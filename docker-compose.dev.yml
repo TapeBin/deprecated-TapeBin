@@ -1,0 +1,22 @@
+version: "3"
+services:
+  backend:
+    build:
+      context: backend
+      dockerfile: Dockerfile.dev
+    container_name: backend
+    expose:
+      - "5000"
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./backend:/usr/src
+      - ./backend/nodemon.json:/usr/src/nodemon.json
+    command: npm run dev
+  # frontend:
+  #   container_name: frontend
+  #   restart: always
+  #   build:
+  #     context: ./frontend
+  #   environment:
+  #     BACK_END: http://backend:5000
