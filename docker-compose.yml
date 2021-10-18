@@ -13,10 +13,15 @@ services:
       - ./backend:/usr/src
       - ./backend/nodemon.json:/usr/src/nodemon.json
     command: node build/index.js
-  # frontend:
-  #   container_name: frontend
-  #   restart: always
-  #   build:
-  #     context: ./frontend
-  #   environment:
-  #     BACK_END: http://backend:5000
+  frontend:
+    container_name: frontend
+    restart: always
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    volumes:
+      - ./frontend:/usr/src
+      - /usr/src/.next
+      - /usr/src/node_modules
+    environment:
+      BACK_END: http://backend:5000

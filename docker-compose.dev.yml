@@ -12,11 +12,21 @@ services:
     volumes:
       - ./backend:/usr/src
       - ./backend/nodemon.json:/usr/src/nodemon.json
+      - /usr/src/node_modules
     command: npm run dev
-  # frontend:
-  #   container_name: frontend
-  #   restart: always
-  #   build:
-  #     context: ./frontend
-  #   environment:
-  #     BACK_END: http://backend:5000
+  frontend:
+    container_name: frontend
+    expose:
+      - "3000"
+    ports:
+      - "3000:3000"
+    restart: always
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.dev
+    volumes:
+      - ./frontend:/usr/src
+      - /usr/src/.next
+      - /usr/src/node_modules
+    environment:
+      BACK_END: http://backend:5000
