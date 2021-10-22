@@ -14,13 +14,13 @@ services:
       - ./backend/nodemon.json:/usr/src/nodemon.json
       - /usr/src/node_modules
     environment:
-      SESSION_SECRET: "${SESSION_SECRET}"
-      START_MONGO: "${START_MONGO}"
-      MONGODB_USERNAME: "${MONGODB_USERNAME}"
-      MONGODB_PASSWORD: "${MONGODB_PASSWORD}"
-      END_MONGODB: "${END_MONGODB}"
-      GITHUB_CLIENT_ID: "${GITHUB_CLIENT_ID}"
-      GITHUB_CLIENT_SECRET: "${GITHUB_CLIENT_SECRET}"
+      - SESSION_SECRET="${SESSION_SECRET}"
+      - START_MONGO="${START_MONGO}"
+      - MONGODB_USERNAME="${MONGODB_USERNAME}"
+      - MONGODB_PASSWORD="${MONGODB_PASSWORD}"
+      - END_MONGODB="${END_MONGODB}"
+      - GITHUB_CLIENT_ID="${GITHUB_CLIENT_ID}"
+      - GITHUB_CLIENT_SECRET="${GITHUB_CLIENT_SECRET}"
     command: npm run dev
   frontend:
     container_name: frontend
@@ -37,4 +37,4 @@ services:
       - /usr/src/.next
       - /usr/src/node_modules
     environment:
-      BACK_END: http://backend:5000
+      - BACK_END=http://backend:5000
