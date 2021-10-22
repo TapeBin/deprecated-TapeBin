@@ -7,7 +7,7 @@ type ProProps = {
 
 const Pro: FunctionComponent<ProProps> = (props: ProProps) => {
   return (
-    <div className="font-bold" style={{ fontSize: props.fontSize }}>
+    <div className="font-black" style={{ fontSize: props.fontSize }}>
       <Link href="pro">
         <a className="flex space-x-3">
           <div>[ </div>
