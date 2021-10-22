@@ -7,6 +7,7 @@ module.exports = {
     extend: {
       colors: {
         gray: colors.trueGray,
+        proColor: "#00C2FF",
       },
     },
   },
