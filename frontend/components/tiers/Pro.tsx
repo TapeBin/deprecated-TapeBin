@@ -1,4 +1,5 @@
 import React, { FunctionComponent } from "react";
+import Link from "next/link";
 
 type ProProps = {
   fontSize?: string | "1rem";
@@ -6,13 +7,14 @@ type ProProps = {
 
 const Pro: FunctionComponent<ProProps> = (props: ProProps) => {
   return (
-    <div
-      className="font-bold flex space-x-3"
-      style={{ fontSize: props.fontSize }}
-    >
-      <div>[ </div>
-      <div className="text-proColor">PRO</div>
-      <div> ]</div>
+    <div className="font-bold" style={{ fontSize: props.fontSize }}>
+      <Link href="pro">
+        <a className="flex space-x-3">
+          <div>[ </div>
+          <div className="text-proColor">PRO</div>
+          <div> ]</div>
+        </a>
+      </Link>
     </div>
   );
 };
