@@ -13,6 +13,14 @@ services:
       - ./backend:/usr/src
       - ./backend/nodemon.json:/usr/src/nodemon.json
       - /usr/src/node_modules
+    environment:
+      SESSION_SECRET: "${SESSION_SECRET}"
+      START_MONGO: "${START_MONGO}"
+      MONGODB_USERNAME: "${MONGODB_USERNAME}"
+      MONGODB_PASSWORD: "${MONGODB_PASSWORD}"
+      END_MONGODB: "${END_MONGODB}"
+      GITHUB_CLIENT_ID: "${GITHUB_CLIENT_ID}"
+      GITHUB_CLIENT_SECRET: "${GITHUB_CLIENT_SECRET}"
     command: npm run dev
   frontend:
     container_name: frontend
