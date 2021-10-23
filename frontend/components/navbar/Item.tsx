@@ -9,7 +9,9 @@ type ItemProps = {
 const Item: FunctionComponent<ItemProps> = (props: ItemProps) => {
   return (
     <Link href={props.link}>
-      <a>{props.text}</a>
+      <a className="rounded sm:border-2 sm:p-2 sm:px-3 border-transparent outline-none  hover:border-3 hover:border-gray-600">
+        {props.text}
+      </a>
     </Link>
   );
 };

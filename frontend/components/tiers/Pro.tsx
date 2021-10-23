@@ -7,7 +7,10 @@ type ProProps = {
 
 const Pro: FunctionComponent<ProProps> = (props: ProProps) => {
   return (
-    <div className="font-black" style={{ fontSize: props.fontSize }}>
+    <div
+      className="font-black rounded sm:border-2 sm:p-2 border-transparent outline-none  hover:border-3 hover:border-gray-600"
+      style={{ fontSize: props.fontSize }}
+    >
       <Link href="pro">
         <a className="flex space-x-3">
           <div>[ </div>
