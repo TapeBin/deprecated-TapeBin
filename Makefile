@@ -13,3 +13,9 @@ build:
 .PHONY: build-plain
 build-plain:
 	docker-compose build --progress=plain
+
+.PHONY: build-clear
+build-clear:
+	docker-compose -f docker-compose.dev.yml down
+	docker-compose -f docker-compose.dev.yml build --no-cache
+	docker-compose -f docker-compose.dev.yml up
