@@ -11,11 +11,8 @@ const DynamicEditor = dynamic(
 
 const Index = (props: any) => {
   return (
-    <div className="flex flex-col" style={{ width: "100vw", height: "100vh" }}>
+    <div className="flex flex-row" style={{ width: "100vw", height: "100vh" }}>
       <Navbar />
-      {/* <Form /> */}
-      {/* <BinList /> */}
-      {/* <DynamicEditor /> */}
     </div>
   );
 };
