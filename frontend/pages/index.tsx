@@ -4,6 +4,7 @@ import dynamic from "next/dynamic";
 import Topbar from "../components/bar/Topbar";
 import BinItem from "../components/form/binlist/BinItem";
 import Middlebar from "../components/bar/Middlebar";
+import Formbar from "../components/bar/Formbar";
 const DynamicEditor = dynamic(
   () => {
     return import("../components/editor/Editor");
@@ -35,7 +36,7 @@ const Index = (props: any) => {
           <BinItem title="sdokf hjsiod" />
         </Topbar>
         <Middlebar>
-          <div>asd asdjkh ajksd asd</div>
+          <Formbar />
           <DynamicEditor />
         </Middlebar>
       </div>

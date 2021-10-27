@@ -8,7 +8,8 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ["Roboto", ...defaultTheme.fontFamily.sans],
+        sans: ["Roboto", ...defaultTheme.fontFamily.sans, "Lobster"],
+        lobster: ["Lobster", "Roboto", ...defaultTheme.fontFamily.sans],
       },
       colors: {
         gray: colors.trueGray,

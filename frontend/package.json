@@ -8,6 +8,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "@fontsource/lobster": "^4.5.0",
     "@fontsource/roboto": "^4.5.1",
     "ace-builds": "^1.4.13",
     "axios": "^0.23.0",
