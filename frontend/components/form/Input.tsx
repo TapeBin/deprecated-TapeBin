@@ -14,7 +14,7 @@ const Input: FunctionComponent<InputProps> = (props: InputProps) => {
         type={props.type}
         name={props.label}
         placeholder={props.placeholder}
-        className="h-[45px] rounded-md px-2 bg-gray-700 mb-6"
+        className="h-[45px] rounded-md px-2 bg-gray-700"
       />
     </div>
   );
