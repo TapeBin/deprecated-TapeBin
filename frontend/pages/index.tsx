@@ -1,5 +1,4 @@
 import React from "react";
-import Editor from "../components/editor/Editor";
 import Navbar from "../components/navbar/Navbar";
 import dynamic from "next/dynamic";
 import Topbar from "../components/navbar/Topbar";
