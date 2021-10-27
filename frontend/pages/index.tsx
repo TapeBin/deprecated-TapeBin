@@ -2,6 +2,7 @@ import React from "react";
 import Navbar from "../components/navbar/Navbar";
 import dynamic from "next/dynamic";
 import Topbar from "../components/navbar/Topbar";
+import BinItem from "../components/form/binlist/BinItem";
 const DynamicEditor = dynamic(
   () => {
     return import("../components/editor/Editor");
@@ -15,11 +16,7 @@ const Index = (props: any) => {
       <Navbar />
       <div className="flex flex-col w-full h-full overflow-hidden">
         <Topbar>
-          <div>asdsd</div>
-          <div>asdsd</div>
-          <div>asdsd</div>
-          <div>asdsd</div>
-          <div>asdsd</div>
+          <BinItem title="sdokf hjsiodfh uiosdfhuisdhf isdhf" />
         </Topbar>
         <DynamicEditor />
       </div>
