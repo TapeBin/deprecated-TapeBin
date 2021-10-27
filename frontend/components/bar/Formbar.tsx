@@ -1,4 +1,5 @@
 import React from "react";
+import Footer from "../footer/Footer";
 import Button from "../form/Button";
 import Input from "../form/Input";
 
@@ -14,6 +15,7 @@ const Formbar = () => {
           <Input label="Description" />
           <Button text="Save" />
         </div>
+        <Footer />
       </div>
     </div>
   );
