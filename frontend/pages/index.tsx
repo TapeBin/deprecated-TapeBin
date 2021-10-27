@@ -17,6 +17,7 @@ const Index = (props: any) => {
       <div className="flex flex-col w-full h-full overflow-hidden">
         <Topbar>
           <BinItem title="sdokf hjsiodfh uiosdfhuisdhf isdhf" />
+          <BinItem title="sdokf hjsiod" />
         </Topbar>
         <DynamicEditor />
       </div>
