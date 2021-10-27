@@ -1,7 +1,6 @@
 import React from "react";
 import Pro from "../tiers/Pro";
 import Icon from "./Icon";
-import Icons from "./Icon";
 import Logo from "./Logo";
 
 const Navbar = () => {

@@ -3,7 +3,7 @@ import React, { FunctionComponent } from "react";
 type InputProps = {
   label: string;
   placeholder?: string;
-  type?: string | "text";
+  type?: string;
 };
 
 const Input: FunctionComponent<InputProps> = (props: InputProps) => {
@@ -18,6 +18,10 @@ const Input: FunctionComponent<InputProps> = (props: InputProps) => {
       />
     </div>
   );
+};
+
+Input.defaultProps = {
+  type: "text",
 };
 
 export default Input;

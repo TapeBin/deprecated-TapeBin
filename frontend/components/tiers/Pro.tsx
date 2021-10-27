@@ -2,7 +2,7 @@ import React, { FunctionComponent } from "react";
 import Link from "next/link";
 
 type ProProps = {
-  fontSize?: string | "1rem";
+  fontSize?: string;
 };
 
 const Pro: FunctionComponent<ProProps> = (props: ProProps) => {
@@ -20,6 +20,10 @@ const Pro: FunctionComponent<ProProps> = (props: ProProps) => {
       </Link>
     </div>
   );
+};
+
+Pro.defaultProps = {
+  fontSize: "1rem",
 };
 
 export default Pro;
