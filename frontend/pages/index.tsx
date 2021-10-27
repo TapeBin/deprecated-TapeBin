@@ -23,16 +23,6 @@ const Index = (props: any) => {
           <BinItem title="sdokf hjsiodfh uiosdfhuisdhf isdhf" />
           <BinItem title="sdokf hjsiodfh uiosdfhuisdhf isdhf" />
           <BinItem title="sdokf hjsiodfh uiosdfhuisdhf isdhf" />
-          <BinItem title="sdokf hjsiodfh uiosdfhuisdhf isdhf" />
-          <BinItem title="sdokf hjsiodfh uiosdfhuisdhf isdhf" />
-          <BinItem title="sdokf hjsiodfh uiosdfhuisdhf isdhf" />
-          <BinItem title="sdokf hjsiodfh uiosdfhuisdhf isdhf" />
-          <BinItem title="sdokf hjsiodfh uiosdfhuisdhf isdhf" />
-          <BinItem title="sdokf hjsiodfh uiosdfhuisdhf isdhf" />
-          <BinItem title="sdokf hjsiodfh uiosdfhuisdhf isdhf" />
-          <BinItem title="sdokf hjsiodfh uiosdfhuisdhf isdhf" />
-          <BinItem title="sdokf hjsiodfh uiosdfhuisdhf isdhf" />
-          <BinItem title="sdokf hjsiodfh uiosdfhuisdhf isdhf" />
           <BinItem title="sdokf hjsiod" />
         </Topbar>
         <Middlebar>
