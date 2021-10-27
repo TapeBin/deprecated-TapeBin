@@ -16,6 +16,9 @@ module.exports = {
         proColor: "#00C2FF",
         background: "#262626",
       },
+      outline: {
+        gray: "1px solid #F5F5F5",
+      },
     },
   },
   variants: {
