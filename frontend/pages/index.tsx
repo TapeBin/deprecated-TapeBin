@@ -21,52 +21,8 @@ const Index = (props: any) => {
           <div>asdsd</div>
           <div>asdsd</div>
           <div>asdsd</div>
-          <div>asdsd</div>
-          <div>asdsd</div>
-          <div>asdsd</div>
-          <div>asdsd</div>
-          <div>asdsd</div>
-          <div>asdsd</div>
-          <div>asdsd</div>
-          <div>asdsd</div>
-          <div>asdsd</div>
-          <div>asdsd</div>
-          <div>asdsd</div>
-          <div>asdsd</div>
-          <div>asdsd</div>
-          <div>asdsd</div>
-          <div>asdsd</div>
-          <div>asdsd</div>
-          <div>asdsd</div>
-          <div>asdsd</div>
-          <div>asdsd</div>
-          <div>asdsd</div>
-          <div>asdsd</div>
-          <div>asdsd</div>
-          <div>asdsd</div>
-          <div>asdsd</div>
-          <div>asdsd</div>
-          <div>asdsd</div>
-          <div>asdsd</div>
-          <div>asdsd</div>
-          <div>asdsd</div>
-          <div>asdsd</div>
-          <div>asdsd</div>
-          <div>asdsd</div>
-          <div>asdsd</div>
-          <div>asdsd</div>
-          <div>asdsd</div>
-          <div>asdsd</div>
-          <div>asdsd</div>
-          <div>asdsd</div>
-          <div>asdsd</div>
-          <div>asdsd</div>
-          <div>asdsd</div>
-          <div>asdsd</div>
-          <div>asdsd</div>
-          <div>asdsd</div>
-          <div>asdsd</div>
         </Topbar>
+        <DynamicEditor />
       </div>
     </div>
   );
