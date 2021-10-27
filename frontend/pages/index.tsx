@@ -1,7 +1,7 @@
 import React from "react";
-import Navbar from "../components/navbar/Navbar";
+import Navbar from "../components/bar/Navbar";
 import dynamic from "next/dynamic";
-import Topbar from "../components/navbar/Topbar";
+import Topbar from "../components/bar/Topbar";
 import BinItem from "../components/form/binlist/BinItem";
 const DynamicEditor = dynamic(
   () => {
@@ -16,6 +16,20 @@ const Index = (props: any) => {
       <Navbar />
       <div className="flex flex-col w-full h-full overflow-hidden">
         <Topbar>
+          <BinItem title="sdokf hjsiodfh uiosdfhuisdhf isdhf" />
+          <BinItem title="sdokf hjsiodfh uiosdfhuisdhf isdhf" />
+          <BinItem title="sdokf hjsiodfh uiosdfhuisdhf isdhf" />
+          <BinItem title="sdokf hjsiodfh uiosdfhuisdhf isdhf" />
+          <BinItem title="sdokf hjsiodfh uiosdfhuisdhf isdhf" />
+          <BinItem title="sdokf hjsiodfh uiosdfhuisdhf isdhf" />
+          <BinItem title="sdokf hjsiodfh uiosdfhuisdhf isdhf" />
+          <BinItem title="sdokf hjsiodfh uiosdfhuisdhf isdhf" />
+          <BinItem title="sdokf hjsiodfh uiosdfhuisdhf isdhf" />
+          <BinItem title="sdokf hjsiodfh uiosdfhuisdhf isdhf" />
+          <BinItem title="sdokf hjsiodfh uiosdfhuisdhf isdhf" />
+          <BinItem title="sdokf hjsiodfh uiosdfhuisdhf isdhf" />
+          <BinItem title="sdokf hjsiodfh uiosdfhuisdhf isdhf" />
+          <BinItem title="sdokf hjsiodfh uiosdfhuisdhf isdhf" />
           <BinItem title="sdokf hjsiodfh uiosdfhuisdhf isdhf" />
           <BinItem title="sdokf hjsiod" />
         </Topbar>
