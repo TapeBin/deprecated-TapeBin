@@ -14,6 +14,8 @@ module.exports = {
       colors: {
         gray: colors.trueGray,
         proColor: "#00C2FF",
+        proHoverColor: "#00a7db",
+        proFocusColor: "#009ccc",
         background: "#262626",
       },
       outline: {
