@@ -3,6 +3,7 @@ import session from "express-session";
 import cors from "cors";
 import mongoose from "mongoose";
 import passport from "passport";
+import User from "schemas/User";
 const app = express();
 const PORT = 5001 || process.env.PORT;
 
@@ -29,6 +30,16 @@ app.use(
 
 app.use(passport.initialize());
 app.use(passport.session());
+
+passport.serializeUser((user: any, done: any) => {
+  return done(null, user._id);
+});
+
+passport.deserializeUser((id: string, done: any) => {
+  User.findById(id, (err: mongoose.Error, document: any) => {
+    return done(null, document);
+  });
+});
 
 mongoose
   .connect(
