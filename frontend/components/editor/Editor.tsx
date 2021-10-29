@@ -9,7 +9,7 @@ ace.config.set("basePath", "ace/");
 type EditorProps = {
   mode?: string;
   value?: string;
-  readOnly?: boolean | false
+  readOnly?: boolean | false;
 };
 
 const Editor: FunctionComponent<EditorProps> = (props: EditorProps) => {
@@ -22,7 +22,6 @@ const Editor: FunctionComponent<EditorProps> = (props: EditorProps) => {
       value={props.value}
       setOptions={{
         useWorker: false,
-        cursorStyle: "smooth",
         fontSize: settings.fontSize,
         fontFamily: settings.fontSize,
         showPrintMargin: settings.printMargin,

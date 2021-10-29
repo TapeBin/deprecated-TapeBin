@@ -6,9 +6,9 @@ services:
       dockerfile: Dockerfile.dev
     container_name: backend
     expose:
-      - "5000"
+      - "5001"
     ports:
-      - "5000:5000"
+      - "5001:5001"
     volumes:
       - ./backend:/usr/src
       - ./backend/nodemon.json:/usr/src/nodemon.json
@@ -37,4 +37,4 @@ services:
       - /usr/src/.next
       - /usr/src/node_modules
     environment:
-      - BACK_END=http://backend:5000
+      - BACK_END=http://backend:5001

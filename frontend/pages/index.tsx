@@ -16,6 +16,7 @@ const Index = (props: any) => {
   return (
     <div className="flex flex-row" style={{ width: "100vw", height: "100vh" }}>
       <Navbar />
+      <Formbar />
       <div className="flex flex-col w-full h-full overflow-hidden">
         <Topbar>
           <BinItem title="sdokf hjsiodfh uiosdfhuisdhf isdhf" />
@@ -25,10 +26,7 @@ const Index = (props: any) => {
           <BinItem title="sdokf hjsiodfh uiosdfhuisdhf isdhf" />
           <BinItem title="sdokf hjsiod" />
         </Topbar>
-        <Middlebar>
-          <Formbar />
-          <DynamicEditor />
-        </Middlebar>
+        <DynamicEditor />
       </div>
     </div>
   );
