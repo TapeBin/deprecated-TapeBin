@@ -22,6 +22,7 @@ services:
       - GITHUB_CLIENT_ID=${GITHUB_CLIENT_ID}
       - GITHUB_CLIENT_SECRET=${GITHUB_CLIENT_SECRET}
       - FRONT_END=http://frontend:3000
+      - PRODUCTION=false
     command: npm run dev
   frontend:
     container_name: frontend

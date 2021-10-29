@@ -1,6 +1,8 @@
 import express from "express";
+import session from "express-session";
 import cors from "cors";
 import mongoose from "mongoose";
+import passport from "passport";
 const app = express();
 const PORT = 5001 || process.env.PORT;
 
@@ -10,6 +12,23 @@ app.use(
     credentials: true,
   })
 );
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+app.use(
+  session({
+    secret: `${process.env.SECRET_KEY}`,
+    resave: true,
+    saveUninitialized: true,
+    cookie: {
+      secure: !!process.env.PRODUCTION,
+    },
+  })
+);
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 mongoose
   .connect(
