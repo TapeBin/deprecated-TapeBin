@@ -1,7 +1,7 @@
 import { PassportStatic } from "passport";
 import { Express } from "express";
 import mongoose from "mongoose";
-import User from "schemas/User";
+import User from "../schemas/User";
 const GithubStrategy = require("passport-github2").Strategy;
 
 module.exports = function (passport: PassportStatic, app: Express) {

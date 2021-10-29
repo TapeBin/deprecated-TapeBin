@@ -37,3 +37,4 @@
 **/.idea
 
 /frontend/public/ace/
+/.env.dev

@@ -13,6 +13,8 @@ services:
       - ./backend:/usr/src
       - ./backend/nodemon.json:/usr/src/nodemon.json
       - /usr/src/node_modules
+    env_file:
+      - .env.dev
     environment:
       - SESSION_SECRET=${SESSION_SECRET}
       - START_MONGODB=${START_MONGODB}

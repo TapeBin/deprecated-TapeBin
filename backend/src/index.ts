@@ -3,7 +3,8 @@ import session from "express-session";
 import cors from "cors";
 import mongoose from "mongoose";
 import passport from "passport";
-import User from "schemas/User";
+import User from "./schemas/User";
+const githubStrategy = require("./strategies/githubStrategy");
 const app = express();
 const PORT = 5001 || process.env.PORT;
 
@@ -40,6 +41,8 @@ passport.deserializeUser((id: string, done: any) => {
     return done(null, document);
   });
 });
+
+githubStrategy(passport, app);
 
 mongoose
   .connect(
