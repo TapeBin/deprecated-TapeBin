@@ -4,6 +4,7 @@ import cors from "cors";
 import mongoose from "mongoose";
 import passport from "passport";
 import User from "./schemas/User";
+import userRouting from "./routes/userRouting";
 const githubStrategy = require("./strategies/githubStrategy");
 const app = express();
 const PORT = 5001 || process.env.PORT;
@@ -43,6 +44,8 @@ passport.deserializeUser((id: string, done: any) => {
 });
 
 githubStrategy(passport, app);
+
+app.use(userRouting);
 
 mongoose
   .connect(
