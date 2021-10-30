@@ -29,6 +29,7 @@ export default function App({ Component, pageProps }: AppProps) {
             username: response.data.username,
             githubId: response.data.githubId,
             profileImage: `https://avatars.githubusercontent.com/u/${response.data.githubId}?v=3`,
+            creationDate: new Date(response.data.creationDate),
           }));
         }
 

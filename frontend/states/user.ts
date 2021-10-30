@@ -6,4 +6,5 @@ export const userAtom = atom({
   githubId: "",
   discordId: "",
   profileImage: "/images/avatar.svg",
+  creationDate: new Date(),
 });
