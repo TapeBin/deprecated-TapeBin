@@ -27,8 +27,9 @@ module.exports = function (passport: PassportStatic, app: Express) {
 
               await newUser.save();
               done(null, newUser);
+            } else {
+              done(null, document);
             }
-            done(null, document);
           }
         );
       }
@@ -39,12 +40,12 @@ module.exports = function (passport: PassportStatic, app: Express) {
 
   app.get(
     "/auth/github/callback",
-    passport.authenticate(
-      "github",
-      { failureRedirect: `${process.env.FRONT_END}`, session: true },
-      function (req, res) {
-        res.redirect(`${process.env.FRONT_END}`);
-      }
-    )
+    passport.authenticate("github", {
+      failureRedirect: `${process.env.FRONT_END}`,
+    }),
+    function (req, res) {
+      // Successful authentication, redirect home.
+      res.redirect(`${process.env.FRONT_END}`);
+    }
   );
 };

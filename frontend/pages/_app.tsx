@@ -13,6 +13,7 @@ export default function App({ Component, pageProps }: AppProps) {
       withCredentials: true,
       url: `${process.env.BACK_END}/user`,
     }).then((response: AxiosResponse) => {
+      console.log(response.data);
       setLoaded(true);
     });
   }, []);

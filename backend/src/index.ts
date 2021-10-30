@@ -8,6 +8,7 @@ import userRouting from "./routes/userRouting";
 const githubStrategy = require("./strategies/githubStrategy");
 const app = express();
 const PORT = 5001 || process.env.PORT;
+const PRODUCTION = process.env.PRODUCTION === "true" ? true : false;
 
 app.use(
   cors({
@@ -23,9 +24,9 @@ app.use(
   session({
     secret: `${process.env.SECRET_KEY}`,
     resave: true,
-    saveUninitialized: true,
+    saveUninitialized: false,
     cookie: {
-      secure: !!process.env.PRODUCTION,
+      secure: PRODUCTION,
     },
   })
 );

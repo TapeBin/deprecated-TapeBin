@@ -23,12 +23,14 @@ services:
       - END_MONGODB=${END_MONGODB}
       - GITHUB_CLIENT_ID=${GITHUB_CLIENT_ID}
       - GITHUB_CLIENT_SECRET=${GITHUB_CLIENT_SECRET}
-      - FRONT_END=http://frontend:3000
-      - BACK_END=http://backend:5001
+      - FRONT_END=http://localhost:3000
+      - BACK_END=http://localhost:5001
       - PRODUCTION=false
     command: npm run dev
   frontend:
     container_name: frontend
+    depends_on:
+      - backend
     expose:
       - "3000"
     ports:
@@ -42,4 +44,4 @@ services:
       - /usr/src/.next
       - /usr/src/node_modules
     environment:
-      - BACK_END=http://backend:5001
+      BACK_END: http://localhost:5001
