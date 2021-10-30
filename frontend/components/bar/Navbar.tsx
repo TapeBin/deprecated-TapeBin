@@ -1,4 +1,5 @@
 import { useAtom } from "jotai";
+import Router from "next/router";
 import React from "react";
 import { userAtom } from "../../states/user";
 import Pro from "../tiers/Pro";
@@ -11,7 +12,7 @@ const Navbar = () => {
 
   const logIn = () => {
     if (user.isLoggedIn) {
-      console.log("logged in");
+      Router.push("/profile");
     } else {
       window.open(`${process.env.BACK_END}/auth/github`, "_self");
     }
