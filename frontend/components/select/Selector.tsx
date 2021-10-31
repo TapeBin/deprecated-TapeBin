@@ -1,14 +1,17 @@
 import React, { FunctionComponent } from "react";
-import Select from "react-select";
+import Select, { ActionMeta } from "react-select";
 
-type SelectOption = {
+export type SelectOption = {
   label: string;
   value: string;
 };
 
 type SelectorProps = {
-  options: [];
-  onChange: (option: SelectOption | null) => void;
+  options: { label: string; value: string }[];
+  onChange: (
+    option: SelectOption | null,
+    actionMeta: ActionMeta<SelectOption>
+  ) => void;
 };
 
 const Selector: FunctionComponent<SelectorProps> = (props: SelectorProps) => {
