@@ -24,7 +24,9 @@ const BinList = () => {
         bins.bins.map((bin: Bin) => (
           <BinItem fileName={bin.fileName} id={bin.id} key={bin.id} />
         ))}
-      <button></button>
+      <button className="rounded-md py-2 px-4 border-2 border-transparent hover:border-2 hover:border-proColor">
+        +
+      </button>
     </>
   );
 };
