@@ -22,7 +22,7 @@ const BinList = () => {
     <>
       {loaded &&
         bins.bins.map((bin: Bin) => (
-          <BinItem title={bin.fileName} key={bin.id} />
+          <BinItem fileName={bin.fileName} id={bin.id} key={bin.id} />
         ))}
       <button></button>
     </>

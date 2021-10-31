@@ -10,7 +10,6 @@ const Formbar = () => {
         <div className="font-lobster text-5xl">Bin</div>
         <div className="w-full h-full flex flex-col space-y-6">
           <Input label="Title" />
-          <Input label="File name" />
           <Input label="Language" />
           <Input label="Description" />
           <Button text="Save" />
