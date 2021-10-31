@@ -24,7 +24,7 @@ const BinItem: FunctionComponent<BinItemProps> = (props: BinItemProps) => {
   };
 
   return (
-    <div className="w-32 sm:w-60 flex flex-row justify-between rounded-md border-2 border-gray-700 p-2 px-3 ">
+    <div className="w-32 sm:w-60 flex flex-row justify-between rounded-md border-2 border-gray-700 p-2 px-3">
       <input
         className="bg-transparent truncate pr-1 sm:pr-2"
         placeholder={props.fileName}

@@ -26,6 +26,8 @@ const BinList = () => {
       });
     }
 
+    max++;
+
     const newBin = new Bin(max, "New File", 0, editor.mode);
     newArray.push(newBin);
 
