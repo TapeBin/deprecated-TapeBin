@@ -17,10 +17,12 @@ const BinItem: FunctionComponent<BinItemProps> = (props: BinItemProps) => {
   };
 
   const removeBin = () => {
-    setBin((prevState) => ({
-      ...prevState,
-      bins: bins.bins.filter((bin) => bin.id !== props.id),
-    }));
+    if (bins.bins.length - 1 > 0) {
+      setBin((prevState) => ({
+        ...prevState,
+        bins: bins.bins.filter((bin) => bin.id !== props.id),
+      }));
+    }
   };
 
   return (
