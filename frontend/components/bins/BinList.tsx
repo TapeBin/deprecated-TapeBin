@@ -12,7 +12,7 @@ const BinList = () => {
 
   useEffect(() => {
     if (bins.bins.length === 0) {
-      bins.bins.push(new Bin(0, "asdasd", "", 0, editor.mode));
+      bins.bins.push(new Bin(0, "New File", 0, editor.mode));
     }
 
     setLoaded(true);
@@ -21,7 +21,10 @@ const BinList = () => {
   return (
     <>
       {loaded &&
-        bins.bins.map((bin: Bin) => <BinItem title={bin.title} key={bin.id} />)}
+        bins.bins.map((bin: Bin) => (
+          <BinItem title={bin.fileName} key={bin.id} />
+        ))}
+      <button></button>
     </>
   );
 };
