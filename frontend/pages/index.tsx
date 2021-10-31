@@ -5,6 +5,7 @@ import Topbar from "../components/bar/Topbar";
 import BinItem from "../components/form/binlist/BinItem";
 import Middlebar from "../components/bar/Middlebar";
 import Formbar from "../components/bar/Formbar";
+import BinList from "../components/bins/BinList";
 const DynamicEditor = dynamic(
   () => {
     return import("../components/editor/Editor");
@@ -19,12 +20,7 @@ const Index = (props: any) => {
       <Formbar />
       <div className="flex flex-col w-full h-full overflow-hidden">
         <Topbar>
-          <BinItem title="sdokf hjsiodfh uiosdfhuisdhf isdhf" />
-          <BinItem title="sdokf hjsiodfh uiosdfhuisdhf isdhf" />
-          <BinItem title="sdokf hjsiodfh uiosdfhuisdhf isdhf" />
-          <BinItem title="sdokf hjsiodfh uiosdfhuisdhf isdhf" />
-          <BinItem title="sdokf hjsiodfh uiosdfhuisdhf isdhf" />
-          <BinItem title="sdokf hjsiod" />
+          <BinList />
         </Topbar>
         <DynamicEditor />
       </div>

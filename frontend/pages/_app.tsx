@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import axios, { AxiosResponse } from "axios";
 import { useAtom } from "jotai";
 import { userAtom } from "../states/user";
+import { editorAtom, setItem } from "../states/editor";
 
 interface User {
   loginFailed: boolean;
@@ -18,7 +19,16 @@ interface User {
 export default function App({ Component, pageProps }: AppProps) {
   const [isLoaded, setLoaded] = useState(false);
   const [_, setUser] = useAtom(userAtom);
+  const [__, setEditor] = useAtom(editorAtom);
   useEffect(() => {
+    setEditor({
+      theme: setItem("theme", "one_dark"),
+      fontSize: setItem("fontSize", "15px"),
+      fontFamily: setItem("fontFamily", "Fira Code"),
+      printMargin: setItem("printMargin", "false") === "true",
+      mode: setItem("mode", "java"),
+    });
+
     axios
       .get<User>(`${process.env.BACK_END}/user`, { withCredentials: true })
       .then((response) => {
