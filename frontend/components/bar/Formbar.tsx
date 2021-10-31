@@ -11,6 +11,7 @@ const Formbar = () => {
 
   for (const key in languages) {
     if (languages.hasOwnProperty(key)) {
+      // TODO fix this with like a type or something
       // @ts-ignore
       languagesArray.push({ label: key, value: languages[key] });
     }
