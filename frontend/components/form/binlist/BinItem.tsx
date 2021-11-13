@@ -1,5 +1,6 @@
 import { useAtom } from "jotai";
-import React, { FunctionComponent } from "react";
+import React, { FunctionComponent, useState } from "react";
+import { binFormAtom } from "../../../states/binForm";
 import { binsAtom } from "../../../states/bins";
 import { Bin } from "../../../types/Bin";
 
@@ -10,6 +11,7 @@ type BinItemProps = {
 
 const BinItem: FunctionComponent<BinItemProps> = (props: BinItemProps) => {
   const [bins, setBin] = useAtom(binsAtom);
+  const [binForm, setBinForm] = useAtom(binFormAtom);
 
   const changeName = (e: React.ChangeEvent<HTMLInputElement>) => {
     const bin: Bin = bins.bins.filter((bin) => bin.id === props.id)[0];
@@ -25,8 +27,18 @@ const BinItem: FunctionComponent<BinItemProps> = (props: BinItemProps) => {
     }
   };
 
+  const binClick = () => {
+    setBinForm((prevState) => ({ ...prevState, currentBinId: props.id }));
+  };
+
   return (
-    <div className="w-32 sm:w-60 flex flex-row justify-between rounded-md border-2 border-gray-700 p-2 px-3">
+    <div
+      style={{
+        borderColor: binForm.currentBinId === props.id ? "#00C2FF" : "#404040",
+      }}
+      className="w-32 sm:w-60 flex flex-row justify-between rounded-md border-2 border-gray-700 p-2 px-3 cursor-pointer"
+      onClick={binClick}
+    >
       <input
         className="bg-transparent truncate pr-1 sm:pr-2"
         placeholder={props.fileName}
