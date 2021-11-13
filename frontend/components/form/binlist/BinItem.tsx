@@ -2,6 +2,7 @@ import { useAtom } from "jotai";
 import React, { FunctionComponent, useState } from "react";
 import { binFormAtom } from "../../../states/binForm";
 import { binsAtom } from "../../../states/bins";
+import { editorAtom } from "../../../states/editor";
 import { Bin } from "../../../types/Bin";
 
 type BinItemProps = {
@@ -12,10 +13,15 @@ type BinItemProps = {
 const BinItem: FunctionComponent<BinItemProps> = (props: BinItemProps) => {
   const [bins, setBin] = useAtom(binsAtom);
   const [binForm, setBinForm] = useAtom(binFormAtom);
+  const [editor, setEditor] = useAtom(editorAtom);
 
   const changeName = (e: React.ChangeEvent<HTMLInputElement>) => {
     const bin: Bin = bins.bins.filter((bin) => bin.id === props.id)[0];
     bin.fileName = e.target.value;
+  };
+
+  const getBin = (): Bin => {
+    return bins.bins.filter((bin) => bin.id === props.id)[0];
   };
 
   const removeBin = () => {
@@ -29,6 +35,11 @@ const BinItem: FunctionComponent<BinItemProps> = (props: BinItemProps) => {
 
   const binClick = () => {
     setBinForm((prevState) => ({ ...prevState, currentBinId: props.id }));
+    setEditor((prevState) => ({
+      ...prevState,
+      mode: getBin().languageExtension,
+    }));
+    console.log(props.id);
   };
 
   return (
