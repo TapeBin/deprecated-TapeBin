@@ -3,6 +3,8 @@ import AceEditor from "react-ace";
 import ace from "ace-builds/src-noconflict/ace";
 import { useAtom } from "jotai";
 import { editorAtom } from "../../states/editor";
+import { binsAtom } from "../../states/bins";
+import { binFormAtom } from "../../states/binForm";
 
 ace.config.set("basePath", "ace/");
 
@@ -10,16 +12,28 @@ type EditorProps = {
   mode?: string;
   value?: string;
   readOnly?: boolean | false;
+  onChange?: (value: string) => void;
 };
 
 const Editor: FunctionComponent<EditorProps> = (props: EditorProps) => {
   const [settings] = useAtom(editorAtom);
+  const [bins] = useAtom(binsAtom);
+  const [binForm] = useAtom(binFormAtom);
+
+  const onChange = (value: string) => {
+    const currentBin = bins.bins.find(
+      (foundBin) => foundBin.id === binForm.currentBinId
+    );
+    if (currentBin) {
+      currentBin.text = value;
+    }
+  };
 
   return (
     <AceEditor
       height="100%"
       width="100%"
-      value={props.value}
+      value={settings.text}
       setOptions={{
         useWorker: false,
         fontSize: settings.fontSize,
@@ -29,6 +43,7 @@ const Editor: FunctionComponent<EditorProps> = (props: EditorProps) => {
       theme={settings.theme}
       mode={props.mode || settings.mode}
       readOnly={props.readOnly}
+      onChange={onChange}
     />
   );
 };

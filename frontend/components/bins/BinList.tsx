@@ -12,7 +12,7 @@ const BinList = () => {
 
   useEffect(() => {
     if (bins.bins.length === 0) {
-      bins.bins.push(new Bin(0, "New File", 0, editor.mode));
+      bins.bins.push(new Bin(0, "New File", 0, editor.mode, ""));
     }
     setLoaded(true);
   }, []);
@@ -28,7 +28,7 @@ const BinList = () => {
 
     max++;
 
-    const newBin = new Bin(max, "New File", 0, editor.mode);
+    const newBin = new Bin(max, "New File", 0, editor.mode, "");
     newArray.push(newBin);
 
     setBins((prevState) => ({ ...prevState, bins: newArray }));

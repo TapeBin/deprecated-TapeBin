@@ -3,17 +3,20 @@ export class Bin {
   private _fileName: string;
   private _languageId: number;
   private _languageExtension: string;
+  private _text: string;
 
   constructor(
     id: number,
     fileName: string,
     languageId: number,
-    languageExtension: string
+    languageExtension: string,
+    text: string
   ) {
     this._id = id;
     this._fileName = fileName;
     this._languageId = languageId;
     this._languageExtension = languageExtension;
+    this._text = text;
   }
 
   get id(): number {
@@ -46,5 +49,13 @@ export class Bin {
 
   set languageExtension(value: string) {
     this._languageExtension = value;
+  }
+
+  get text(): string {
+    return this._text;
+  }
+
+  set text(value: string) {
+    this._text = value;
   }
 }

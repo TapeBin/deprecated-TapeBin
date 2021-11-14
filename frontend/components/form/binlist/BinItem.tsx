@@ -38,6 +38,7 @@ const BinItem: FunctionComponent<BinItemProps> = (props: BinItemProps) => {
     setEditor((prevState) => ({
       ...prevState,
       mode: getBin().languageExtension,
+      text: getBin().text,
     }));
     console.log(props.id);
   };

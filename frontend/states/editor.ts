@@ -13,4 +13,5 @@ export const editorAtom = atom({
   fontFamily: "",
   printMargin: false,
   mode: "",
+  text: "",
 });
