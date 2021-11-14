@@ -35,9 +35,13 @@ const customStyles: StylesConfig<SelectOption, false> = {
     ...provided,
     color: "#F5F5F5",
   }),
-  dropdownIndicator: (base) => ({
-    ...base,
+  dropdownIndicator: (provided) => ({
+    ...provided,
     color: "#737373",
+  }),
+  input: (provided) => ({
+    ...provided,
+    color: "#F5F5F5",
   }),
 };
 
