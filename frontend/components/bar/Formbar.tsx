@@ -4,9 +4,18 @@ import Button from "../form/Button";
 import Input from "../form/Input";
 import Selector, { SelectOption } from "../select/Selector";
 import languages from "../../utils/json/languages.json";
+import linguist from "../../utils/json/linguist.json";
 import { ActionMeta } from "react-select";
+import { useAtom } from "jotai";
+import { editorAtom } from "../../states/editor";
+import { binsAtom } from "../../states/bins";
+import { binFormAtom } from "../../states/binForm";
+import { Bin } from "../../types/Bin";
 
 const Formbar = () => {
+  const [editor, setEditor] = useAtom(editorAtom);
+  const [bins, setBins] = useAtom(binsAtom);
+  const [binForm, _] = useAtom(binFormAtom);
   const languagesArray = [];
 
   for (const key in languages) {
@@ -20,7 +29,27 @@ const Formbar = () => {
   const onChange = (
     option: SelectOption | null,
     actionMeta: ActionMeta<SelectOption>
-  ) => {};
+  ) => {
+    if (linguist.hasOwnProperty(option!!.value)) {
+      // @ts-ignore
+      const languageExtension = linguist[option!!.value].aceMode;
+      setEditor((prevState) => ({
+        ...prevState,
+        mode: languageExtension,
+      }));
+
+      const bin = bins.bins.find(
+        (foundBin) => foundBin.id === binForm.currentBinId
+      );
+
+      if (bin) {
+        bin.languageId = parseInt(option!!.value);
+        bin.languageExtension = languageExtension;
+      }
+
+      console.log(bin?.languageExtension);
+    }
+  };
 
   return (
     <div className="w-[280px] h-full bg-background text-gray-100 border-r-2 border-gray-700">
