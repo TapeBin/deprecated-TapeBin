@@ -30,6 +30,20 @@ const BinItem: FunctionComponent<BinItemProps> = (props: BinItemProps) => {
         ...prevState,
         bins: bins.bins.filter((bin) => bin.id !== props.id),
       }));
+      const firstBin = bins.bins[0];
+      console.log(firstBin);
+      console.log(firstBin.id);
+      setBinForm((prevState) => ({
+        ...prevState,
+        currentBinId: 0,
+      }));
+      console.log(binForm);
+      setEditor((prevState) => ({
+        ...prevState,
+        mode: firstBin.languageExtension,
+        text: firstBin.text,
+      }));
+      console.log("test");
     }
   };
 
@@ -40,7 +54,8 @@ const BinItem: FunctionComponent<BinItemProps> = (props: BinItemProps) => {
       mode: getBin().languageExtension,
       text: getBin().text,
     }));
-    console.log(props.id);
+    // console.log(props.id);
+    console.log("Asdasdasdasda");
   };
 
   return (
@@ -49,7 +64,6 @@ const BinItem: FunctionComponent<BinItemProps> = (props: BinItemProps) => {
         borderColor: binForm.currentBinId === props.id ? "#00C2FF" : "#404040",
       }}
       className="w-32 sm:w-60 flex flex-row justify-between rounded-md border-2 border-gray-700 p-2 px-3 cursor-pointer"
-      onClick={binClick}
     >
       <input
         className="bg-transparent truncate pr-1 sm:pr-2"
@@ -57,6 +71,7 @@ const BinItem: FunctionComponent<BinItemProps> = (props: BinItemProps) => {
         defaultValue={props.fileName}
         onChange={changeName}
         maxLength={35}
+        onClick={binClick}
       />
       <img
         src="./images/close.svg"
