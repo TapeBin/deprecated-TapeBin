@@ -27,6 +27,7 @@ const Editor: FunctionComponent<EditorProps> = (props: EditorProps) => {
     if (currentBin) {
       currentBin.text = value;
     }
+    console.log(value);
   };
 
   return (

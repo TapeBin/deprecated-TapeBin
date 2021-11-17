@@ -31,6 +31,7 @@ const Formbar = () => {
     actionMeta: ActionMeta<SelectOption>
   ) => {
     if (linguist.hasOwnProperty(option!!.value)) {
+      console.log(editor.text);
       // @ts-ignore
       const languageExtension = linguist[option!!.value].aceMode;
       setEditor((prevState) => ({
@@ -45,6 +46,8 @@ const Formbar = () => {
       if (bin) {
         bin.languageId = parseInt(option!!.value);
         bin.languageExtension = languageExtension;
+        // console.log(bin.text);
+        console.log(editor.text);
       }
     }
   };

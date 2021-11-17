@@ -58,7 +58,7 @@ const customStyles: StylesConfig<SelectOption, false> = {
 const Selector: FunctionComponent<SelectorProps> = (props: SelectorProps) => {
   const [bins, setBins] = useAtom(binsAtom);
   const [binForm, setBinForm] = useAtom(binFormAtom);
-  const [editor] = useAtom(editorAtom);
+  const [editor, setEditor] = useAtom(editorAtom);
   const getDefaultSettings = () => {
     return {
       value: getLanguageIdFromStorage(),
@@ -74,6 +74,7 @@ const Selector: FunctionComponent<SelectorProps> = (props: SelectorProps) => {
   });
 
   const handleValueChange = () => {
+    console.log(editor.text);
     const bin = bins.bins.find(
       (foundBin) => foundBin.id === binForm.currentBinId
     );
@@ -84,7 +85,12 @@ const Selector: FunctionComponent<SelectorProps> = (props: SelectorProps) => {
         label: linguist[bin.languageId.toString()].name,
         value: bin.languageId.toString(),
       });
+
+      // A bug causes the editor text to reset, to prevent that, we set it again
+      setEditor((prevState) => ({ ...prevState, text: bin.text }));
     }
+
+    console.log(bin);
   };
 
   useEffect(() => {

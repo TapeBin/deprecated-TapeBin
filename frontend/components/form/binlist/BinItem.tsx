@@ -31,19 +31,15 @@ const BinItem: FunctionComponent<BinItemProps> = (props: BinItemProps) => {
         bins: bins.bins.filter((bin) => bin.id !== props.id),
       }));
       const firstBin = bins.bins[0];
-      console.log(firstBin);
-      console.log(firstBin.id);
       setBinForm((prevState) => ({
         ...prevState,
         currentBinId: 0,
       }));
-      console.log(binForm);
       setEditor((prevState) => ({
         ...prevState,
         mode: firstBin.languageExtension,
         text: firstBin.text,
       }));
-      console.log("test");
     }
   };
 
@@ -55,7 +51,6 @@ const BinItem: FunctionComponent<BinItemProps> = (props: BinItemProps) => {
       text: getBin().text,
     }));
     // console.log(props.id);
-    console.log("Asdasdasdasda");
   };
 
   return (
