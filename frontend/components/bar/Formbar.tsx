@@ -46,8 +46,6 @@ const Formbar = () => {
         bin.languageId = parseInt(option!!.value);
         bin.languageExtension = languageExtension;
       }
-
-      console.log(bin?.languageExtension);
     }
   };
 

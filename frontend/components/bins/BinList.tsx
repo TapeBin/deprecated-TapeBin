@@ -3,6 +3,10 @@ import React, { useEffect, useState } from "react";
 import { binsAtom } from "../../states/bins";
 import { editorAtom } from "../../states/editor";
 import { Bin } from "../../types/Bin";
+import {
+  getLanguageIdWithMode,
+  getLanguageNameWithMode,
+} from "../../utils/binUtil";
 import BinItem from "../form/binlist/BinItem";
 
 const BinList = () => {
@@ -12,7 +16,16 @@ const BinList = () => {
 
   useEffect(() => {
     if (bins.bins.length === 0) {
-      bins.bins.push(new Bin(0, "New File", 0, editor.mode, ""));
+      bins.bins.push(
+        new Bin(
+          0,
+          "New File",
+          getLanguageIdWithMode(editor.mode),
+          editor.mode,
+          ""
+        )
+      );
+      // addBin();
     }
     setLoaded(true);
   }, []);
@@ -28,7 +41,13 @@ const BinList = () => {
 
     max++;
 
-    const newBin = new Bin(max, "New File", 0, editor.mode, "");
+    const newBin = new Bin(
+      max,
+      "New File",
+      getLanguageIdWithMode(editor.mode),
+      editor.mode,
+      ""
+    );
     newArray.push(newBin);
 
     setBins((prevState) => ({ ...prevState, bins: newArray }));

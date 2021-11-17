@@ -1,5 +1,15 @@
-import React, { FunctionComponent } from "react";
+import { useAtom } from "jotai";
+import React, { FunctionComponent, useEffect, useState } from "react";
 import Select, { ActionMeta, StylesConfig } from "react-select";
+import { binFormAtom } from "../../states/binForm";
+import { binsAtom } from "../../states/bins";
+import { editorAtom } from "../../states/editor";
+import {
+  getLanguageIdFromStorage,
+  getLanguageNameWithBin,
+  getLanguageNameWithMode,
+} from "../../utils/binUtil";
+import linguist from "../../utils/json/linguist.json";
 
 export type SelectOption = {
   label: string;
@@ -46,11 +56,57 @@ const customStyles: StylesConfig<SelectOption, false> = {
 };
 
 const Selector: FunctionComponent<SelectorProps> = (props: SelectorProps) => {
+  const [bins, setBins] = useAtom(binsAtom);
+  const [binForm, setBinForm] = useAtom(binFormAtom);
+  const [editor] = useAtom(editorAtom);
+  const getDefaultSettings = () => {
+    return {
+      value: getLanguageIdFromStorage(),
+      label:
+        getLanguageNameWithBin(bins.bins) ||
+        getLanguageNameWithMode(editor.mode),
+    };
+  };
+
+  const [value, setValue] = useState({
+    label: getDefaultSettings().label,
+    value: getDefaultSettings().value,
+  });
+
+  const handleValueChange = () => {
+    const bin = bins.bins.find(
+      (foundBin) => foundBin.id === binForm.currentBinId
+    );
+
+    if (bin) {
+      // @ts-ignore
+      setValue({
+        label: linguist[bin.languageId.toString()].name,
+        value: bin.languageId.toString(),
+      });
+    }
+  };
+
+  useEffect(() => {
+    handleValueChange();
+  }, [binForm.currentBinId]);
+
   return (
     <Select
       options={props.options}
-      onChange={props.onChange}
+      onChange={(
+        option: SelectOption | null,
+        actionMeta: ActionMeta<SelectOption>
+      ) => {
+        props.onChange(option, actionMeta);
+        handleValueChange();
+      }}
       styles={customStyles}
+      value={value}
+      defaultValue={{
+        label: getDefaultSettings().label,
+        value: getDefaultSettings().value,
+      }}
     />
   );
 };
