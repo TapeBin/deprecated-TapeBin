@@ -47,9 +47,6 @@ const BinItem: FunctionComponent<BinItemProps> = (props: BinItemProps) => {
 
     setBinForm((prevState) => ({ ...prevState, currentBinId: props.id }));
 
-    console.log(editor.mode);
-    console.log(getLanguageModeWithId(currentBin.languageId));
-
     setEditor((prevState) => ({
       ...prevState,
       mode: getLanguageModeWithId(currentBin.languageId),

@@ -81,9 +81,6 @@ const Selector: FunctionComponent<SelectorProps> = (props: SelectorProps) => {
 
     if (bin) {
       // @ts-ignore
-      console.log(linguist[bin.languageId.toString()].name);
-
-      // @ts-ignore
       setValue({
         label: linguist[bin.languageId.toString()].name,
         value: bin.languageId.toString() as string,
