@@ -14,12 +14,9 @@ interface Bin {
 router.post("/bin/create", (req: any, res: any) => {
 
   createBin(req.body, req.user as MongoUser).then(binCreation => {
-
-    console.log(binCreation);
-
-    // if (binCreation.succeed)
-    //   res.status(201).json(binCreation);
-    // else res.status(500).json(binCreation);
+    if (binCreation.succeed)
+      res.status(201).json(binCreation);
+    else res.status(500).json(binCreation);
   }).catch(err => console.log(err));
 
 
@@ -38,9 +35,6 @@ async function createBin(data: any, user: MongoUser) {
   if (data.bins.length === 0)
     return { succeed, url: "" };
 
-  console.log("continued");
-
-
   let userId = null;
 
   if (user)
@@ -58,8 +52,6 @@ async function createBin(data: any, user: MongoUser) {
     text: bin._text
   }));
 
-  console.log(correctBins);
-
   const bin = await new Bin({
     binId: url,
     createdAt: Date.now(),
@@ -73,8 +65,6 @@ async function createBin(data: any, user: MongoUser) {
     console.log(err);
     succeed = false;
   });
-
-  console.log("failed");
 
   return { succeed, url };
 }
