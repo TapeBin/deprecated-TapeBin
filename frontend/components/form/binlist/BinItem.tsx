@@ -26,14 +26,16 @@ const BinItem: FunctionComponent<BinItemProps> = (props: BinItemProps) => {
 
   const removeBin = () => {
     if (bins.bins.length - 1 > 0) {
+      const filteredBins = bins.bins.filter((bin) => bin.id !== props.id);
       setBin((prevState) => ({
         ...prevState,
-        bins: bins.bins.filter((bin) => bin.id !== props.id),
+        bins: filteredBins,
       }));
-      const firstBin = bins.bins[0];
+
+      const firstBin = filteredBins[0];
       setBinForm((prevState) => ({
         ...prevState,
-        currentBinId: 0,
+        currentBinId: firstBin.id,
       }));
       setEditor((prevState) => ({
         ...prevState,
@@ -61,7 +63,7 @@ const BinItem: FunctionComponent<BinItemProps> = (props: BinItemProps) => {
       className="w-32 sm:w-60 flex flex-row justify-between rounded-md border-2 border-gray-700 p-2 px-3 cursor-pointer"
     >
       <input
-        className="bg-transparent truncate pr-1 sm:pr-2"
+        className="h-full bg-transparent truncate pr-1 sm:pr-2"
         placeholder={props.fileName}
         defaultValue={props.fileName}
         onChange={changeName}
