@@ -11,6 +11,7 @@ import { editorAtom } from "../../states/editor";
 import { binsAtom } from "../../states/bins";
 import { binFormAtom } from "../../states/binForm";
 import { Bin } from "../../types/Bin";
+import axios from "axios";
 
 const Formbar = () => {
   const [editor, setEditor] = useAtom(editorAtom);
@@ -52,6 +53,13 @@ const Formbar = () => {
     }
   };
 
+  const sendBin = () => {
+    axios(`${process.env.BACK_END}/bin/create`, {method: "POST", withCredentials: true, data: bins})
+      .then((response) => {
+        console.log(response.data);
+      });
+  };
+
   return (
     <div className="w-[280px] h-full bg-background text-gray-100 border-r-2 border-gray-700">
       <div className="w-full h-full flex flex-col py-5 px-8 space-y-6 items-center">
@@ -60,7 +68,7 @@ const Formbar = () => {
           <Input label="Title" />
           <Selector options={languagesArray} onChange={onChange} />
           <Input label="Description" />
-          <Button text="Save" />
+          <Button text="Save" onClick={sendBin}/>
         </div>
         <Footer />
       </div>
