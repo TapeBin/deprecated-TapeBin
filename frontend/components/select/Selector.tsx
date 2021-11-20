@@ -22,6 +22,7 @@ type SelectorProps = {
     option: SelectOption | null,
     actionMeta: ActionMeta<SelectOption>
   ) => void;
+  isOnId?: boolean;
 };
 
 const customStyles: StylesConfig<SelectOption, false> = {
@@ -112,6 +113,7 @@ const Selector: FunctionComponent<SelectorProps> = (props: SelectorProps) => {
         label: getDefaultSettings().label,
         value: getDefaultSettings().value,
       }}
+      isDisabled={props.isOnId}
     />
   );
 };

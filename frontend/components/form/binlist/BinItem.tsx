@@ -9,6 +9,7 @@ import { getLanguageModeWithId, getLanguageModeWithIdAsString } from "../../../u
 type BinItemProps = {
   fileName: string;
   id: number;
+  isOnId?: boolean;
 };
 
 const BinItem: FunctionComponent<BinItemProps> = (props: BinItemProps) => {
@@ -69,6 +70,7 @@ const BinItem: FunctionComponent<BinItemProps> = (props: BinItemProps) => {
         onChange={changeName}
         maxLength={35}
         onClick={binClick}
+        disabled={props.isOnId}
       />
       <img
         src="./images/close.svg"

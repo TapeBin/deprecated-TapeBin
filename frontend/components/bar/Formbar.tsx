@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FunctionComponent } from "react";
 import Footer from "../footer/Footer";
 import Button from "../form/Button";
 import Input from "../form/Input";
@@ -13,7 +13,11 @@ import { binFormAtom } from "../../states/binForm";
 import { Bin } from "../../types/Bin";
 import axios from "axios";
 
-const Formbar = () => {
+type FormbarProps = {
+  isOnId?: boolean;
+};
+
+const Formbar: FunctionComponent<FormbarProps> = (props: FormbarProps) => {
   const [editor, setEditor] = useAtom(editorAtom);
   const [bins, setBins] = useAtom(binsAtom);
   const [binForm, _] = useAtom(binFormAtom);
@@ -54,23 +58,23 @@ const Formbar = () => {
   };
 
   const sendBin = () => {
-    axios(`${process.env.BACK_END}/bin/create`, {method: "POST", withCredentials: true, data: bins})
+    axios(`${process.env.BACK_END}/bin/create`, { method: "POST", withCredentials: true, data: bins })
       .then((response) => {
         console.log(response.data);
       });
   };
 
   return (
-    <div className="w-[280px] h-full bg-background text-gray-100 border-r-2 border-gray-700">
+    <div className="w-[280px] h-full bg-background text-gray-100  border-r-2 border-gray-700">
       <div className="w-full h-full flex flex-col py-5 px-8 space-y-6 items-center">
         <div className="font-lobster text-5xl">Bin</div>
         <div className="w-full h-full flex flex-col space-y-6">
-          <Input label="Title" />
-          <Selector options={languagesArray} onChange={onChange} />
-          <Input label="Description" />
-          <Button text="Save" onClick={sendBin}/>
+          <Input label="Title" isOnId={props.isOnId}/>
+          <Selector options={languagesArray} onChange={onChange} isOnId={props.isOnId}/>
+          <Input label="Description" isOnId={props.isOnId}/>
+          {!props.isOnId && <Button text="Save" onClick={sendBin}/>}
         </div>
-        <Footer />
+        <Footer/>
       </div>
     </div>
   );

@@ -1,12 +1,16 @@
 import { useAtom } from "jotai";
-import React, { useEffect, useState } from "react";
+import React, { FunctionComponent, useEffect, useState } from "react";
 import { binsAtom } from "../../states/bins";
 import { editorAtom } from "../../states/editor";
 import { Bin } from "../../types/Bin";
 import BinItem from "../form/binlist/BinItem";
 import { getLanguageModeWithIdAsString } from "../../utils/binUtil";
 
-const BinList = () => {
+type BinListProps = {
+  isOnId?: boolean;
+};
+
+const BinList: FunctionComponent<BinListProps> = (props: BinListProps) => {
   const [loaded, setLoaded] = useState(false);
   const [bins, setBins] = useAtom(binsAtom);
   const [editor, setEditor] = useAtom(editorAtom);
@@ -53,17 +57,18 @@ const BinList = () => {
   return (
     <>
       {loaded &&
-        bins.bins.map((bin: Bin) => (
-          <BinItem fileName={bin.fileName} id={bin.id} key={bin.id} />
-        ))}
-      <button
+      bins.bins.map((bin: Bin) => (
+        <BinItem fileName={bin.fileName} id={bin.id} key={bin.id} isOnId={props.isOnId}/>
+      ))}
+      {!props.isOnId && <button
         className="rounded-md py-2 px-4 border-2 border-transparent hover:border-2 hover:border-proColor"
         onClick={addBin}
       >
         +
-      </button>
+      </button>}
     </>
   );
-};
+}
+;
 
 export default BinList;
