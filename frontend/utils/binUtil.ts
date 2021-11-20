@@ -24,7 +24,7 @@ export const getLanguageNameWithMode = (mode: string): string => {
   for (const key in linguist) {
     if (linguist.hasOwnProperty(key)) {
       // @ts-ignore
-      if (linguist[key].extension === mode) return linguist[key].name;
+      if (linguist[key].aceMode === mode) return linguist[key].name;
     }
   }
 
@@ -47,8 +47,25 @@ export const getLanguageIdAsString = (bins: Bin[]): string => {
   return "";
 };
 
+export const getLanguageModeWithIdAsString = (number: string): string | undefined => {
+  if (linguist.hasOwnProperty(number)) {
+    // @ts-ignore
+    return linguist[number].aceMode;
+  }
+
+  return undefined;
+};
+
+export const getLanguageModeWithId = (number: number): string => {
+  if (linguist.hasOwnProperty(number)) {
+    // @ts-ignore
+    return linguist[number].aceMode;
+  }
+
+  return "";
+};
+
+
 export const getLanguageIdFromStorage = (): string => {
-  return getLanguageIdWithMode(
-    localStorage.getItem("mode") || "java"
-  ).toString();
+  return localStorage.getItem("mode") || "null";
 };

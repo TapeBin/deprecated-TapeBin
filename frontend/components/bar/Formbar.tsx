@@ -36,7 +36,7 @@ const Formbar = () => {
       const languageExtension = linguist[option!!.value].aceMode;
       setEditor((prevState) => ({
         ...prevState,
-        mode: languageExtension,
+        mode: option!!.value,
       }));
 
       const bin = bins.bins.find(

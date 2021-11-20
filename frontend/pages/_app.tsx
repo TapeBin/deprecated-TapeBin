@@ -21,13 +21,13 @@ export default function App({ Component, pageProps }: AppProps) {
   const [_, setUser] = useAtom(userAtom);
   const [__, setEditor] = useAtom(editorAtom);
   useEffect(() => {
-    setEditor({
+    setEditor(prevState => ({...prevState,
       theme: setItem("theme", "one_dark"),
       fontSize: setItem("fontSize", "15px"),
       fontFamily: setItem("fontFamily", "Fira Code"),
       printMargin: setItem("printMargin", "false") === "true",
-      mode: setItem("mode", "java"),
-    });
+      mode: setItem("mode", "181"),
+    }));
 
     axios
       .get<User>(`${process.env.BACK_END}/user`, { withCredentials: true })

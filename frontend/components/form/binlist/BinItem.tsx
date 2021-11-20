@@ -4,6 +4,7 @@ import { binFormAtom } from "../../../states/binForm";
 import { binsAtom } from "../../../states/bins";
 import { editorAtom } from "../../../states/editor";
 import { Bin } from "../../../types/Bin";
+import { getLanguageModeWithId, getLanguageModeWithIdAsString } from "../../../utils/binUtil";
 
 type BinItemProps = {
   fileName: string;
@@ -18,10 +19,6 @@ const BinItem: FunctionComponent<BinItemProps> = (props: BinItemProps) => {
   const changeName = (e: React.ChangeEvent<HTMLInputElement>) => {
     const bin: Bin = bins.bins.filter((bin) => bin.id === props.id)[0];
     bin.fileName = e.target.value;
-  };
-
-  const getBin = (): Bin => {
-    return bins.bins.filter((bin) => bin.id === props.id)[0];
   };
 
   const removeBin = () => {
@@ -46,13 +43,19 @@ const BinItem: FunctionComponent<BinItemProps> = (props: BinItemProps) => {
   };
 
   const binClick = () => {
+    const currentBin = bins.bins.filter((bin) => bin.id === props.id)[0];
+
     setBinForm((prevState) => ({ ...prevState, currentBinId: props.id }));
+
+    console.log(editor.mode);
+    console.log(getLanguageModeWithId(currentBin.languageId));
+
     setEditor((prevState) => ({
       ...prevState,
-      mode: getBin().languageExtension,
-      text: getBin().text,
+      mode: getLanguageModeWithId(currentBin.languageId),
+      text: currentBin.text,
     }));
-    // console.log(props.id);
+
   };
 
   return (

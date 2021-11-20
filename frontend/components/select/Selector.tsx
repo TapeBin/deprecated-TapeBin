@@ -5,8 +5,8 @@ import { binFormAtom } from "../../states/binForm";
 import { binsAtom } from "../../states/bins";
 import { editorAtom } from "../../states/editor";
 import {
-  getLanguageIdFromStorage,
-  getLanguageNameWithBin,
+  getLanguageIdFromStorage, getLanguageModeWithIdAsString,
+  getLanguageNameWithBin, getLanguageNameWithId,
   getLanguageNameWithMode,
 } from "../../utils/binUtil";
 import linguist from "../../utils/json/linguist.json";
@@ -56,15 +56,15 @@ const customStyles: StylesConfig<SelectOption, false> = {
 };
 
 const Selector: FunctionComponent<SelectorProps> = (props: SelectorProps) => {
-  const [bins, setBins] = useAtom(binsAtom);
-  const [binForm, setBinForm] = useAtom(binFormAtom);
+  const [bins] = useAtom(binsAtom);
+  const [binForm] = useAtom(binFormAtom);
   const [editor, setEditor] = useAtom(editorAtom);
   const getDefaultSettings = () => {
     return {
       value: getLanguageIdFromStorage(),
       label:
         getLanguageNameWithBin(bins.bins) ||
-        getLanguageNameWithMode(editor.mode),
+        getLanguageNameWithId(parseInt(editor.mode))!!,
     };
   };
 
@@ -74,23 +74,25 @@ const Selector: FunctionComponent<SelectorProps> = (props: SelectorProps) => {
   });
 
   const handleValueChange = () => {
-    console.log(editor.text);
     const bin = bins.bins.find(
       (foundBin) => foundBin.id === binForm.currentBinId
     );
 
+
     if (bin) {
+      // @ts-ignore
+      console.log(linguist[bin.languageId.toString()].name);
+
       // @ts-ignore
       setValue({
         label: linguist[bin.languageId.toString()].name,
-        value: bin.languageId.toString(),
+        value: bin.languageId.toString() as string,
       });
 
       // A bug causes the editor text to reset, to prevent that, we set it again
       setEditor((prevState) => ({ ...prevState, text: bin.text }));
     }
 
-    console.log(bin);
   };
 
   useEffect(() => {

@@ -5,6 +5,7 @@ import { useAtom } from "jotai";
 import { editorAtom } from "../../states/editor";
 import { binsAtom } from "../../states/bins";
 import { binFormAtom } from "../../states/binForm";
+import { getLanguageModeWithIdAsString } from "../../utils/binUtil";
 
 ace.config.set("basePath", "ace/");
 
@@ -16,18 +17,18 @@ type EditorProps = {
 };
 
 const Editor: FunctionComponent<EditorProps> = (props: EditorProps) => {
-  const [settings] = useAtom(editorAtom);
+  const [settings, setEditor] = useAtom(editorAtom);
   const [bins] = useAtom(binsAtom);
   const [binForm] = useAtom(binFormAtom);
 
   const onChange = (value: string) => {
+    setEditor(prevState => ({...prevState, text: value}))
     const currentBin = bins.bins.find(
       (foundBin) => foundBin.id === binForm.currentBinId
     );
     if (currentBin) {
       currentBin.text = value;
     }
-    console.log(value);
   };
 
   return (
@@ -42,7 +43,7 @@ const Editor: FunctionComponent<EditorProps> = (props: EditorProps) => {
         showPrintMargin: settings.printMargin,
       }}
       theme={settings.theme}
-      mode={props.mode || settings.mode}
+      mode={props.mode || getLanguageModeWithIdAsString(settings.mode) || settings.mode}
       readOnly={props.readOnly}
       onChange={onChange}
     />
