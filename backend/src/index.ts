@@ -15,6 +15,8 @@ app.use(
   cors({
     origin: `${process.env.FRONT_END}`,
     credentials: true,
+    methods: ["GET", "POST"],
+
   })
 );
 

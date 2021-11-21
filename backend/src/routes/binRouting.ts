@@ -24,14 +24,28 @@ router.post("/bin/create", (req: any, res: any) => {
 });
 
 router.get("/bin/:id", (req: any, res: any) => {
-  Bin.findOne({ binId: req.params.id }, function (err: mongoose.Error, document: MongoUser) {
+  Bin.findOne({ binId: req.params.id }, function (err: mongoose.Error, document: any) {
 
     if (err)
       console.log(err);
 
     if (!document)
       res.json({ succeed: false });
-    else res.json({ succeed: true, document});
+    else {
+      const bins: any[] = [];
+
+      document.bins.forEach((bin: any) => {
+        bins.push({
+          id: bin.id,
+          fileName: bin._fileName || bin.fileName,
+          languageId: bin._languageId || bin.languageId,
+          languageExtension: bin._languageExtension || bin.languageExtension,
+          text: bin._text || bin.text
+        })
+      });
+
+      res.json({ succeed: true, title: document.title, description: document.description, bins: bins });
+    }
 
   });
 });

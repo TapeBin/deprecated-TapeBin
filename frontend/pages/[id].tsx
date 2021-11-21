@@ -24,7 +24,7 @@ export const getServerSideProps: GetServerSideProps<{}, Record<"id", string>> = 
 
   return {
     props: {
-      bin: json.document
+      bin: json
     }
   };
 };

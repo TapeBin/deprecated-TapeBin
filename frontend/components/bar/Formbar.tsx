@@ -13,6 +13,7 @@ import { binFormAtom } from "../../states/binForm";
 import { Bin } from "../../types/Bin";
 import axios from "axios";
 import { useRouter } from "next/router";
+import FormContainer from "./FormContainer";
 
 type FormbarProps = {
   isOnId?: boolean;
@@ -70,18 +71,12 @@ const Formbar: FunctionComponent<FormbarProps> = (props: FormbarProps) => {
   };
 
   return (
-    <div className="w-[280px] h-full bg-background text-gray-100  border-r-2 border-gray-700">
-      <div className="w-full h-full flex flex-col py-5 px-8 space-y-6 items-center">
-        <div className="font-lobster text-5xl">Bin</div>
-        <div className="w-full h-full flex flex-col space-y-6">
+    <FormContainer title="Bin">
           <Input label="Title" isOnId={props.isOnId}/>
           <Selector options={languagesArray} onChange={onChange} isOnId={props.isOnId}/>
           <Input label="Description" isOnId={props.isOnId}/>
           {!props.isOnId && <Button text="Save" onClick={sendBin}/>}
-        </div>
-        <Footer/>
-      </div>
-    </div>
+    </FormContainer>
   );
 };
 
