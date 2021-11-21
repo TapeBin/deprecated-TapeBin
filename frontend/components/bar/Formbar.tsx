@@ -12,12 +12,14 @@ import { binsAtom } from "../../states/bins";
 import { binFormAtom } from "../../states/binForm";
 import { Bin } from "../../types/Bin";
 import axios from "axios";
+import { useRouter } from "next/router";
 
 type FormbarProps = {
   isOnId?: boolean;
 };
 
 const Formbar: FunctionComponent<FormbarProps> = (props: FormbarProps) => {
+  const router = useRouter();
   const [editor, setEditor] = useAtom(editorAtom);
   const [bins, setBins] = useAtom(binsAtom);
   const [binForm, _] = useAtom(binFormAtom);
@@ -59,8 +61,11 @@ const Formbar: FunctionComponent<FormbarProps> = (props: FormbarProps) => {
 
   const sendBin = () => {
     axios(`${process.env.BACK_END}/bin/create`, { method: "POST", withCredentials: true, data: bins })
-      .then((response) => {
-        console.log(response.data);
+      .then((response: any) => {
+        if (response.data.succeed) {
+          navigator.clipboard.writeText(`https://tapeb.in/${response.data.url}`);
+          router.push("[id]", `/${response.data.url}`, {shallow: true});
+        }
       });
   };
 

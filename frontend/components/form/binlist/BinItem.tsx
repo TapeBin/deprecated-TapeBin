@@ -64,7 +64,7 @@ const BinItem: FunctionComponent<BinItemProps> = (props: BinItemProps) => {
       className="w-32 sm:w-60 flex flex-row justify-between rounded-md border-2 border-gray-700 p-2 px-3 cursor-pointer"
     >
       <input
-        className="h-full bg-transparent truncate pr-1 sm:pr-2"
+        className="h-full bg-transparent truncate pr-1 sm:pr-2 m-auto"
         placeholder={props.fileName}
         defaultValue={props.fileName}
         onChange={changeName}
