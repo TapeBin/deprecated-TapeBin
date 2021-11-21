@@ -8,7 +8,7 @@ type DefaultSelectorProps = {
     option: SelectOption | null,
     actionMeta: ActionMeta<SelectOption>
   ) => void;
-  value: {label: string, value: string};
+  value?: {label: string, value: string};
   defaultValue: {label: string, value: string};
   label: string;
 };
