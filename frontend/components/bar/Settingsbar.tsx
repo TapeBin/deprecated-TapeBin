@@ -4,10 +4,10 @@ import DefaultSelector from "../select/DefaultSelector";
 import {
   getAceModeWithId,
   getFirstOrSelectedFontFamily,
-  getFirstOrSelectedLanguage,
+  getFirstOrSelectedLanguage, getFirstOrSelectedTheme,
   getFonts,
   getFontSize,
-  getLanguages
+  getLanguages, getThemes
 } from "../../utils/fileUtil";
 import { SelectOption } from "../select/Selector";
 import { ActionMeta } from "react-select";
@@ -40,6 +40,8 @@ const Settingsbar = () => {
 
   const onThemeChange = (option: SelectOption | null, actionMeta: ActionMeta<SelectOption>) => {
     const value = option!!.value;
+    setEditor(prevState => ({...prevState, theme: value}));
+    localStorage.setItem("theme", value);
   };
 
   const redirectToHomePage = () => {
@@ -52,7 +54,7 @@ const Settingsbar = () => {
       <DefaultSelector options={getFonts()} onChange={onFontFamilyChange} defaultValue={getFirstOrSelectedFontFamily()}
                        label={"Font Family"}/>
       <DefaultSelector options={getLanguages()} onChange={onLanguageChange} defaultValue={getFirstOrSelectedLanguage()} label={"Default Language"}/>
-      {/*<DefaultSelector options={} onChange={} defaultValue={} label={"Theme"}/>*/}
+      <DefaultSelector options={getThemes()} onChange={onThemeChange} defaultValue={getFirstOrSelectedTheme()} label={"Theme"}/>
       <Input label={"Font Size"} type="number" onChange={onFontSizeChange} defaultValue={getFontSize()}/>
       <Button text={"Return to home page"} onClick={redirectToHomePage}/>
     </FormContainer>

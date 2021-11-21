@@ -1,6 +1,7 @@
 import fontFamilies from "./json/fonts.json";
 import languages from "./json/languages.json";
 import linguist from "./json/linguist.json";
+import themes from "./json/themes.json";
 
 interface Selection {
   label: string;
@@ -25,9 +26,8 @@ export const getFonts = (): Selection[] => {
 export const getFirstOrSelectedFontFamily = (): Selection => {
   let fontFamily = localStorage.getItem("fontFamily");
 
-  if (!fontFamily) {
+  if (!fontFamily)
     fontFamily = fontFamilies.fonts[0];
-  }
 
   return { label: fontFamily, value: fontFamily };
 };
@@ -70,7 +70,35 @@ export const getFirstOrSelectedLanguage = (): Selection => {
 
   // @ts-ignore
   const languageName = linguist[mode].name;
-  return { label: languageName, value: mode};
+  return { label: languageName, value: mode };
 }
 
 // END LANGUAGES ------------------------------------------------------------
+
+// THEMES ------------------------------------------------------------
+
+export const getThemes = (): Selection[] => {
+  const newThemes: Selection[] = [];
+
+  for (const theme in themes) {
+    if (themes.hasOwnProperty(theme)) {
+      // @ts-ignore
+      newThemes.push({ label: themes[theme], value: theme });
+    }
+  }
+
+  return newThemes;
+};
+
+export const getFirstOrSelectedTheme = (): Selection => {
+  let theme = localStorage.getItem("theme");
+
+  if (!theme)
+    // @ts-ignore
+    theme = themes[0];
+
+  // @ts-ignore
+  return { label: themes[theme], value: theme };
+};
+
+// END THEMES ------------------------------------------------------------
