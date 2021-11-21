@@ -45,9 +45,12 @@ const Settingsbar = () => {
     localStorage.setItem("theme", value);
   };
 
+  const onPrintMarginChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setEditor(prevState => ({...prevState, printMargin: event.target.checked}));
+  };
+
   const redirectToHomePage = () => {
     router.push("/");
-    // router.reload();
   }
 
   return (
@@ -57,7 +60,7 @@ const Settingsbar = () => {
       <DefaultSelector options={getLanguages()} onChange={onLanguageChange} defaultValue={getFirstOrSelectedLanguage()} label={"Default Language"}/>
       <DefaultSelector options={getThemes()} onChange={onThemeChange} defaultValue={getFirstOrSelectedTheme()} label={"Theme"}/>
       <Input label={"Font Size"} type="number" onChange={onFontSizeChange} defaultValue={getFontSize()}/>
-      <Check label={"Print Margin"}/>
+      <Check label={"Print Margin"} onChange={onPrintMarginChange}/>
       <Button text={"Return to home page"} onClick={redirectToHomePage}/>
     </FormContainer>
   )
