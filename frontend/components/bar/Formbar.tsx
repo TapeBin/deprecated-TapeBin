@@ -13,6 +13,8 @@ import axios from "axios";
 import { useRouter } from "next/router";
 import FormContainer from "./FormContainer";
 import { toast } from "react-toastify";
+import { notifyMoreThanXCharacters, notifySuccessfulBinCreation } from "../../utils/notify";
+import { exceedsMaxCharacters } from "../../utils/binUtil";
 
 type FormbarProps = {
   isOnId?: boolean;
@@ -23,15 +25,7 @@ const Formbar: FunctionComponent<FormbarProps> = (props: FormbarProps) => {
   const [editor, setEditor] = useAtom(editorAtom);
   const [bins] = useAtom(binsAtom);
   const [binForm, _] = useAtom(binFormAtom);
-  const notify = () => toast.success("Successfully saved and copied to clipboard", {
-    position: "top-right",
-    autoClose: 4000,
-    hideProgressBar: false,
-    closeOnClick: true,
-    pauseOnHover: false,
-    draggable: true,
-    progress: undefined,
-  });
+
   const languagesArray = [];
 
   for (const key in languages) {
@@ -69,11 +63,16 @@ const Formbar: FunctionComponent<FormbarProps> = (props: FormbarProps) => {
   };
 
   const sendBin = () => {
+    if (exceedsMaxCharacters(bins.bins)) {
+      notifyMoreThanXCharacters();
+      return;
+    }
+
     axios(`${process.env.BACK_END}/bin/create`, { method: "POST", withCredentials: true, data: bins })
       .then((response: any) => {
         if (response.data.succeed) {
           navigator.clipboard.writeText(`https://tapeb.in/${response.data.url}`);
-          notify();
+          notifySuccessfulBinCreation();
           router.push("[id]", `/${response.data.url}`, { shallow: true });
         }
       });

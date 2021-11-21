@@ -1,6 +1,7 @@
 import { Bin } from "../types/Bin";
 import language from "./json/languages.json";
 import linguist from "./json/linguist.json";
+import { MAX_CHARACTERS } from "./constants";
 
 export const getLanguageNameWithId = (
   id: number | undefined
@@ -68,4 +69,10 @@ export const getLanguageModeWithId = (number: number): string => {
 
 export const getLanguageIdFromStorage = (): string => {
   return localStorage.getItem("mode") || "null";
+};
+
+export const exceedsMaxCharacters = (bins: any[]): boolean => {
+  let amountCharacters = 0;
+  bins.forEach(bin => amountCharacters += bin.text.length);
+  return amountCharacters >= MAX_CHARACTERS;
 };

@@ -65,6 +65,7 @@ export default function App({ Component, pageProps }: AppProps) {
       draggable
       pauseOnHover={false}
       theme="dark"
+      limit={4}
     />
   </>;
 }

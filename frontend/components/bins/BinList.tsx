@@ -5,6 +5,8 @@ import { editorAtom } from "../../states/editor";
 import { Bin } from "../../types/Bin";
 import BinItem from "../form/binlist/BinItem";
 import { getLanguageModeWithIdAsString } from "../../utils/binUtil";
+import { notifyMoreThanTenBins } from "../../utils/notify";
+import { MAX_BINS } from "../../utils/constants";
 
 type BinListProps = {
   isOnId?: boolean;
@@ -13,7 +15,7 @@ type BinListProps = {
 const BinList: FunctionComponent<BinListProps> = (props: BinListProps) => {
   const [loaded, setLoaded] = useState(false);
   const [bins, setBins] = useAtom(binsAtom);
-  const [editor, setEditor] = useAtom(editorAtom);
+  const [editor] = useAtom(editorAtom);
 
   useEffect(() => {
     if (bins.bins.length === 0) {
@@ -32,6 +34,11 @@ const BinList: FunctionComponent<BinListProps> = (props: BinListProps) => {
   }, []);
 
   const addBin = () => {
+    if (bins.bins.length >= MAX_BINS) {
+      notifyMoreThanTenBins();
+      return;
+    }
+
     const newArray: Bin[] = bins.bins;
     let max = 0;
     if (newArray.length > 0) {
