@@ -5,6 +5,8 @@ services:
       context: backend
       dockerfile: Dockerfile.dev
     container_name: backend
+    networks:
+      - tapebin-network
     expose:
       - "5001"
     ports:
@@ -29,6 +31,8 @@ services:
     command: npm run dev
   frontend:
     container_name: frontend
+    networks:
+      - tapebin-network
     depends_on:
       - backend
     expose:
@@ -45,3 +49,6 @@ services:
       - /usr/src/node_modules
     environment:
       BACK_END: http://localhost:5001
+networks:
+  tapebin-network:
+    driver: bridge

@@ -70,7 +70,7 @@ const BinItem: FunctionComponent<BinItemProps> = (props: BinItemProps) => {
         onChange={changeName}
         maxLength={35}
         onClick={binClick}
-        disabled={props.isOnId}
+        // disabled={props.isOnId}
       />
       <img
         src="./images/close.svg"
