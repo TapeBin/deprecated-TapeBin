@@ -52,9 +52,7 @@ const Settingsbar = () => {
 
   const redirectToHomePage = () => {
     router.push("/");
-  }
-
-  console.log(getPrintMargin());
+  };
 
   return (
     <FormContainer title="Settings">
