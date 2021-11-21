@@ -1,13 +1,15 @@
 import React from "react";
 import FormContainer from "./FormContainer";
-import Selector, { SelectOption } from "../select/Selector";
-import Select, { ActionMeta } from "react-select";
+import DefaultSelector from "../select/DefaultSelector";
 
 const Settingsbar = () => {
 
   return (
     <FormContainer title="Settings">
 
+      {/*<DefaultSelector options={} onChange={} value={} defaultValue={} label={"Font Family"}/>*/}
+      {/*<DefaultSelector options={} onChange={} value={} defaultValue={} label={"Default Language"}/>*/}
+      {/*<DefaultSelector options={} onChange={} value={} defaultValue={} label={"Theme"}/>*/}
     </FormContainer>
   )
 };
