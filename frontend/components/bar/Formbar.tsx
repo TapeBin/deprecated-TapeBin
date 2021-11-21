@@ -1,5 +1,4 @@
 import React, { FunctionComponent } from "react";
-import Footer from "../footer/Footer";
 import Button from "../form/Button";
 import Input from "../form/Input";
 import Selector, { SelectOption } from "../select/Selector";
@@ -10,10 +9,10 @@ import { useAtom } from "jotai";
 import { editorAtom } from "../../states/editor";
 import { binsAtom } from "../../states/bins";
 import { binFormAtom } from "../../states/binForm";
-import { Bin } from "../../types/Bin";
 import axios from "axios";
 import { useRouter } from "next/router";
 import FormContainer from "./FormContainer";
+import { toast } from "react-toastify";
 
 type FormbarProps = {
   isOnId?: boolean;
@@ -22,8 +21,17 @@ type FormbarProps = {
 const Formbar: FunctionComponent<FormbarProps> = (props: FormbarProps) => {
   const router = useRouter();
   const [editor, setEditor] = useAtom(editorAtom);
-  const [bins, setBins] = useAtom(binsAtom);
+  const [bins] = useAtom(binsAtom);
   const [binForm, _] = useAtom(binFormAtom);
+  const notify = () => toast.success("Successfully saved and copied to clipboard", {
+    position: "top-right",
+    autoClose: 4000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: false,
+    draggable: true,
+    progress: undefined,
+  });
   const languagesArray = [];
 
   for (const key in languages) {
@@ -65,17 +73,18 @@ const Formbar: FunctionComponent<FormbarProps> = (props: FormbarProps) => {
       .then((response: any) => {
         if (response.data.succeed) {
           navigator.clipboard.writeText(`https://tapeb.in/${response.data.url}`);
-          router.push("[id]", `/${response.data.url}`, {shallow: true});
+          notify();
+          router.push("[id]", `/${response.data.url}`, { shallow: true });
         }
       });
   };
 
   return (
     <FormContainer title="Bin">
-          <Input label="Title" isOnId={props.isOnId}/>
-          <Selector options={languagesArray} onChange={onChange} isOnId={props.isOnId}/>
-          <Input label="Description" isOnId={props.isOnId}/>
-          {!props.isOnId && <Button text="Save" onClick={sendBin}/>}
+      <Input label="Title" isOnId={props.isOnId}/>
+      <Selector options={languagesArray} onChange={onChange} isOnId={props.isOnId}/>
+      <Input label="Description" isOnId={props.isOnId}/>
+      {!props.isOnId && <Button text="Save" onClick={sendBin}/>}
     </FormContainer>
   );
 };

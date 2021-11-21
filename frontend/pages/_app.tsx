@@ -4,11 +4,13 @@ import "@fontsource/roboto";
 import "@fontsource/lobster";
 import "@fontsource/fira-code";
 import "@fontsource/source-code-pro";
-import { useEffect, useState } from "react";
+import 'react-toastify/dist/ReactToastify.css';
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useAtom } from "jotai";
 import { userAtom } from "../states/user";
 import { editorAtom, setItem } from "../states/editor";
+import { ToastContainer } from "react-toastify";
 
 interface User {
   loginFailed: boolean;
@@ -23,7 +25,8 @@ export default function App({ Component, pageProps }: AppProps) {
   const [_, setUser] = useAtom(userAtom);
   const [__, setEditor] = useAtom(editorAtom);
   useEffect(() => {
-    setEditor(prevState => ({...prevState,
+    setEditor(prevState => ({
+      ...prevState,
       theme: setItem("theme", "one_dark"),
       fontSize: setItem("fontSize", "15px"),
       fontFamily: setItem("fontFamily", "Fira Code"),
@@ -49,5 +52,19 @@ export default function App({ Component, pageProps }: AppProps) {
       });
   }, []);
 
-  return isLoaded && <Component {...pageProps} />;
+  return isLoaded && <>
+    <Component {...pageProps} />
+    <ToastContainer
+      position="top-right"
+      autoClose={4000}
+      hideProgressBar={false}
+      newestOnTop
+      closeOnClick
+      rtl={false}
+      pauseOnFocusLoss={false}
+      draggable
+      pauseOnHover={false}
+      theme="dark"
+    />
+  </>;
 }
