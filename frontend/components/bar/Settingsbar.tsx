@@ -7,7 +7,7 @@ import {
   getFirstOrSelectedLanguage, getFirstOrSelectedTheme,
   getFonts,
   getFontSize,
-  getLanguages, getThemes
+  getLanguages, getPrintMargin, getThemes
 } from "../../utils/fileUtil";
 import { SelectOption } from "../select/Selector";
 import { ActionMeta } from "react-select";
@@ -47,11 +47,14 @@ const Settingsbar = () => {
 
   const onPrintMarginChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setEditor(prevState => ({...prevState, printMargin: event.target.checked}));
+    localStorage.setItem("printMargin", `${event.target.checked}`);
   };
 
   const redirectToHomePage = () => {
     router.push("/");
   }
+
+  console.log(getPrintMargin());
 
   return (
     <FormContainer title="Settings">
@@ -60,7 +63,7 @@ const Settingsbar = () => {
       <DefaultSelector options={getLanguages()} onChange={onLanguageChange} defaultValue={getFirstOrSelectedLanguage()} label={"Default Language"}/>
       <DefaultSelector options={getThemes()} onChange={onThemeChange} defaultValue={getFirstOrSelectedTheme()} label={"Theme"}/>
       <Input label={"Font Size"} type="number" onChange={onFontSizeChange} defaultValue={getFontSize()}/>
-      <Check label={"Print Margin"} onChange={onPrintMarginChange}/>
+      <Check label={"Print Margin"} onChange={onPrintMarginChange} isChecked={getPrintMargin()}/>
       <Button text={"Return to home page"} onClick={redirectToHomePage}/>
     </FormContainer>
   )

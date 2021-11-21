@@ -102,3 +102,11 @@ export const getFirstOrSelectedTheme = (): Selection => {
 };
 
 // END THEMES ------------------------------------------------------------
+
+// MARGIN ------------------------------------------------------------
+
+export const getPrintMargin = (): boolean => {
+  return localStorage.getItem("printMargin") === "true";
+};
+
+// END MARGIN ------------------------------------------------------------
