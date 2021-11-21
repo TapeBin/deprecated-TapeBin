@@ -1,6 +1,7 @@
 import Bin from "../schemas/Bin";
 import cryptoRandomString from "crypto-random-string";
 import * as mongoose from "mongoose";
+import { MAX_CHARACTERS } from "../constants";
 
 const router = require("express").Router();
 
@@ -13,14 +14,11 @@ interface Bin {
 }
 
 router.post("/bin/create", (req: any, res: any) => {
-  console.log(req.body);
   createBin(req.body, req.user as MongoUser).then(binCreation => {
     if (binCreation.succeed)
       res.status(201).json(binCreation);
-    else res.status(500).json(binCreation);
+    else res.status(413).json(binCreation);
   }).catch(err => console.log(err));
-
-
 });
 
 router.get("/bin/:id", (req: any, res: any) => {
@@ -57,10 +55,21 @@ function generateKey(): Promise<String> {
   });
 }
 
+function exceedsMaximumCharacters(bins: any[]): boolean {
+  let amountOfCharacters = 0;
+  bins.forEach(bin => {
+    if (bin.text)
+      amountOfCharacters += bin.text.length;
+    else amountOfCharacters += bin._text.length;
+  });
+
+  return amountOfCharacters >= MAX_CHARACTERS;
+}
+
 async function createBin(data: any, user: MongoUser) {
   let succeed = false;
 
-  if (data.bins.length === 0)
+  if (data.bins.length === 0 || exceedsMaximumCharacters(data.bins))
     return { succeed, url: "" };
 
   let userId = null;
