@@ -2,6 +2,7 @@ import React from "react";
 import FormContainer from "./FormContainer";
 import DefaultSelector from "../select/DefaultSelector";
 import {
+  getAceModeWithId,
   getFirstOrSelectedFontFamily,
   getFirstOrSelectedLanguage,
   getFonts,
@@ -31,12 +32,17 @@ const Settingsbar = () => {
     localStorage.setItem("fontSize", fontSize);
   }
 
-  const onLanguageChange = () => {
+  const onLanguageChange = (option: SelectOption | null, actionMeta: ActionMeta<SelectOption>) => {
+    const value = option!!.value;
+
+    setEditor(prevState => ({...prevState, mode: getAceModeWithId(value)}));
+    localStorage.setItem("mode", value);
 
   };
 
   const redirectToHomePage = () => {
     router.push("/");
+    // router.reload();
   }
 
   return (

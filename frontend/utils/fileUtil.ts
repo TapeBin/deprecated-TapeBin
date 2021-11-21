@@ -57,6 +57,11 @@ export const getLanguages = (): Selection[] => {
   return properLanguages;
 };
 
+export const getAceModeWithId = (id: string): string => {
+  // @ts-ignore
+  return linguist[id].aceMode;
+}
+
 export const getFirstOrSelectedLanguage = (): Selection => {
   let mode = localStorage.getItem("mode");
 
