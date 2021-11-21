@@ -1,25 +1,42 @@
 import React from "react";
 import FormContainer from "./FormContainer";
 import DefaultSelector from "../select/DefaultSelector";
-import { getFirstOrSelectedFontFamily, getFonts } from "../../utils/fileUtil";
+import { getFirstOrSelectedFontFamily, getFonts, getFontSize } from "../../utils/fileUtil";
 import { SelectOption } from "../select/Selector";
 import { ActionMeta } from "react-select";
+import { useAtom } from "jotai";
+import { editorAtom } from "../../states/editor";
+import Input from "../form/Input";
+import Button from "../form/Button";
+import { useRouter } from "next/router";
 
 const Settingsbar = () => {
+  const router = useRouter();
+  const [_, setEditor] = useAtom(editorAtom);
 
   const onFontFamilyChange = (option: SelectOption | null, actionMeta: ActionMeta<SelectOption>) => {
-
+    setEditor(prevState => ({ ...prevState, fontFamily: option!!.value }));
+    localStorage.setItem("fontFamily", option!!.value);
   };
 
-  console.log(getFonts());
+  const onFontSizeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const fontSize = `${event.target.value}px`;
+    setEditor(prevState => ({...prevState, fontSize: fontSize}));
+    localStorage.setItem("fontSize", fontSize);
+  }
+
+  const redirectToHomePage = () => {
+    router.push("/");
+  }
 
   return (
     <FormContainer title="Settings">
-
       <DefaultSelector options={getFonts()} onChange={onFontFamilyChange} defaultValue={getFirstOrSelectedFontFamily()}
                        label={"Font Family"}/>
-      {/*<DefaultSelector options={} onChange={} value={} defaultValue={} label={"Default Language"}/>*/}
-      {/*<DefaultSelector options={} onChange={} value={} defaultValue={} label={"Theme"}/>*/}
+      {/*<DefaultSelector options={} onChange={} defaultValue={} label={"Default Language"}/>*/}
+      {/*<DefaultSelector options={} onChange={} defaultValue={} label={"Theme"}/>*/}
+      <Input label={"Font Size"} type="number" onChange={onFontSizeChange} defaultValue={getFontSize()}/>
+      <Button text={"Return to home page"} onClick={redirectToHomePage}/>
     </FormContainer>
   )
 };

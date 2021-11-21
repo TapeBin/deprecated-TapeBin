@@ -5,6 +5,8 @@ type InputProps = {
   placeholder?: string;
   type?: string;
   isOnId?: boolean;
+  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  defaultValue?: string | number;
 };
 
 const Input: FunctionComponent<InputProps> = (props: InputProps) => {
@@ -17,6 +19,8 @@ const Input: FunctionComponent<InputProps> = (props: InputProps) => {
         placeholder={props.placeholder}
         className="h-[45px] rounded-md px-2 bg-gray-700 disabled:text-gray-100"
         disabled={props.isOnId}
+        onChange={props.onChange}
+        defaultValue={props.defaultValue}
       />
     </div>
   );

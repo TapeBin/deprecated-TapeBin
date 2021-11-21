@@ -8,8 +8,10 @@
     "start": "next start"
   },
   "dependencies": {
+    "@fontsource/fira-code": "^4.5.2",
     "@fontsource/lobster": "^4.5.0",
     "@fontsource/roboto": "^4.5.1",
+    "@fontsource/source-code-pro": "^4.5.0",
     "ace-builds": "^1.4.13",
     "axios": "^0.23.0",
     "date-fns": "^2.11.1",

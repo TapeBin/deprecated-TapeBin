@@ -29,4 +29,12 @@ export const getFirstOrSelectedFontFamily = (): Selection => {
   return { label: fontFamily, value: fontFamily };
 };
 
+export const getFontSize = (): number => {
+  const fontSize = localStorage.getItem("fontSize")!!;
+
+  fontSize.replace("px", "");
+
+  return parseInt(fontSize);
+};
+
 // END FONTS ------------------------------------------------------------

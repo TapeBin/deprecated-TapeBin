@@ -5,9 +5,8 @@ import { binFormAtom } from "../../states/binForm";
 import { binsAtom } from "../../states/bins";
 import { editorAtom } from "../../states/editor";
 import {
-  getLanguageIdFromStorage, getLanguageModeWithIdAsString,
-  getLanguageNameWithBin, getLanguageNameWithId,
-  getLanguageNameWithMode,
+  getLanguageIdFromStorage,
+  getLanguageNameWithBin, getLanguageNameWithId
 } from "../../utils/binUtil";
 import linguist from "../../utils/json/linguist.json";
 

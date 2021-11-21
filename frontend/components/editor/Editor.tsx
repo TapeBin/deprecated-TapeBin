@@ -39,7 +39,7 @@ const Editor: FunctionComponent<EditorProps> = (props: EditorProps) => {
       setOptions={{
         useWorker: false,
         fontSize: settings.fontSize,
-        fontFamily: settings.fontSize,
+        fontFamily: settings.fontFamily,
         showPrintMargin: settings.printMargin,
       }}
       theme={settings.theme}
