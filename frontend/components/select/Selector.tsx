@@ -25,7 +25,7 @@ type SelectorProps = {
   isOnId?: boolean;
 };
 
-const customStyles: StylesConfig<SelectOption, false> = {
+export const customStyles: StylesConfig<SelectOption, false> = {
   control: (provided) => ({
     ...provided,
     backgroundColor: "#404040",

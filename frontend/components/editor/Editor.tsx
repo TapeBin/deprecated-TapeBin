@@ -35,7 +35,7 @@ const Editor: FunctionComponent<EditorProps> = (props: EditorProps) => {
     <AceEditor
       height="100%"
       width="100%"
-      value={settings.text}
+      value={props.value || settings.text}
       setOptions={{
         useWorker: false,
         fontSize: settings.fontSize,
