@@ -16,6 +16,7 @@ import { editorAtom } from "../../states/editor";
 import Input from "../form/Input";
 import Button from "../form/Button";
 import { useRouter } from "next/router";
+import Check from "../form/Check";
 
 const Settingsbar = () => {
   const router = useRouter();
@@ -56,6 +57,7 @@ const Settingsbar = () => {
       <DefaultSelector options={getLanguages()} onChange={onLanguageChange} defaultValue={getFirstOrSelectedLanguage()} label={"Default Language"}/>
       <DefaultSelector options={getThemes()} onChange={onThemeChange} defaultValue={getFirstOrSelectedTheme()} label={"Theme"}/>
       <Input label={"Font Size"} type="number" onChange={onFontSizeChange} defaultValue={getFontSize()}/>
+      <Check label={"Print Margin"}/>
       <Button text={"Return to home page"} onClick={redirectToHomePage}/>
     </FormContainer>
   )
