@@ -4,7 +4,7 @@ import { binFormAtom } from "../../../states/binForm";
 import { binsAtom } from "../../../states/bins";
 import { editorAtom } from "../../../states/editor";
 import { Bin } from "../../../types/Bin";
-import { getLanguageModeWithId, getLanguageModeWithIdAsString } from "../../../utils/binUtil";
+import { getLanguageModeWithId } from "../../../utils/binUtil";
 
 type BinItemProps = {
   fileName: string;
@@ -15,7 +15,7 @@ type BinItemProps = {
 const BinItem: FunctionComponent<BinItemProps> = (props: BinItemProps) => {
   const [bins, setBin] = useAtom(binsAtom);
   const [binForm, setBinForm] = useAtom(binFormAtom);
-  const [editor, setEditor] = useAtom(editorAtom);
+  const [_, setEditor] = useAtom(editorAtom);
 
   const changeName = (e: React.ChangeEvent<HTMLInputElement>) => {
     const bin: Bin = bins.bins.filter((bin) => bin.id === props.id)[0];
@@ -73,6 +73,9 @@ const BinItem: FunctionComponent<BinItemProps> = (props: BinItemProps) => {
         onChange={changeName}
         maxLength={35}
         onClick={binClick}
+        onKeyDown={(event) => {
+          if (props.isOnId) event.preventDefault();
+        }}
         // disabled={props.isOnId}
       />
       <img
