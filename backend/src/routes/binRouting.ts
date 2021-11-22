@@ -22,7 +22,7 @@ router.post("/bin/create", (req: any, res: any) => {
   }).catch(err => console.log(err));
 });
 
-router.get("/bin/:id", isLoggedIn, (req: any, res: any) => {
+router.get("/bin/:id", (req: any, res: any) => {
   Bin.findOne({ binId: req.params.id }, function (err: mongoose.Error, document: any) {
 
     if (err)
