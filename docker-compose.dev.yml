@@ -41,7 +41,7 @@ services:
       - "3000:3000"
     restart: always
     build:
-      context: ./frontend
+      context: frontend
       dockerfile: Dockerfile.dev
     volumes:
       - ./frontend:/usr/src
@@ -49,6 +49,10 @@ services:
       - /usr/src/node_modules
     environment:
       BACK_END: http://localhost:5001
+nginx:
+  build:
+    context: nginx
+    dockerfile: Dockerfile.dev
 networks:
   tapebin-network:
     driver: bridge
