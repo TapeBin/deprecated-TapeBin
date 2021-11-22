@@ -15,7 +15,7 @@ const Check: FunctionComponent<CheckProps> = (props: CheckProps) => {
         name={props.label}
         type="checkbox"
         className="text-proColor w-8 h-8 bg-gray-700
-        focus:ring-indigo-400 focus:ring-opacity-25 border border-gray-300 rounded-md"
+        border border-gray-500 rounded-md"
         onChange={props.onChange}
         defaultChecked={props.isChecked}
       />
