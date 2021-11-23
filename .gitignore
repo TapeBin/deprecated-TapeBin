@@ -38,3 +38,4 @@
 
 /frontend/public/ace/
 /.env.dev
+/nginx/certs/

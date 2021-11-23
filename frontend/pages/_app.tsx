@@ -6,11 +6,14 @@ import "@fontsource/fira-code";
 import "@fontsource/source-code-pro";
 import 'react-toastify/dist/ReactToastify.css';
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import { useAtom } from "jotai";
 import { userAtom } from "../states/user";
 import { editorAtom, setItem } from "../states/editor";
 import { ToastContainer } from "react-toastify";
+import axios from "../utils/axios";
+import config from "next/config";
+const { serverRuntimeConfig, publicRuntimeConfig} = config();
+const apiURL = serverRuntimeConfig.apiUrl || publicRuntimeConfig.apiUrl;
 
 interface User {
   loginFailed: boolean;
@@ -33,17 +36,20 @@ export default function App({ Component, pageProps }: AppProps) {
       printMargin: setItem("printMargin", "false") === "true",
       mode: setItem("mode", "181"),
     }));
-
+    //
     axios
-      .get<User>(`${process.env.BACK_END}/user`, { withCredentials: true })
+      .get<User>("/user", {
+        withCredentials: true,
+      })
       .then((response) => {
+        console.log(response.data);
         if (!response.data.loginFailed) {
           setUser((prevState) => ({
             ...prevState,
             isLoggedIn: true,
             username: response.data.username,
             githubId: response.data.githubId,
-            profileImage: `https://avatars.githubusercontent.com/u/${response.data.githubId}?v=3`,
+            // profileImage: `https://avatars.githubusercontent.com/u/${response.data.githubId}?v=3`,
             creationDate: new Date(response.data.creationDate),
           }));
         }

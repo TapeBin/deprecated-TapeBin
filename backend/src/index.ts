@@ -8,15 +8,12 @@ import userRouting from "./routes/userRouting";
 import binRouting from "./routes/binRouting";
 const githubStrategy = require("./strategies/githubStrategy");
 const app = express();
-const PORT = 5001 || process.env.PORT;
 const PRODUCTION = process.env.PRODUCTION === "true";
 
 app.use(
   cors({
-    origin: `${process.env.FRONT_END}`,
+    origin: ["*"],
     credentials: true,
-    methods: ["GET", "POST"],
-
   })
 );
 
@@ -59,6 +56,9 @@ mongoose
   .then(() => console.log("Connected to database!"))
   .catch((err) => console.log(`Database error: ${err}`));
 
-app.listen(PORT, () => {
-  console.log(`Server started on port ${PORT}`);
+
+app.set("trust proxy", true);
+
+app.listen(3000, () => {
+  console.log(`Server started on port 3000`);
 });
