@@ -15,7 +15,7 @@ const Navbar = () => {
     if (user.isLoggedIn) {
       Router.push("/profile");
     } else {
-      window.open(`${process.env.BACK_END}/auth/github`, "_self");
+      window.open(`/api/auth/github`, "_self");
     }
   };
 

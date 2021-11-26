@@ -10,7 +10,7 @@ module.exports = function (passport: PassportStatic, app: Express) {
       {
         clientID: `${process.env.GITHUB_CLIENT_ID}`,
         clientSecret: `${process.env.GITHUB_CLIENT_SECRET}`,
-        callbackURL: `${process.env.BACK_END}/auth/github/callback`,
+        callbackURL: `/api/auth/github/callback`,
       },
       function (_: any, __: any, profile: any, done: any) {
         User.findOne(
@@ -41,11 +41,11 @@ module.exports = function (passport: PassportStatic, app: Express) {
   app.get(
     "/auth/github/callback",
     passport.authenticate("github", {
-      failureRedirect: `${process.env.FRONT_END}`,
+      failureRedirect: `localhost`,
     }),
     function (req, res) {
       // Successful authentication, redirect home.
-      res.redirect(`${process.env.FRONT_END}`);
+      res.redirect(`http://localhost`);
     }
   );
 };

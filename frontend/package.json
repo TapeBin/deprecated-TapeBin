@@ -8,6 +8,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "@datapunt/matomo-tracker-react": "^0.5.1",
     "@fontsource/fira-code": "^4.5.2",
     "@fontsource/lobster": "^4.5.0",
     "@fontsource/roboto": "^4.5.1",
