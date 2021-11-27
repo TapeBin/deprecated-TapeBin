@@ -1,11 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Navbar from "../components/bar/Navbar";
 import dynamic from "next/dynamic";
 import Topbar from "../components/bar/Topbar";
-import BinItem from "../components/form/binlist/BinItem";
-import Middlebar from "../components/bar/Middlebar";
 import Formbar from "../components/bar/Formbar";
 import BinList from "../components/bins/BinList";
+import { useMatomo } from "@datapunt/matomo-tracker-react";
 const DynamicEditor = dynamic(
   () => {
     return import("../components/editor/Editor");
@@ -13,7 +12,17 @@ const DynamicEditor = dynamic(
   { ssr: false }
 );
 
-const Index = (props: any) => {
+
+const Index = () => {
+  const { trackPageView } = useMatomo();
+
+  useEffect(() => {
+    trackPageView({
+      documentTitle: "Index",
+    });
+  }, []);
+
+
   return (
     <div className="flex flex-row" style={{ width: "100vw", height: "100vh" }}>
       <Navbar />

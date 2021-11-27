@@ -9,7 +9,7 @@ import { useAtom } from "jotai";
 import { editorAtom } from "../../states/editor";
 import { binsAtom } from "../../states/bins";
 import { binFormAtom } from "../../states/binForm";
-import axios from "axios";
+import axios from "../../utils/axios";
 import { useRouter } from "next/router";
 import FormContainer from "./FormContainer";
 import { toast } from "react-toastify";
@@ -68,7 +68,7 @@ const Formbar: FunctionComponent<FormbarProps> = (props: FormbarProps) => {
       return;
     }
 
-    axios(`${process.env.BACK_END}/bin/create`, { method: "POST", withCredentials: true, data: bins })
+    axios(`bin/create`, { method: "POST", withCredentials: true, data: bins })
       .then((response: any) => {
         if (response.data.succeed) {
           navigator.clipboard.writeText(`https://tapeb.in/${response.data.url}`);

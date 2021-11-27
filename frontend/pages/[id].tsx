@@ -10,6 +10,7 @@ import { binsAtom } from "../states/bins";
 import { editorAtom } from "../states/editor";
 import { binFormAtom } from "../states/binForm";
 import { getLanguageModeWithIdAsString } from "../utils/binUtil";
+import { useMatomo } from "@datapunt/matomo-tracker-react";
 
 const DynamicEditor = dynamic(
   () => {
@@ -19,14 +20,16 @@ const DynamicEditor = dynamic(
 );
 
 export const getServerSideProps: GetServerSideProps<{}, Record<"id", string>> = async ({ params }) => {
-  const response = await fetch(`http://backend:5001/bin/${params!!.id}`);
+  const response = await fetch(`http://host.docker.internal/api/bin/${params!!.id}`);
   const json = await response.json();
 
   return {
     props: {
-      bin: json
+      bin: json,
+      id: params!!.id
     }
   };
+
 };
 
 
@@ -34,10 +37,10 @@ const ID = (props: any) => {
   const [_, setBin] = useAtom(binsAtom);
   const [__, setEditor] = useAtom(editorAtom);
   const [___, setBinForm] = useAtom(binFormAtom);
+  const { trackPageView } = useMatomo();
 
 
   useEffect(() => {
-    console.log(props);
     const bin = props.bin;
     setBin({
       title: bin.title,
@@ -54,6 +57,10 @@ const ID = (props: any) => {
       mode: getLanguageModeWithIdAsString(bin.bins[0].languageId)!!,
       text: bin.bins[0].text
     }));
+
+    trackPageView({
+      documentTitle: `${props.id}`,
+    });
 
   }, [props.bin]);
 
