@@ -35,8 +35,12 @@ const Formbar: FunctionComponent<FormbarProps> = (props: FormbarProps) => {
   const languagesArray = [];
 
   useEffect(() => {
-    document.addEventListener("keydown", () => {
-
+    if (props.isOnId) return;
+    document.addEventListener("keydown", (event) => {
+      if ((event.ctrlKey || event.metaKey) && event.keyCode === 83) {
+        event.preventDefault();
+        sendBin();
+      }
     });
   }, []);
   for (const key in languages) {
