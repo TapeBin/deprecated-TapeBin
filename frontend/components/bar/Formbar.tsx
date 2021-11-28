@@ -42,7 +42,6 @@ const Formbar: FunctionComponent<FormbarProps> = (props: FormbarProps) => {
     actionMeta: ActionMeta<SelectOption>
   ) => {
     if (linguist.hasOwnProperty(option!!.value)) {
-      console.log(editor.text);
       // @ts-ignore
       const languageExtension = linguist[option!!.value].aceMode;
       setEditor((prevState) => ({
@@ -95,7 +94,7 @@ const Formbar: FunctionComponent<FormbarProps> = (props: FormbarProps) => {
       <Selector options={languagesArray} onChange={onChange} isOnId={props.isOnId}/>
       <Input label="Description" isOnId={props.isOnId}/>
       {!props.isOnId && <Button text="Save" onClick={sendBin}/>}
-      {canBeautify(getLanguageModeWithIdAsString(editor.mode)) && <Button text={"Format"} onClick={format}/>}
+      {canBeautify(editor.mode) && <Button text={"Format"} onClick={format}/>}
     </FormContainer>
   );
 };
