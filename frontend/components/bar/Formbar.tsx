@@ -13,7 +13,7 @@ import axios from "../../utils/axios";
 import { useRouter } from "next/router";
 import FormContainer from "./FormContainer";
 import { toast } from "react-toastify";
-import { notifyMoreThanXCharacters, notifySuccessfulBinCreation } from "../../utils/notify";
+import { notifyFormattingError, notifyMoreThanXCharacters, notifySuccessfulBinCreation } from "../../utils/notify";
 import { exceedsMaxCharacters, getLanguageModeWithIdAsString } from "../../utils/binUtil";
 import { beautify } from "../../utils/beautify/beautifier";
 
@@ -80,8 +80,13 @@ const Formbar: FunctionComponent<FormbarProps> = (props: FormbarProps) => {
   };
 
   const format = () => {
-    console.log(editor.mode)
-    setEditor(prevState => ({...prevState, text: beautify(editor.text, getLanguageModeWithIdAsString(editor.mode))}));
+    const prettified = beautify(editor.text, getLanguageModeWithIdAsString(editor.mode));
+    if (!prettified) {
+      notifyFormattingError();
+      return;
+    }
+
+    setEditor(prevState => ({...prevState, text: prettified}));
   };
 
   return (

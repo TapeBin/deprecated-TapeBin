@@ -20,8 +20,18 @@ export const beautify = (code, language) => {
   if (language === "javascript" || language === "js")
     language = "babel";
 
-  return prettier.format(code, {
-    parser: language,
-    plugins
-  });
+
+  let prettified;
+  try {
+    prettified = prettier.format(code, {
+        parser: language,
+        tabWidth: 4,
+        plugins: plugins
+      },
+    );
+  } catch (e) {
+    return undefined;
+  }
+
+  return prettified;
 }
