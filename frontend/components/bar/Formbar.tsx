@@ -113,7 +113,7 @@ const Formbar: FunctionComponent<FormbarProps> = (props: FormbarProps) => {
       <Selector options={languagesArray} onChange={onChange} isOnId={props.isOnId}/>
       <Input label="Description" isOnId={props.isOnId}/>
       {!props.isOnId && <Button text="Save" onClick={sendBin}/>}
-      {canBeautify(editor.mode) && <Button text={"Format"} onClick={format}/>}
+      {!props.isOnId && canBeautify(editor.mode) && <Button text={"Format"} onClick={format}/>}
     </FormContainer>
   );
 };
