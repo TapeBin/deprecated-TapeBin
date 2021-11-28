@@ -61,6 +61,8 @@ const ID = (props: any) => {
     trackPageView({
       documentTitle: `${props.id}`,
     });
+    // axios.get(`http://localhost:8080/?module=API&method=Auctions.getPageUrl&pageUrl=${props.id}&idSite=2&format=JSON`)
+    //   .then((result) => console.log(result));
 
   }, [props.bin]);
 

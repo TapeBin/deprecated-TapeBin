@@ -8,6 +8,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "@babel/eslint-parser": "^7.16.3",
     "@datapunt/matomo-tracker-react": "^0.5.1",
     "@fontsource/fira-code": "^4.5.2",
     "@fontsource/lobster": "^4.5.0",
@@ -16,10 +17,12 @@
     "@tailwindcss/forms": "^0.3.4",
     "ace-builds": "^1.4.13",
     "axios": "^0.23.0",
+    "babel": "^6.23.0",
     "date-fns": "^2.11.1",
     "gray-matter": "^4.0.2",
     "jotai": "^1.4.1",
     "next": "^11.0.0",
+    "prettier": "^2.5.0",
     "react": "17.0.2",
     "react-ace": "^9.5.0",
     "react-dom": "17.0.2",

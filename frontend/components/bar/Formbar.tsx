@@ -14,7 +14,8 @@ import { useRouter } from "next/router";
 import FormContainer from "./FormContainer";
 import { toast } from "react-toastify";
 import { notifyMoreThanXCharacters, notifySuccessfulBinCreation } from "../../utils/notify";
-import { exceedsMaxCharacters } from "../../utils/binUtil";
+import { exceedsMaxCharacters, getLanguageModeWithIdAsString } from "../../utils/binUtil";
+import { beautify } from "../../utils/beautify/beautifier";
 
 type FormbarProps = {
   isOnId?: boolean;
@@ -78,12 +79,18 @@ const Formbar: FunctionComponent<FormbarProps> = (props: FormbarProps) => {
       });
   };
 
+  const format = () => {
+    console.log(editor.mode)
+    setEditor(prevState => ({...prevState, text: beautify(editor.text, getLanguageModeWithIdAsString(editor.mode))}));
+  };
+
   return (
     <FormContainer title="Bin">
       <Input label="Title" isOnId={props.isOnId}/>
       <Selector options={languagesArray} onChange={onChange} isOnId={props.isOnId}/>
       <Input label="Description" isOnId={props.isOnId}/>
       {!props.isOnId && <Button text="Save" onClick={sendBin}/>}
+      <Button text={"Format"} onClick={format}/>
     </FormContainer>
   );
 };
