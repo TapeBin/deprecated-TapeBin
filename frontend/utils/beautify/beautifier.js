@@ -52,7 +52,6 @@ export const beautify = (code, language) => {
   if (language === "javascript" || language === "js")
     language = "babel";
 
-
   let prettified;
   try {
     prettified = prettier.format(code, {

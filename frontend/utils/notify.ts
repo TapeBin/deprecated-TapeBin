@@ -17,3 +17,5 @@ export const notifyMoreThanTenBins = () => toast.warn("You can't have more than 
 export const notifyMoreThanXCharacters = () => toast.error("You can't have more than 100.000 characters in total!", NOTIFY_OPTIONS);
 
 export const notifyFormattingError = () => toast.error("Something went wrong with formatting", NOTIFY_OPTIONS)
+
+export const notifyEmptyBins = () =>  toast.error("You can't save an empty bin", NOTIFY_OPTIONS);

@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from "react";
+import React, { FunctionComponent, useEffect } from "react";
 import Button from "../form/Button";
 import Input from "../form/Input";
 import Selector, { SelectOption } from "../select/Selector";
@@ -13,8 +13,13 @@ import axios from "../../utils/axios";
 import { useRouter } from "next/router";
 import FormContainer from "./FormContainer";
 import { toast } from "react-toastify";
-import { notifyFormattingError, notifyMoreThanXCharacters, notifySuccessfulBinCreation } from "../../utils/notify";
-import { exceedsMaxCharacters, getLanguageModeWithIdAsString } from "../../utils/binUtil";
+import {
+  notifyEmptyBins,
+  notifyFormattingError,
+  notifyMoreThanXCharacters,
+  notifySuccessfulBinCreation
+} from "../../utils/notify";
+import { exceedsMaxCharacters, getLanguageModeWithIdAsString, isEmptyBins } from "../../utils/binUtil";
 import { beautify, canBeautify } from "../../utils/beautify/beautifier";
 
 type FormbarProps = {
@@ -29,6 +34,11 @@ const Formbar: FunctionComponent<FormbarProps> = (props: FormbarProps) => {
 
   const languagesArray = [];
 
+  useEffect(() => {
+    document.addEventListener("keydown", () => {
+
+    });
+  }, []);
   for (const key in languages) {
     if (languages.hasOwnProperty(key)) {
       // TODO fix this with like a type or something
@@ -63,6 +73,11 @@ const Formbar: FunctionComponent<FormbarProps> = (props: FormbarProps) => {
   };
 
   const sendBin = () => {
+    if (isEmptyBins(bins.bins)) {
+      notifyEmptyBins();
+      return;
+    }
+
     if (exceedsMaxCharacters(bins.bins)) {
       notifyMoreThanXCharacters();
       return;

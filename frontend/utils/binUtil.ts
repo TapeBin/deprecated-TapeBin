@@ -76,3 +76,7 @@ export const exceedsMaxCharacters = (bins: any[]): boolean => {
   bins.forEach(bin => amountCharacters += bin.text.length);
   return amountCharacters >= MAX_CHARACTERS;
 };
+
+export const isEmptyBins = (bins: any[]) => {
+  return bins.some(bin => bin.text === '');
+};
