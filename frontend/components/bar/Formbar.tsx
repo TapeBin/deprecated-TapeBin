@@ -15,7 +15,7 @@ import FormContainer from "./FormContainer";
 import { toast } from "react-toastify";
 import { notifyFormattingError, notifyMoreThanXCharacters, notifySuccessfulBinCreation } from "../../utils/notify";
 import { exceedsMaxCharacters, getLanguageModeWithIdAsString } from "../../utils/binUtil";
-import { beautify } from "../../utils/beautify/beautifier";
+import { beautify, canBeautify } from "../../utils/beautify/beautifier";
 
 type FormbarProps = {
   isOnId?: boolean;
@@ -95,7 +95,7 @@ const Formbar: FunctionComponent<FormbarProps> = (props: FormbarProps) => {
       <Selector options={languagesArray} onChange={onChange} isOnId={props.isOnId}/>
       <Input label="Description" isOnId={props.isOnId}/>
       {!props.isOnId && <Button text="Save" onClick={sendBin}/>}
-      <Button text={"Format"} onClick={format}/>
+      {canBeautify(getLanguageModeWithIdAsString(editor.mode)) && <Button text={"Format"} onClick={format}/>}
     </FormContainer>
   );
 };

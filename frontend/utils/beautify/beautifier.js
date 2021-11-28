@@ -15,6 +15,33 @@ const plugins = [
   require("prettier-plugin-java"),
 ];
 
+const LANGUAGES = [
+  "javascript",
+  "js",
+  "java",
+  "typescript",
+  "ts",
+  "meriyah",
+  "css",
+  "scss",
+  "sass",
+  "json",
+  "yaml",
+  "yml",
+  "angular",
+  "flow",
+  "babel",
+  "html",
+  "glimmer",
+  "graphql",
+  "markdown",
+  "espree",
+];
+
+export const canBeautify = (aceMode) => {
+  return LANGUAGES.includes(aceMode);
+}
+
 export const beautify = (code, language) => {
 
   if (language === "javascript" || language === "js")
