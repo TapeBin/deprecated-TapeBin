@@ -12,6 +12,7 @@ const plugins = [
   require("prettier/parser-meriyah"),
   require("prettier/parser-postcss"),
   require("prettier/parser-typescript"),
+  require("prettier-plugin-java"),
 ];
 
 export const beautify = (code, language) => {
