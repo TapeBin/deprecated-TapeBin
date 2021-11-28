@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from "../../utils/axios";
 import { useAtom } from "jotai";
 import React from "react";
 import { userAtom } from "../../states/user";
@@ -11,7 +11,7 @@ const TopProfile = () => {
   const router = useRouter();
   const logOut = () => {
     axios
-      .get(`${process.env.BACK_END}/user/logout`, { withCredentials: true })
+      .get(`user/logout`, { withCredentials: true })
       .then((response: any) => {
         if (response.data.logOut) {
           router.push("/");
