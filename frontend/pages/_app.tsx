@@ -38,6 +38,7 @@ export default function App({ Component, pageProps }: AppProps) {
       fontSize: setItem("fontSize", "15px"),
       fontFamily: setItem("fontFamily", "Fira Code"),
       printMargin: setItem("printMargin", "false") === "true",
+      tabWidth: setItem("tabWidth", "4"),
       mode: setItem("mode", "181"),
     }));
 

@@ -42,6 +42,14 @@ export const getFontSize = (): number => {
 
 // END FONTS ------------------------------------------------------------
 
+// TAB WIDTH ------------------------------------------------------------
+
+export const getTabWidth = (): number => {
+  return parseInt(localStorage.getItem("tabWidth")!!);
+}
+
+// END TAB WIDTH ------------------------------------------------------------
+
 // LANGUAGES ------------------------------------------------------------
 
 export const getLanguages = (): Selection[] => {

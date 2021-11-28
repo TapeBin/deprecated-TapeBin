@@ -41,6 +41,7 @@ const Editor: FunctionComponent<EditorProps> = (props: EditorProps) => {
         fontSize: settings.fontSize,
         fontFamily: settings.fontFamily,
         showPrintMargin: settings.printMargin,
+        tabSize: settings.tabWidth
       }}
       theme={settings.theme}
       mode={props.mode || getLanguageModeWithIdAsString(settings.mode) || settings.mode}

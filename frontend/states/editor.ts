@@ -14,4 +14,5 @@ export const editorAtom = atom({
   printMargin: false,
   mode: "",
   text: "",
+  tabWidth: 4
 });

@@ -7,7 +7,7 @@ import {
   getFirstOrSelectedLanguage, getFirstOrSelectedTheme,
   getFonts,
   getFontSize,
-  getLanguages, getPrintMargin, getThemes
+  getLanguages, getPrintMargin, getTabWidth, getThemes
 } from "../../utils/fileUtil";
 import { SelectOption } from "../select/Selector";
 import { ActionMeta } from "react-select";
@@ -29,26 +29,32 @@ const Settingsbar = () => {
 
   const onFontSizeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const fontSize = `${event.target.value}px`;
-    setEditor(prevState => ({...prevState, fontSize: fontSize}));
+    setEditor(prevState => ({ ...prevState, fontSize: fontSize }));
     localStorage.setItem("fontSize", fontSize);
   }
 
   const onLanguageChange = (option: SelectOption | null, actionMeta: ActionMeta<SelectOption>) => {
     const value = option!!.value;
-    setEditor(prevState => ({...prevState, mode: getAceModeWithId(value)}));
+    setEditor(prevState => ({ ...prevState, mode: getAceModeWithId(value) }));
     localStorage.setItem("mode", value);
   };
 
   const onThemeChange = (option: SelectOption | null, actionMeta: ActionMeta<SelectOption>) => {
     const value = option!!.value;
-    setEditor(prevState => ({...prevState, theme: value}));
+    setEditor(prevState => ({ ...prevState, theme: value }));
     localStorage.setItem("theme", value);
   };
 
   const onPrintMarginChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setEditor(prevState => ({...prevState, printMargin: event.target.checked}));
+    setEditor(prevState => ({ ...prevState, printMargin: event.target.checked }));
     localStorage.setItem("printMargin", `${event.target.checked}`);
   };
+
+  const onTabWidthChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const value = event.target.value;
+    setEditor(prevState => ({ ...prevState, tabWidth: parseInt(value) }))
+    localStorage.setItem("tabWidth", value);
+  }
 
   const redirectToHomePage = () => {
     router.push("/");
@@ -58,9 +64,12 @@ const Settingsbar = () => {
     <FormContainer title="Settings">
       <DefaultSelector options={getFonts()} onChange={onFontFamilyChange} defaultValue={getFirstOrSelectedFontFamily()}
                        label={"Font Family"}/>
-      <DefaultSelector options={getLanguages()} onChange={onLanguageChange} defaultValue={getFirstOrSelectedLanguage()} label={"Default Language"}/>
-      <DefaultSelector options={getThemes()} onChange={onThemeChange} defaultValue={getFirstOrSelectedTheme()} label={"Theme"}/>
+      <DefaultSelector options={getLanguages()} onChange={onLanguageChange} defaultValue={getFirstOrSelectedLanguage()}
+                       label={"Default Language"}/>
+      <DefaultSelector options={getThemes()} onChange={onThemeChange} defaultValue={getFirstOrSelectedTheme()}
+                       label={"Theme"}/>
       <Input label={"Font Size"} type="number" onChange={onFontSizeChange} defaultValue={getFontSize()}/>
+      <Input label={"Tab Width"} type="number" onChange={onTabWidthChange} defaultValue={getTabWidth()}/>
       <Check label={"Print Margin"} onChange={onPrintMarginChange} isChecked={getPrintMargin()}/>
       <Button text={"Return to home page"} onClick={redirectToHomePage}/>
     </FormContainer>

@@ -25,7 +25,7 @@ export const beautify = (code, language) => {
   try {
     prettified = prettier.format(code, {
         parser: language,
-        tabWidth: 4,
+        tabWidth: parseInt(localStorage.getItem("tabWidth")),
         plugins: plugins
       },
     );
