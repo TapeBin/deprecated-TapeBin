@@ -39,7 +39,7 @@ export default function App({ Component, pageProps }: AppProps) {
       fontFamily: setItem("fontFamily", "Fira Code"),
       printMargin: setItem("printMargin", "false") === "true",
       tabWidth: setItem("tabWidth", "4"),
-      mode: setItem("mode", "181"),
+      languageId: setItem("languageId", "181"),
     }));
 
     axios

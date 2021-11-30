@@ -35,8 +35,8 @@ const Settingsbar = () => {
 
   const onLanguageChange = (option: SelectOption | null, actionMeta: ActionMeta<SelectOption>) => {
     const value = option!!.value;
-    setEditor(prevState => ({ ...prevState, mode: getAceModeWithId(value) }));
-    localStorage.setItem("mode", value);
+    setEditor(prevState => ({ ...prevState, languageId: getAceModeWithId(value) }));
+    localStorage.setItem("languageId", value);
   };
 
   const onThemeChange = (option: SelectOption | null, actionMeta: ActionMeta<SelectOption>) => {

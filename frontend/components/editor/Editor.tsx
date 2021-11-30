@@ -44,7 +44,7 @@ const Editor: FunctionComponent<EditorProps> = (props: EditorProps) => {
         tabSize: settings.tabWidth
       }}
       theme={settings.theme}
-      mode={props.mode || getLanguageModeWithIdAsString(settings.mode) || settings.mode}
+      mode={props.mode || getLanguageModeWithIdAsString(settings.languageId) || settings.languageId}
       readOnly={props.readOnly}
       onChange={onChange}
     />

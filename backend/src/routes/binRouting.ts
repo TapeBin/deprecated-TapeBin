@@ -14,6 +14,7 @@ interface Bin {
   text: string
 }
 
+
 router.post("/bin/create", (req: any, res: any) => {
   createBin(req.body, req.user as MongoUser).then(binCreation => {
     if (binCreation.succeed)
@@ -43,6 +44,8 @@ router.get("/bin/:id", (req: any, res: any) => {
         })
       });
 
+      console.log(bins);
+
       res.json({ succeed: true, title: document.title, description: document.description, bins: bins });
     }
 
@@ -66,6 +69,24 @@ function exceedsMaximumCharacters(bins: any[]): boolean {
 
   return amountOfCharacters >= MAX_CHARACTERS;
 }
+
+
+/**
+ *
+ * The request needs to have this structure:
+ *
+ * {
+ *   title?: string,
+ *   description?: string
+ *   bins: [
+ *      id: number,
+ *      fileName?: string,
+ *      languageId: string,
+ *      languageExtension:
+ *   ]
+ * }
+ *
+ */
 
 async function createBin(data: any, user: MongoUser) {
   let succeed = false;

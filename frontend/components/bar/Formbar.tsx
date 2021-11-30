@@ -12,7 +12,6 @@ import { binFormAtom } from "../../states/binForm";
 import axios from "../../utils/axios";
 import { useRouter } from "next/router";
 import FormContainer from "./FormContainer";
-import { toast } from "react-toastify";
 import {
   notifyEmptyBins,
   notifyFormattingError,
@@ -60,7 +59,7 @@ const Formbar: FunctionComponent<FormbarProps> = (props: FormbarProps) => {
       const languageExtension = linguist[option!!.value].aceMode;
       setEditor((prevState) => ({
         ...prevState,
-        mode: option!!.value,
+        languageId: option!!.value,
       }));
 
       const bin = bins.bins.find(
@@ -69,9 +68,6 @@ const Formbar: FunctionComponent<FormbarProps> = (props: FormbarProps) => {
 
       if (bin) {
         bin.languageId = parseInt(option!!.value);
-        bin.languageExtension = languageExtension;
-        // console.log(bin.text);
-        console.log(editor.text);
       }
     }
   };
@@ -98,22 +94,22 @@ const Formbar: FunctionComponent<FormbarProps> = (props: FormbarProps) => {
   };
 
   const format = () => {
-    const prettified = beautify(editor.text, getLanguageModeWithIdAsString(editor.mode));
+    const prettified = beautify(editor.text, getLanguageModeWithIdAsString(editor.languageId));
     if (!prettified) {
       notifyFormattingError();
       return;
     }
 
-    setEditor(prevState => ({...prevState, text: prettified}));
+    setEditor(prevState => ({ ...prevState, text: prettified }));
   };
 
   return (
     <FormContainer title="Bin">
       <Input label="Title" isOnId={props.isOnId}/>
       <Selector options={languagesArray} onChange={onChange} isOnId={props.isOnId}/>
-      <Input label="Description" isOnId={props.isOnId}/>
+      <Input label="Description" isOnId={props.isOnId} maxLength={256}/>
       {!props.isOnId && <Button text="Save" onClick={sendBin}/>}
-      {!props.isOnId && canBeautify(editor.mode) && <Button text={"Format"} onClick={format}/>}
+      {!props.isOnId && canBeautify(editor.languageId) && <Button text={"Format"} onClick={format}/>}
     </FormContainer>
   );
 };

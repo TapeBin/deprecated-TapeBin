@@ -26,7 +26,6 @@ const bin = new mongoose.Schema({
     id: Number,
     fileName: String,
     languageId: String,
-    languageExtension: String,
     text: String
   }],
 });

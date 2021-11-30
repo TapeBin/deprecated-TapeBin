@@ -23,9 +23,8 @@ const BinList: FunctionComponent<BinListProps> = (props: BinListProps) => {
         new Bin(
           0,
           "New File",
-          parseInt(localStorage.getItem("mode") || "0"),
-          editor.mode,
-          ""
+          parseInt(localStorage.getItem("languageId") || "0"),
+          "",
         )
       );
       // addBin();
@@ -52,9 +51,8 @@ const BinList: FunctionComponent<BinListProps> = (props: BinListProps) => {
     const newBin = new Bin(
       max,
       "New File",
-      parseInt(localStorage.getItem("mode") || "0"),
-      getLanguageModeWithIdAsString(localStorage.getItem("mode")!!)!!,
-      ""
+      parseInt(localStorage.getItem("languageId") || "0"),
+      "",
     );
     newArray.push(newBin);
 

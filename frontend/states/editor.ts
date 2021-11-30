@@ -12,7 +12,7 @@ export const editorAtom = atom({
   fontSize: "",
   fontFamily: "",
   printMargin: false,
-  mode: "",
+  languageId: "",
   text: "",
   tabWidth: 4
 });

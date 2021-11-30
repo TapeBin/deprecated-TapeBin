@@ -37,7 +37,7 @@ const BinItem: FunctionComponent<BinItemProps> = (props: BinItemProps) => {
       }));
       setEditor((prevState) => ({
         ...prevState,
-        mode: firstBin.languageExtension,
+        languageId: String(firstBin.languageId),
         text: firstBin.text,
       }));
     }
@@ -50,7 +50,7 @@ const BinItem: FunctionComponent<BinItemProps> = (props: BinItemProps) => {
 
     setEditor((prevState) => ({
       ...prevState,
-      mode: getLanguageModeWithId(currentBin.languageId),
+      languageId: getLanguageModeWithId(currentBin.languageId),
       text: currentBin.text,
     }));
 

@@ -64,7 +64,7 @@ const Selector: FunctionComponent<SelectorProps> = (props: SelectorProps) => {
       value: getLanguageIdFromStorage(),
       label:
         getLanguageNameWithBin(bins.bins) ||
-        getLanguageNameWithId(parseInt(editor.mode))!!,
+        getLanguageNameWithId(parseInt(editor.languageId))!!,
     };
   };
 

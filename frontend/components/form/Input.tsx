@@ -7,6 +7,7 @@ type InputProps = {
   isOnId?: boolean;
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
   defaultValue?: string | number;
+  maxLength?: number;
 };
 
 const Input: FunctionComponent<InputProps> = (props: InputProps) => {
@@ -21,6 +22,7 @@ const Input: FunctionComponent<InputProps> = (props: InputProps) => {
         disabled={props.isOnId}
         onChange={props.onChange}
         defaultValue={props.defaultValue}
+        maxLength={props.maxLength}
       />
     </div>
   );
@@ -28,6 +30,7 @@ const Input: FunctionComponent<InputProps> = (props: InputProps) => {
 
 Input.defaultProps = {
   type: "text",
+  maxLength: 64
 };
 
 export default Input;
