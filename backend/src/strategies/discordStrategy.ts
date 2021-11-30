@@ -35,6 +35,10 @@ module.exports = function (passport: PassportStatic, app: Express) {
             } else {
               done(null, document);
             }
+
+            app.get("/discordImage", isLoggedIn, (req: any, res: any) => {
+              res.json(getAvatarURL(profile));
+            });
           }
         );
       }
@@ -44,10 +48,10 @@ module.exports = function (passport: PassportStatic, app: Express) {
   function getAvatarURL(profile: any): string {
     if (profile.avatar) {
       const ext = profile.avatar.startsWith('a_') ? 'gif' : 'png';
-      return `https://cdn.discordapp.com//avatars/${profile.id}/${profile.avatar}.${ext}`;
+      return `https://cdn.discordapp.com/avatars/${profile.id}/${profile.avatar}.${ext}`;
     }
 
-    return `https://cdn.discordapp.com//embed/avatars/${Number(profile.discriminator) % 5}.png`;
+    return `https://cdn.discordapp.com/embed/avatars/${Number(profile.discriminator) % 5}.png`;
   }
 
   app.get("/auth/discord", passport.authenticate("discord"));

@@ -70,6 +70,12 @@ export default function App({ Component, pageProps }: AppProps) {
             creationDate: new Date(response.data.creationDate),
           }));
 
+          if (response.data.discordId)
+            axios.get("discordImage").then((res: AxiosResponse<any>) => setUser(prevState => ({
+              ...prevState,
+              profileImage: res.data.toString()
+            })));
+
         }
 
         setLoaded(true);
