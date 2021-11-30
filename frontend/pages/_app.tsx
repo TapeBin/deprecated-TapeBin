@@ -52,8 +52,9 @@ export default function App({ Component, pageProps }: AppProps) {
             ...prevState,
             isLoggedIn: true,
             username: response.data.username,
+            discordId: response.data.discordId,
             githubId: response.data.githubId,
-            profileImage: `https://avatars.githubusercontent.com/u/${response.data.githubId}?v=3`,
+            // profileImage: `https://avatars.githubusercontent.com/u/${response.data.githubId}?v=3`,
             creationDate: new Date(response.data.creationDate),
           }));
         }

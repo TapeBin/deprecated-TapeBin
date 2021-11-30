@@ -2,7 +2,6 @@ import { useAtom } from "jotai";
 import Router, { useRouter } from "next/router";
 import React from "react";
 import { userAtom } from "../../states/user";
-import Pro from "../tiers/Pro";
 import Icon from "./Icon";
 import Logo from "./Logo";
 import ProfileIcon from "./ProfileIcon";

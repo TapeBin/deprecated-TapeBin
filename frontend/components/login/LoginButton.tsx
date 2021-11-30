@@ -14,7 +14,9 @@ const LoginButton: FunctionComponent<LoginButtonProps> = (props: LoginButtonProp
   return (
     <div style={{ backgroundColor: props.backgroundColor, color: props.color }}
          className="w-[270px] h-[50px] py-1 flex flex-row items-center rounded-md transform-gpu hover:scale-105
-         transition duration-300 cursor-pointer">
+         transition duration-300 cursor-pointer"
+         onClick={props.onClick}
+    >
       <img className="h-[30px] px-4" src={props.src} alt={props.alt}/>
       <div className="pl-2">{props.title}</div>
     </div>

@@ -19,6 +19,8 @@ services:
       - END_MONGODB=${END_MONGODB}
       - GITHUB_CLIENT_ID=${GITHUB_CLIENT_ID}
       - GITHUB_CLIENT_SECRET=${GITHUB_CLIENT_SECRET}
+      - DISCORD_CLIENT_ID=${DISCORD_CLIENT_ID}
+      - DISCORD_CLIENT_SECRET=${DISCORD_CLIENT_SECRET}
       - FRONT_END=http://localhost
       - BACK_END="http://frontend"
       - PRODUCTION=false
