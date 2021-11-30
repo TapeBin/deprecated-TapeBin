@@ -32,6 +32,7 @@ export default function App({ Component, pageProps }: AppProps) {
 
   useEffect(() => {
 
+    // @ts-ignore
     setEditor(prevState => ({
       ...prevState,
       theme: setItem("theme", "one_dark"),
