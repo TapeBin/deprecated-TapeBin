@@ -1,7 +1,9 @@
-import { PassportStatic } from "passport";
+import { PassportStatic, Strategy } from "passport";
 import User from "../schemas/User";
 import { Express } from "express";
 import * as mongoose from "mongoose";
+import { isLoggedIn } from "../utils/routeUtils";
+import fetch from "cross-fetch";
 
 const DiscordStrategy = require("passport-discord").Strategy;
 const scopes = ["identify", "email"];
@@ -38,6 +40,15 @@ module.exports = function (passport: PassportStatic, app: Express) {
       }
     )
   );
+
+  function getAvatarURL(profile: any): string {
+    if (profile.avatar) {
+      const ext = profile.avatar.startsWith('a_') ? 'gif' : 'png';
+      return `https://cdn.discordapp.com//avatars/${profile.id}/${profile.avatar}.${ext}`;
+    }
+
+    return `https://cdn.discordapp.com//embed/avatars/${Number(profile.discriminator) % 5}.png`;
+  }
 
   app.get("/auth/discord", passport.authenticate("discord"));
 

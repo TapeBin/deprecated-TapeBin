@@ -12,6 +12,7 @@ import { editorAtom, setItem } from "../states/editor";
 import { ToastContainer } from "react-toastify";
 import axios from "../utils/axios";
 import { createInstance, MatomoProvider } from "@datapunt/matomo-tracker-react";
+import { AxiosResponse } from "axios";
 
 interface User {
   loginFailed: boolean;
@@ -19,6 +20,11 @@ interface User {
   githubId: string;
   discordId: string;
   creationDate: Date;
+  profilePicture: string;
+}
+
+async function getDiscordImage(discordId: any): string {
+
 }
 
 export default function App({ Component, pageProps }: AppProps) {
@@ -49,15 +55,21 @@ export default function App({ Component, pageProps }: AppProps) {
       })
       .then((response) => {
         if (!response.data.loginFailed && response.data.username) {
+
+
+          console.log(response.data);
           setUser((prevState) => ({
             ...prevState,
             isLoggedIn: true,
             username: response.data.username,
             discordId: response.data.discordId,
             githubId: response.data.githubId,
-            // profileImage: `https://avatars.githubusercontent.com/u/${response.data.githubId}?v=3`,
+            profileImage: response.data.githubId
+              ? `https://avatars.githubusercontent.com/u/${response.data.githubId}?v=3`
+              : "",
             creationDate: new Date(response.data.creationDate),
           }));
+
         }
 
         setLoaded(true);
