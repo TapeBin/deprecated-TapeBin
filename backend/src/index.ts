@@ -7,6 +7,7 @@ import User from "./schemas/User";
 import userRouting from "./routes/userRouting";
 import binRouting from "./routes/binRouting";
 const githubStrategy = require("./strategies/githubStrategy");
+const discordStrategy = require("./strategies/discordStrategy");
 const app = express();
 const PRODUCTION = process.env.PRODUCTION === "true";
 
@@ -45,6 +46,7 @@ passport.deserializeUser((id: string, done: any) => {
 });
 
 githubStrategy(passport, app);
+discordStrategy(passport, app);
 
 app.use(userRouting);
 app.use(binRouting);
