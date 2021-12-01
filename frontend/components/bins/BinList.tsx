@@ -4,7 +4,6 @@ import { binsAtom } from "../../states/bins";
 import { editorAtom } from "../../states/editor";
 import { Bin } from "../../types/Bin";
 import BinItem from "../form/binlist/BinItem";
-import { getLanguageModeWithIdAsString } from "../../utils/binUtil";
 import { notifyMoreThanTenBins } from "../../utils/notify";
 import { MAX_BINS } from "../../utils/constants";
 

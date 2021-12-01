@@ -5,7 +5,7 @@ import { useAtom } from "jotai";
 import { editorAtom } from "../../states/editor";
 import { binsAtom } from "../../states/bins";
 import { binFormAtom } from "../../states/binForm";
-import { getLanguageModeWithIdAsString } from "../../utils/binUtil";
+import { getAceModeWithId } from "../../utils/fileUtil";
 
 ace.config.set("basePath", "ace/");
 
@@ -44,7 +44,7 @@ const Editor: FunctionComponent<EditorProps> = (props: EditorProps) => {
         tabSize: settings.tabWidth
       }}
       theme={settings.theme}
-      mode={props.mode || getLanguageModeWithIdAsString(settings.languageId) || settings.languageId}
+      mode={props.mode || getAceModeWithId(settings.languageId.toString())}
       readOnly={props.readOnly}
       onChange={onChange}
     />

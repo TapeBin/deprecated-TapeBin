@@ -5,8 +5,8 @@ import { binFormAtom } from "../../states/binForm";
 import { binsAtom } from "../../states/bins";
 import { editorAtom } from "../../states/editor";
 import {
-  getLanguageIdFromStorage,
-  getLanguageNameWithBin, getLanguageNameWithId
+  getFirstLanguageNameWithBins,
+  getLanguageIdFromStorage, getLanguageNameWithId,
 } from "../../utils/binUtil";
 import linguist from "../../utils/json/linguist.json";
 
@@ -61,10 +61,10 @@ const Selector: FunctionComponent<SelectorProps> = (props: SelectorProps) => {
   const [editor, setEditor] = useAtom(editorAtom);
   const getDefaultSettings = () => {
     return {
-      value: getLanguageIdFromStorage(),
+      value: String(getLanguageIdFromStorage()),
       label:
-        getLanguageNameWithBin(bins.bins) ||
-        getLanguageNameWithId(parseInt(editor.languageId))!!,
+        getFirstLanguageNameWithBins(bins.bins) ||
+        getLanguageNameWithId(editor.languageId)!!,
     };
   };
 
@@ -74,15 +74,15 @@ const Selector: FunctionComponent<SelectorProps> = (props: SelectorProps) => {
   });
 
   const handleValueChange = () => {
+    console.log(binForm.currentBinId + " id");
     const bin = bins.bins.find(
-      (foundBin) => foundBin.id === binForm.currentBinId
-    );
-
+      (foundBin) => foundBin.id === binForm.currentBinId);
 
     if (bin) {
       // @ts-ignore
+      const name = linguist[bin.languageId.toString()].name;
       setValue({
-        label: linguist[bin.languageId.toString()].name,
+        label: name,
         value: bin.languageId.toString() as string,
       });
 
@@ -94,7 +94,7 @@ const Selector: FunctionComponent<SelectorProps> = (props: SelectorProps) => {
 
   useEffect(() => {
     handleValueChange();
-  }, [binForm.currentBinId]);
+  }, [bins.bins, binForm.currentBinId]);
 
   return (
     <Select

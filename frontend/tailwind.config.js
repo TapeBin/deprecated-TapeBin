@@ -17,6 +17,7 @@ module.exports = {
         proHoverColor: "#00a7db",
         proFocusColor: "#009ccc",
         background: "#262626",
+        binColor: "#309CFF"
       },
       outline: {
         gray: "1px solid #F5F5F5",

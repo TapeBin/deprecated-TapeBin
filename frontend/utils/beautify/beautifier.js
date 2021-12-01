@@ -1,4 +1,4 @@
-import {getLanguageModeWithIdAsString} from "../binUtil";
+import {getModeWithLanguageId} from "../binUtil";
 
 const prettier = require("prettier/standalone");
 const plugins = [
@@ -43,7 +43,7 @@ const LANGUAGES = [
 export const canBeautify = (aceMode) => {
   let language = aceMode;
   if (String(aceMode).match(/\d/))
-    language = getLanguageModeWithIdAsString(aceMode)
+    language = getModeWithLanguageId(aceMode)
   return LANGUAGES.includes(language);
 }
 

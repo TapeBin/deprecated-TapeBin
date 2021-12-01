@@ -18,7 +18,7 @@ import {
   notifyMoreThanXCharacters,
   notifySuccessfulBinCreation
 } from "../../utils/notify";
-import { exceedsMaxCharacters, getLanguageModeWithIdAsString, isEmptyBins } from "../../utils/binUtil";
+import { exceedsMaxCharacters, getModeWithLanguageId, isEmptyBins } from "../../utils/binUtil";
 import { beautify, canBeautify } from "../../utils/beautify/beautifier";
 
 type FormbarProps = {
@@ -55,11 +55,9 @@ const Formbar: FunctionComponent<FormbarProps> = (props: FormbarProps) => {
     actionMeta: ActionMeta<SelectOption>
   ) => {
     if (linguist.hasOwnProperty(option!!.value)) {
-      // @ts-ignore
-      const languageExtension = linguist[option!!.value].aceMode;
       setEditor((prevState) => ({
         ...prevState,
-        languageId: option!!.value,
+        languageId: parseInt(option!!.value),
       }));
 
       const bin = bins.bins.find(
@@ -94,7 +92,7 @@ const Formbar: FunctionComponent<FormbarProps> = (props: FormbarProps) => {
   };
 
   const format = () => {
-    const prettified = beautify(editor.text, getLanguageModeWithIdAsString(editor.languageId));
+    const prettified = beautify(editor.text, getModeWithLanguageId(editor.languageId));
     if (!prettified) {
       notifyFormattingError();
       return;

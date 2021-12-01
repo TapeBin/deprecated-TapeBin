@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import TopProfile from "./TopProfile";
 import axios from "../../utils/axios";
 import { AxiosResponse } from "axios";
+import ProfileBinList from "./ProfileBinList";
 
 const Profile = () => {
   const [state, setState] = useState([]);
@@ -15,8 +16,9 @@ const Profile = () => {
   }, []);
 
   return (
-    <div className="flex flex-col px-[25px] py-[35px] bg-gray-800 w-full h-full ">
+    <div className="flex flex-col px-[25px] py-[35px] bg-gray-800 w-full h-full space-y-5">
       <TopProfile amountOfBins={state.length}/>
+      <ProfileBinList bins={state}/>
     </div>
   );
 };

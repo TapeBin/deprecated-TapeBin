@@ -9,7 +9,6 @@ import { useAtom } from "jotai";
 import { binsAtom } from "../states/bins";
 import { editorAtom } from "../states/editor";
 import { binFormAtom } from "../states/binForm";
-import { getLanguageModeWithIdAsString } from "../utils/binUtil";
 import { useMatomo } from "@datapunt/matomo-tracker-react";
 
 const DynamicEditor = dynamic(
@@ -48,15 +47,15 @@ const ID = (props: any) => {
       bins: bin.bins
     });
 
+    setEditor(prevState => ({
+      ...prevState,
+      languageId: bin.bins[0].languageId,
+      text: bin.bins[0].text
+    }));
+
     setBinForm({
       currentBinId: bin.bins[0].id
     });
-
-    setEditor(prevState => ({
-      ...prevState,
-      mode: getLanguageModeWithIdAsString(bin.bins[0].languageId)!!,
-      text: bin.bins[0].text
-    }));
 
     trackPageView({
       documentTitle: `${props.id}`,

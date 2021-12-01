@@ -4,7 +4,6 @@ import { binFormAtom } from "../../../states/binForm";
 import { binsAtom } from "../../../states/bins";
 import { editorAtom } from "../../../states/editor";
 import { Bin } from "../../../types/Bin";
-import { getLanguageModeWithId } from "../../../utils/binUtil";
 
 type BinItemProps = {
   fileName: string;
@@ -37,7 +36,7 @@ const BinItem: FunctionComponent<BinItemProps> = (props: BinItemProps) => {
       }));
       setEditor((prevState) => ({
         ...prevState,
-        languageId: String(firstBin.languageId),
+        languageId: firstBin.languageId,
         text: firstBin.text,
       }));
     }
@@ -50,7 +49,7 @@ const BinItem: FunctionComponent<BinItemProps> = (props: BinItemProps) => {
 
     setEditor((prevState) => ({
       ...prevState,
-      languageId: getLanguageModeWithId(currentBin.languageId),
+      languageId: currentBin.languageId,
       text: currentBin.text,
     }));
 

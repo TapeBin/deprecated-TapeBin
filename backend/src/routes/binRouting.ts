@@ -15,6 +15,7 @@ interface Bin {
 }
 
 router.post("/bin/create", (req: any, res: any) => {
+  console.log(req.body);
   createBin(req.body, req.user as MongoUser).then(binCreation => {
     if (binCreation.succeed)
       res.status(201).json(binCreation);
@@ -50,10 +51,9 @@ router.get("/bin/:id", (req: any, res: any) => {
       document.bins.forEach((bin: any) => {
         bins.push({
           id: bin.id,
-          fileName: bin._fileName || bin.fileName,
-          languageId: bin._languageId || bin.languageId,
-          languageExtension: bin._languageExtension || bin.languageExtension,
-          text: bin._text || bin.text
+          fileName: bin.fileName,
+          languageId: bin.languageId,
+          text: bin.text
         })
       });
 
@@ -115,13 +115,18 @@ async function createBin(data: any, user: MongoUser) {
   const bins = data.bins;
   const correctBins: any[] = [];
 
-  bins.forEach((bin: any) => correctBins.push({
-    id: bin.id || bin._id,
-    fileName: bin._fileName || bin.fileName,
-    languageId: bin._languageId || bin.languageId,
-    languageExtension: bin._languageExtension || bin.languageExtension,
-    text: bin._text || bin.text
-  }));
+
+
+  bins.forEach((bin: any) => {
+    console.log(bin._languageId);
+    console.log(bin.languageId);
+    correctBins.push({
+      id: bin.id,
+      fileName: bin.fileName,
+      languageId: bin.languageId,
+      text: bin.text
+    });
+  } );
 
   const bin = await new Bin({
     binId: url,
