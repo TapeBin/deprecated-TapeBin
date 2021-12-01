@@ -22,6 +22,20 @@ router.post("/bin/create", (req: any, res: any) => {
   }).catch(err => console.log(err));
 });
 
+router.get("/bin", isLoggedIn, (req: any, res: any) => {
+  Bin.find({ownerId: req.user._id}, function(err: mongoose.Error, document: any) {
+    if (err)
+      console.log(err);
+
+    if (!document)
+      res.json({succeed: false});
+    else {
+      res.json(document);
+    }
+
+  });
+});
+
 router.get("/bin/:id", (req: any, res: any) => {
   Bin.findOne({ binId: req.params.id }, function (err: mongoose.Error, document: any) {
 
