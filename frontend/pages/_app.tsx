@@ -23,10 +23,6 @@ interface User {
   profilePicture: string;
 }
 
-async function getDiscordImage(discordId: any): string {
-
-}
-
 export default function App({ Component, pageProps }: AppProps) {
   const [isLoaded, setLoaded] = useState(false);
   const [_, setUser] = useAtom(userAtom);
@@ -56,8 +52,6 @@ export default function App({ Component, pageProps }: AppProps) {
       .then((response) => {
         if (!response.data.loginFailed && response.data.username) {
 
-
-          console.log(response.data);
           setUser((prevState) => ({
             ...prevState,
             isLoggedIn: true,

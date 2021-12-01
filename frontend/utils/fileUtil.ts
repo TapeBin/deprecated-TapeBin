@@ -71,7 +71,7 @@ export const getAceModeWithId = (id: string): string => {
 }
 
 export const getFirstOrSelectedLanguage = (): Selection => {
-  let mode = localStorage.getItem("mode");
+  let mode = localStorage.getItem("languageId");
 
   if (!mode)
     mode = linguist[0].extension;

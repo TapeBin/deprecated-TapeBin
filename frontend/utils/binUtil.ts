@@ -68,7 +68,7 @@ export const getLanguageModeWithId = (number: number): string => {
 
 
 export const getLanguageIdFromStorage = (): string => {
-  return localStorage.getItem("mode") || "null";
+  return localStorage.getItem("languageId") || "null";
 };
 
 export const exceedsMaxCharacters = (bins: any[]): boolean => {
