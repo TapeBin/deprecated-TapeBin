@@ -23,12 +23,14 @@ import { beautify, canBeautify } from "../../utils/beautify/beautifier";
 
 type FormbarProps = {
   isOnId?: boolean;
+  title?: string;
+  description?: string;
 };
 
 const Formbar: FunctionComponent<FormbarProps> = (props: FormbarProps) => {
   const router = useRouter();
   const [editor, setEditor] = useAtom(editorAtom);
-  const [bins] = useAtom(binsAtom);
+  const [bins, setBins] = useAtom(binsAtom);
   const [binForm, _] = useAtom(binFormAtom);
 
   const languagesArray = [];
@@ -101,11 +103,19 @@ const Formbar: FunctionComponent<FormbarProps> = (props: FormbarProps) => {
     setEditor(prevState => ({ ...prevState, text: prettified }));
   };
 
+  const onTitleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setBins(prevState => ({...prevState, title: event.target.value}));
+  };
+
+  const onDescriptionChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setBins(prevState => ({...prevState, description: event.target.value}));
+  };
+
   return (
     <FormContainer title="Bin">
-      <Input label="Title" isOnId={props.isOnId}/>
+      <Input label="Title" isOnId={props.isOnId} onChange={onTitleChange} defaultValue={props.title || ""}/>
       <Selector options={languagesArray} onChange={onChange} isOnId={props.isOnId}/>
-      <Input label="Description" isOnId={props.isOnId} maxLength={256}/>
+      <Input label="Description" isOnId={props.isOnId} maxLength={256} onChange={onDescriptionChange} defaultValue={props.description || ""}/>
       {!props.isOnId && <Button text="Save" onClick={sendBin}/>}
       {!props.isOnId && canBeautify(editor.languageId) && <Button text={"Format"} onClick={format}/>}
     </FormContainer>

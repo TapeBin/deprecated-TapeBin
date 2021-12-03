@@ -74,7 +74,6 @@ const Selector: FunctionComponent<SelectorProps> = (props: SelectorProps) => {
   });
 
   const handleValueChange = () => {
-    console.log(binForm.currentBinId + " id");
     const bin = bins.bins.find(
       (foundBin) => foundBin.id === binForm.currentBinId);
 

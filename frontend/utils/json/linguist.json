@@ -1,4 +1,9 @@
 {
+  "-1": {
+    "name": "None",
+    "extension": "text",
+    "aceMode": "text"
+  },
   "0": {
     "name": "1C Enterprise",
     "color": "814CCC",
