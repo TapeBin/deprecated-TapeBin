@@ -7,7 +7,9 @@ type ProfileBinListProps = {
 }
 
 const ProfileBinList: FunctionComponent<ProfileBinListProps> = (props: ProfileBinListProps) => {
-  console.log(props.bins);
+
+
+
   return (
     <div className="mx-3 flex flex-col space-y-5 text-gray-100">
       {props.bins.map(bin =>

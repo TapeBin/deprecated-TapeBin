@@ -31,7 +31,6 @@ services:
     container_name: frontend
     depends_on:
       - backend
-      - matomo
     restart: always
     ports:
     - 3000:3000
@@ -54,7 +53,6 @@ services:
     depends_on:
       - frontend
       - backend
-      - matomo
     ports:
       - 80:80
       - 443:443
@@ -63,18 +61,6 @@ services:
     restart: always
     networks:
       - tapebin
-  matomo:
-    image: matomo
-    container_name: matomo
-    ports:
-      - 8080:80
-    env_file:
-      - db.env
-    volumes:
-      - ./nginx/config.ini.php:/config
-    networks:
-      - tapebin
 networks:
   tapebin:
     driver: bridge
-#    matomo:fpm-alpine

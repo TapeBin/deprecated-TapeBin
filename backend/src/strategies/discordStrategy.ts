@@ -3,7 +3,6 @@ import User from "../schemas/User";
 import { Express } from "express";
 import * as mongoose from "mongoose";
 import { isLoggedIn } from "../utils/routeUtils";
-import fetch from "cross-fetch";
 
 const DiscordStrategy = require("passport-discord").Strategy;
 const scopes = ["identify", "email"];
