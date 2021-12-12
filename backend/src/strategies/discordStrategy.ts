@@ -1,8 +1,8 @@
-import { PassportStatic, Strategy } from "passport";
+import { PassportStatic } from "passport";
 import User from "../schemas/User";
 import { Express } from "express";
 import * as mongoose from "mongoose";
-import { isLoggedIn } from "../utils/routeUtils";
+import { FAILURE_REDIRECT, FRONT_END, isLoggedIn } from "../utils/routeUtils";
 
 const DiscordStrategy = require("passport-discord").Strategy;
 const scopes = ["identify", "email"];
@@ -58,10 +58,10 @@ module.exports = function (passport: PassportStatic, app: Express) {
   app.get(
     "/auth/discord/callback",
     passport.authenticate("discord", {
-      failureRedirect: "localhost"
+      failureRedirect: FAILURE_REDIRECT
     }),
     function (req, res) {
-      res.redirect("http://localhost");
+      res.redirect(FRONT_END);
     }
   );
 

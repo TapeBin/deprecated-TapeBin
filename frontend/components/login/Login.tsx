@@ -2,18 +2,19 @@ import React from "react";
 import LoginButton from "./LoginButton";
 import { useAtom } from "jotai";
 import { userAtom } from "../../states/user";
+import { FRONT_END_ROUTE } from "../../utils/routes";
 
 const Login = () => {
   const [user] = useAtom(userAtom);
   const discordLogin = () => {
     if (!user.isLoggedIn) {
-      window.open("http://localhost/api/auth/discord", "_self");
+      window.open(`http://${FRONT_END_ROUTE}/api/auth/discord`, "_self");
     }
   }
 
   const githubLogin = () => {
     if (!user.isLoggedIn) {
-      window.open("http://localhost/api/auth/github", "_self");
+      window.open(`http://${FRONT_END_ROUTE}/api/auth/github`, "_self");
     }
   };
 

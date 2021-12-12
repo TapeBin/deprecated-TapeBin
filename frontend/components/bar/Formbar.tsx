@@ -19,7 +19,7 @@ import {
   notifySuccessfulBinCreation
 } from "../../utils/notify";
 import { exceedsMaxCharacters, getModeWithLanguageId, isEmptyBins } from "../../utils/binUtil";
-import { beautify, canBeautify } from "../../utils/beautify/beautifier";
+// import { beautify, canBeautify } from "../../utils/beautify/beautifier";
 
 type FormbarProps = {
   isOnId?: boolean;
@@ -93,15 +93,15 @@ const Formbar: FunctionComponent<FormbarProps> = (props: FormbarProps) => {
       });
   };
 
-  const format = () => {
-    const prettified = beautify(editor.text, getModeWithLanguageId(editor.languageId));
-    if (!prettified) {
-      notifyFormattingError();
-      return;
-    }
+  // const format = () => {
+  //   const prettified = beautify(editor.text, getModeWithLanguageId(editor.languageId));
+  //   if (!prettified) {
+  //     notifyFormattingError();
+  //     return;
+  //   }
 
-    setEditor(prevState => ({ ...prevState, text: prettified }));
-  };
+    // setEditor(prevState => ({ ...prevState, text: prettified }));
+  // };
 
   const onTitleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setBins(prevState => ({...prevState, title: event.target.value}));
@@ -117,7 +117,7 @@ const Formbar: FunctionComponent<FormbarProps> = (props: FormbarProps) => {
       <Selector options={languagesArray} onChange={onChange} isOnId={props.isOnId}/>
       <Input label="Description" isOnId={props.isOnId} maxLength={256} onChange={onDescriptionChange} defaultValue={props.description || ""}/>
       {!props.isOnId && <Button text="Save" onClick={sendBin}/>}
-      {!props.isOnId && canBeautify(editor.languageId) && <Button text={"Format"} onClick={format}/>}
+      {/*{!props.isOnId && canBeautify(editor.languageId) && <Button text={"Format"} onClick={format}/>}*/}
     </FormContainer>
   );
 };

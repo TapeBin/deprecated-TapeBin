@@ -10,5 +10,6 @@ module.exports = {
 
   env: {
     BACK_END: process.env.BACK_END,
+    PRODUCTION: process.env.PRODUCTION
   },
 };

@@ -44,3 +44,5 @@
 /nginx/nginx/
 /nginx/ssl/
 /db.env
+/nginx/production/
+/nginx/conf.d/

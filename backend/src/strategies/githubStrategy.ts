@@ -2,14 +2,16 @@ import { PassportStatic } from "passport";
 import { Express } from "express";
 import mongoose from "mongoose";
 import User from "../schemas/User";
+import { FAILURE_REDIRECT, FRONT_END } from "../utils/routeUtils";
+import { GITHUB_CLIENT_ID, GITHUB_CLIENT_SECRET } from "../utils/secrets";
 const GithubStrategy = require("passport-github2").Strategy;
 
 module.exports = function (passport: PassportStatic, app: Express) {
   passport.use(
     new GithubStrategy(
       {
-        clientID: `${process.env.GITHUB_CLIENT_ID}`,
-        clientSecret: `${process.env.GITHUB_CLIENT_SECRET}`,
+        clientID: `${GITHUB_CLIENT_ID}`,
+        clientSecret: `${GITHUB_CLIENT_SECRET}`,
         callbackURL: `/api/auth/github/callback`,
       },
       function (_: any, __: any, profile: any, done: any) {
@@ -41,11 +43,11 @@ module.exports = function (passport: PassportStatic, app: Express) {
   app.get(
     "/auth/github/callback",
     passport.authenticate("github", {
-      failureRedirect: `localhost`,
+      failureRedirect: FAILURE_REDIRECT,
     }),
     function (req, res) {
       // Successful authentication, redirect home.
-      res.redirect(`http://localhost`);
+      res.redirect(FRONT_END);
     }
   );
 };

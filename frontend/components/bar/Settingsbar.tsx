@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import FormContainer from "./FormContainer";
 import DefaultSelector from "../select/DefaultSelector";
 import {
@@ -35,7 +35,7 @@ const Settingsbar = () => {
 
   const onLanguageChange = (option: SelectOption | null, actionMeta: ActionMeta<SelectOption>) => {
     const value = option!!.value;
-    setEditor(prevState => ({ ...prevState, languageId: getAceModeWithId(value) }));
+    setEditor(prevState => ({ ...prevState, languageId: parseInt(value) }));
     localStorage.setItem("languageId", value);
   };
 

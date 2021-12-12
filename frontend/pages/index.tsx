@@ -4,7 +4,7 @@ import dynamic from "next/dynamic";
 import Topbar from "../components/bar/Topbar";
 import Formbar from "../components/bar/Formbar";
 import BinList from "../components/bins/BinList";
-import { useMatomo } from "@datapunt/matomo-tracker-react";
+// import { useMatomo } from "@datapunt/matomo-tracker-react";
 const DynamicEditor = dynamic(
   () => {
     return import("../components/editor/Editor");
@@ -14,13 +14,13 @@ const DynamicEditor = dynamic(
 
 
 const Index = () => {
-  const { trackPageView } = useMatomo();
+  // const { trackPageView } = useMatomo();
 
-  useEffect(() => {
-    trackPageView({
-      documentTitle: "Index",
-    });
-  }, []);
+  // useEffect(() => {
+  //   trackPageView({
+  //     documentTitle: "Index",
+  //   });
+  // }, []);
 
 
   return (

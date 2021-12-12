@@ -8,7 +8,14 @@ up:
 
 .PHONY: build
 build:
-	docker-compose build
+	docker-compose down
+	docker-compose build --no-cache
+
+.PHONY: build-run
+build-run:
+	docker-compose down
+	docker-compose build --no-cache
+	docker-compose up
 
 .PHONY: build-plain
 build-plain:

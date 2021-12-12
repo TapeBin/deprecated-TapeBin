@@ -11,6 +11,7 @@ const Index = () => {
   const [isLoggedIn, _] = useState(user.isLoggedIn);
 
   useEffect(() => {
+    console.log(user + "  ");
     if(!isLoggedIn)
       router.push("/");
   }, []);

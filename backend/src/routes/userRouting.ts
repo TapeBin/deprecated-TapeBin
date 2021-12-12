@@ -1,8 +1,7 @@
 import { isLoggedIn } from "../utils/routeUtils";
 const router = require("express").Router();
 
-router.get("/user", isLoggedIn,(req: any, res: any) => {
-  console.log("test");
+router.get("/user",(req: any, res: any) => {
   if (req.user) {
     res.json(req.user);
   } else {

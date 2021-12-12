@@ -11,9 +11,9 @@ import { userAtom } from "../states/user";
 import { editorAtom, setItem } from "../states/editor";
 import { ToastContainer } from "react-toastify";
 import axios from "../utils/axios";
-import { createInstance, MatomoProvider } from "@datapunt/matomo-tracker-react";
 import { AxiosResponse } from "axios";
-
+// import { createInstance, MatomoProvider } from "@datapunt/matomo-tracker-react";
+// import { AxiosResponse } from "axios";
 interface User {
   loginFailed: boolean;
   username: string;
@@ -27,10 +27,10 @@ export default function App({ Component, pageProps }: AppProps) {
   const [isLoaded, setLoaded] = useState(false);
   const [_, setUser] = useAtom(userAtom);
   const [__, setEditor] = useAtom(editorAtom);
-  const instance = createInstance({
-    urlBase: "http://localhost:8080",
-    siteId: 2
-  });
+  // const instance = createInstance({
+  //   urlBase: "http://localhost:8080",
+  //   siteId: 2
+  // });
 
   useEffect(() => {
 
@@ -50,6 +50,7 @@ export default function App({ Component, pageProps }: AppProps) {
         withCredentials: true,
       })
       .then((response) => {
+        console.log(response)
         if (!response.data.loginFailed && response.data.username) {
 
           setUser((prevState) => ({
@@ -79,7 +80,8 @@ export default function App({ Component, pageProps }: AppProps) {
 
 
   return (
-    <MatomoProvider value={instance}>
+    // <MatomoProvider value={instance}>
+      <>
       {isLoaded &&
       <Component {...pageProps} />}
       <ToastContainer
@@ -95,6 +97,7 @@ export default function App({ Component, pageProps }: AppProps) {
         theme="dark"
         limit={4}
       />
-    </MatomoProvider>
+      </>
+    // </MatomoProvider>
   );
 }

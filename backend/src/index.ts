@@ -6,10 +6,10 @@ import passport from "passport";
 import User from "./schemas/User";
 import userRouting from "./routes/userRouting";
 import binRouting from "./routes/binRouting";
+import { PRODUCTION } from "./utils/secrets";
 const githubStrategy = require("./strategies/githubStrategy");
 const discordStrategy = require("./strategies/discordStrategy");
 const app = express();
-const PRODUCTION = process.env.PRODUCTION === "true";
 
 app.use(
   cors({
@@ -20,6 +20,8 @@ app.use(
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+console.log()
 
 app.use(
   session({
