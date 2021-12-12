@@ -8,13 +8,13 @@ const Login = () => {
   const [user] = useAtom(userAtom);
   const discordLogin = () => {
     if (!user.isLoggedIn) {
-      window.open(`http://${FRONT_END_ROUTE}/api/auth/discord`, "_self");
+      window.open(`${FRONT_END_ROUTE}/api/auth/discord`, "_self");
     }
   }
 
   const githubLogin = () => {
     if (!user.isLoggedIn) {
-      window.open(`http://${FRONT_END_ROUTE}/api/auth/github`, "_self");
+      window.open(`${FRONT_END_ROUTE}/api/auth/github`, "_self");
     }
   };
 
