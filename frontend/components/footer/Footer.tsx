@@ -8,8 +8,13 @@ const Footer = () => {
         <SocialMediaIcon
           src="../images/social_media/discord.svg"
           alt="Discord"
+          url="https://discord.gg/vsh3VJGJqg"
         />
-        <SocialMediaIcon src="../images/social_media/github.svg" alt="Github" />
+        <SocialMediaIcon
+            src="../images/social_media/github.svg"
+            alt="Github"
+            url="https://github.com/TapeBin/TapeBin"
+        />
         <SocialMediaIcon
           src="../images/social_media/twitter.svg"
           alt="Twitter"
