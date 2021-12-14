@@ -10,7 +10,7 @@ export default {
         },
         {
             property: "og:image",
-            content: "https://cdn.discordapp.com/attachments/759883351754145803/919714901298122812/logo.png"
+            content: "https://cdn.discordapp.com/attachments/759883351754145803/920448321104011294/logo_1.png"
         },
         {
             property: "theme-color",

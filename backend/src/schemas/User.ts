@@ -9,10 +9,6 @@ const user = new mongoose.Schema({
     required: false,
     type: String,
   },
-  username: {
-    required: true,
-    type: String,
-  },
   creationDate: {
     required: true,
     type: Date,

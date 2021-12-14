@@ -10,7 +10,6 @@ const Profile = () => {
   useEffect(() => {
     axios.get("/bin")
       .then((response: AxiosResponse<any>) => {
-        console.log(response);
         setState(response.data);
       });
   }, []);

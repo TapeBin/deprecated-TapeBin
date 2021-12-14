@@ -25,11 +25,11 @@ module.exports = function (passport: PassportStatic, app: Express) {
 
                         req.session.avatar = profile.avatar;
                         req.session.discriminator = profile.discriminator;
+                        req.session.username = profile.username;
 
                         if (!document) {
                             const newUser = new User({
                                 discordId: profile.id,
-                                username: profile.username,
                                 creationDate: Date.now(),
                             });
                             await newUser.save();

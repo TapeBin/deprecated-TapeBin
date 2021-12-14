@@ -10,10 +10,9 @@ import { pageAtom } from "../_app";
 const Index = () => {
     const router = useRouter();
     const [user] = useAtom(userAtom);
-    const [page, setPage] = useAtom(pageAtom);
+    const [page] = useAtom(pageAtom);
 
     useEffect(() => {
-        console.log(user);
         if (page.isLoaded && !user.isLoggedIn)
             router.push("/");
     }, [page.isLoaded]);
@@ -22,7 +21,7 @@ const Index = () => {
         <div className="flex flex-row" style={{ width: "100vw", height: "100vh" }}>
             <Meta title="Profile" url="https://tapeb.in/profile"/>
             <Navbar/>
-            {page.isLoaded && <Profile/>}
+            {page.isLoaded && user.isLoggedIn && <Profile/>}
         </div>
     );
 };

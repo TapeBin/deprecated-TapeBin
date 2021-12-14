@@ -60,7 +60,6 @@ export default function App({ Component, pageProps }: AppProps) {
                     withCredentials: true,
                 })
                 .then((response) => {
-
                     if (!response.data.loginFailed && response.data.username) {
 
                         setUser((prevState) => ({
@@ -82,10 +81,11 @@ export default function App({ Component, pageProps }: AppProps) {
                             })));
 
                     }
+                    setPage(prevState => ({...prevState, isLoaded: true}));
                 });
         }
 
-        setPage(prevState => ({...prevState, isLoaded: true}));
+
 
     }, []);
 
