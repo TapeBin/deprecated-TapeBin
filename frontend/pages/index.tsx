@@ -1,9 +1,10 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Navbar from "../components/bar/Navbar";
 import dynamic from "next/dynamic";
 import Topbar from "../components/bar/Topbar";
 import Formbar from "../components/bar/Formbar";
 import BinList from "../components/bins/BinList";
+import Meta from "../components/seo/Meta";
 // import { useMatomo } from "@datapunt/matomo-tracker-react";
 const DynamicEditor = dynamic(
   () => {
@@ -25,6 +26,7 @@ const Index = () => {
 
   return (
     <div className="flex flex-row" style={{ width: "100vw", height: "100vh" }}>
+      <Meta title="TapeBin" titleTemplate="%s"/>
       <Navbar />
       <Formbar />
       <div className="flex flex-col w-full h-full overflow-hidden">

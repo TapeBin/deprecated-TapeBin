@@ -59,19 +59,11 @@ const Selector: FunctionComponent<SelectorProps> = (props: SelectorProps) => {
   const [bins] = useAtom(binsAtom);
   const [binForm] = useAtom(binFormAtom);
   const [editor, setEditor] = useAtom(editorAtom);
-  const getDefaultSettings = () => {
-    return {
-      value: String(getLanguageIdFromStorage()),
-      label:
-        getFirstLanguageNameWithBins(bins.bins) ||
-        getLanguageNameWithId(editor.languageId)!!,
-    };
-  };
-
   const [value, setValue] = useState({
-    label: getDefaultSettings().label,
-    value: getDefaultSettings().value,
+    value: "",
+    label: ""
   });
+  const [isLoaded, setLoaded] = useState(false);
 
   const handleValueChange = () => {
     const bin = bins.bins.find(
@@ -92,11 +84,27 @@ const Selector: FunctionComponent<SelectorProps> = (props: SelectorProps) => {
   };
 
   useEffect(() => {
+    const getDefaultSettings = () => {
+      return {
+        value: String(getLanguageIdFromStorage()),
+        label:
+            getFirstLanguageNameWithBins(bins.bins) ||
+            getLanguageNameWithId(editor.languageId)!!,
+      };
+    };
+
+    setValue({
+      label: getDefaultSettings().label,
+      value: getDefaultSettings().value,
+    });
+
     handleValueChange();
-  }, [bins.bins, binForm.currentBinId]);
+    setLoaded(true);
+  }, [bins.bins, binForm.currentBinId, editor.languageId]);
 
   return (
-    <Select
+    <>
+      {isLoaded && <Select
       options={props.options}
       onChange={(
         option: SelectOption | null,
@@ -108,11 +116,12 @@ const Selector: FunctionComponent<SelectorProps> = (props: SelectorProps) => {
       styles={customStyles}
       value={value}
       defaultValue={{
-        label: getDefaultSettings().label,
-        value: getDefaultSettings().value,
+        label: value.label,
+        value: value.value,
       }}
       isDisabled={props.isOnId}
-    />
+    />}
+      </>
   );
 };
 

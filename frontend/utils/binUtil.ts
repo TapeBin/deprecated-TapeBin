@@ -9,7 +9,7 @@ export const getModeWithLanguageId = (id: number): string => {
 };
 
 export const getLanguageIdFromStorage = (): number => {
-  return parseInt(localStorage.getItem("languageId")!!);
+  return parseInt(window.localStorage.getItem("languageId")!!);
 }
 
 export const getFirstLanguageNameWithBins = (bins: any[]): string | undefined => {

@@ -9,74 +9,87 @@ import { useAtom } from "jotai";
 import { binsAtom } from "../states/bins";
 import { editorAtom } from "../states/editor";
 import { binFormAtom } from "../states/binForm";
+import { BACK_END_ROUTE } from "../utils/routes";
+import Meta from "../components/seo/Meta";
+import { NextSeo } from "next-seo";
+import { pageAtom } from "./_app";
 // import { useMatomo } from "@datapunt/matomo-tracker-react";
 
 const DynamicEditor = dynamic(
-  () => {
-    return import("../components/editor/Editor");
-  },
-  { ssr: false }
+    () => {
+        return import("../components/editor/Editor");
+    },
+    { ssr: false }
 );
 
 export const getServerSideProps: GetServerSideProps<{}, Record<"id", string>> = async ({ params }) => {
-  const response = await fetch(`http://host.docker.internal/api/bin/${params!!.id}`);
-  const json = await response.json();
+    const response = await fetch(`${BACK_END_ROUTE}/api/bin/${params!!.id}`);
+    const json = await response.json();
 
-  return {
-    props: {
-      bin: json,
-      id: params!!.id
-    }
-  };
+    return {
+        props: {
+            bin: json,
+            id: params!!.id
+        }
+    };
 
 };
 
 
 const ID = (props: any) => {
-  const [bins, setBin] = useAtom(binsAtom);
-  const [__, setEditor] = useAtom(editorAtom);
-  const [___, setBinForm] = useAtom(binFormAtom);
-  // const { trackPageView } = useMatomo();
+    const [bins, setBin] = useAtom(binsAtom);
+    const [page] = useAtom(pageAtom);
+    const [__, setEditor] = useAtom(editorAtom);
+    const [___, setBinForm] = useAtom(binFormAtom);
+    // const { trackPageView } = useMatomo();
 
 
-  useEffect(() => {
-    const bin = props.bin;
-    setBin({
-      title: bin.title,
-      description: bin.description,
-      bins: bin.bins
-    });
+    useEffect(() => {
+        const bin = props.bin;
+        setBin({
+            title: bin.title,
+            description: bin.description,
+            bins: bin.bins
+        });
 
-    setEditor(prevState => ({
-      ...prevState,
-      languageId: bin.bins[0].languageId,
-      text: bin.bins[0].text
-    }));
+        setEditor(prevState => ({
+            ...prevState,
+            languageId: bin.bins[0].languageId,
+            text: bin.bins[0].text
+        }));
 
-    setBinForm({
-      currentBinId: bin.bins[0].id
-    });
+        setBinForm({
+            currentBinId: bin.bins[0].id
+        });
 
-    // trackPageView({
-    //   documentTitle: `${props.id}`,
-    // });
-    // axios.get(`http://localhost:8080/?module=API&method=Auctions.getPageUrl&pageUrl=${props.id}&idSite=2&format=JSON`)
-    //   .then((result) => console.log(result));
+        // trackPageView({
+        //   documentTitle: `${props.id}`,
+        // });
+        // axios.get(`http://localhost:8080/?module=API&method=Auctions.getPageUrl&pageUrl=${props.id}&idSite=2&format=JSON`)
+        //   .then((result) => console.log(result));
 
-  }, [props.bin]);
+    }, [props.bin]);
 
-  return (
-    <div className="flex flex-row" style={{ width: "100vw", height: "100vh" }}>
-      <Navbar/>
-      <Formbar isOnId={true} title={bins.title} description={bins.description}/>
-      <div className="flex flex-col w-full h-full overflow-hidden">
-        <Topbar>
-          <BinList isOnId={true}/>
-        </Topbar>
-        <DynamicEditor/>
-      </div>
-    </div>
-  )
+    return (
+        <>
+            <Meta title={props.bin.title || props.id}
+                  description={props.bin.description}
+                  url={"https://tapeb.in/" + props.id}
+            />
+            {/*<NextSeo {...{ title: "yes" }}/>*/}
+            <div className="flex flex-row" style={{ width: "100vw", height: "100vh" }}>
+
+                <Navbar/>
+                <Formbar isOnId={true} title={bins.title} description={bins.description}/>
+                <div className="flex flex-col w-full h-full overflow-hidden">
+                    <Topbar>
+                        <BinList isOnId={true}/>
+                    </Topbar>
+                    {page.isLoaded && <DynamicEditor/>}
+                </div>
+            </div>
+        </>
+    )
 };
 
 export default ID;

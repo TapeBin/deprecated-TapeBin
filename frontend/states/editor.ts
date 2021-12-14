@@ -1,10 +1,10 @@
 import { atom } from "jotai";
 
 export const setItem = (item: string, value: string) => {
-  if (localStorage.getItem(item) === null) {
-    localStorage.setItem(item, value);
+  if (window.localStorage.getItem(item) === null) {
+    window.localStorage.setItem(item, value);
   }
-  return localStorage.getItem(item)!!;
+  return window.localStorage.getItem(item)!!;
 };
 
 export const editorAtom = atom({
