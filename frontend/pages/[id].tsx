@@ -13,6 +13,7 @@ import { BACK_END_ROUTE } from "../utils/routes";
 import Meta from "../components/seo/Meta";
 import { pageAtom } from "./_app";
 import { getAceModeWithId } from "../utils/fileUtil";
+import { useRouter } from "next/router";
 // import { useMatomo } from "@datapunt/matomo-tracker-react";
 const DynamicEditor = dynamic(
     () => {
@@ -36,6 +37,7 @@ export const getServerSideProps: GetServerSideProps<{}, Record<"id", string>> = 
 
 
 const ID = (props: any) => {
+    const router = useRouter();
     const [_, setBin] = useAtom(binsAtom);
     const [page] = useAtom(pageAtom)
     const [__, setEditor] = useAtom(editorAtom);
@@ -45,6 +47,11 @@ const ID = (props: any) => {
 
 
     useEffect(() => {
+        if (!props.bin.succeed) {
+            router.push("404");
+            return;
+        }
+
         if (!page.isLoaded) return;
         const bin = props.bin;
 
@@ -71,7 +78,6 @@ const ID = (props: any) => {
         //   .then((result) => console.log(result));
 
     }, [page.isLoaded]);
-
 
 
     return (
