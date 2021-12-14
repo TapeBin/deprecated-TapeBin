@@ -22,17 +22,14 @@ const Editor: FunctionComponent<EditorProps> = (props: EditorProps) => {
   const [binForm] = useAtom(binFormAtom);
 
   const onChange = (value: string) => {
-    // setEditor(prevState => ({...prevState, text: value}))
-    // const currentBin = bins.bins.find(
-    //   (foundBin) => foundBin.id === binForm.currentBinId
-    // );
-    // if (currentBin) {
-    //   currentBin.text = value;
-    // }
+    setEditor(prevState => ({...prevState, text: value}))
+    const currentBin = bins.bins.find(
+      (foundBin) => foundBin.id === binForm.currentBinId
+    );
+    if (currentBin) {
+      currentBin.text = value;
+    }
   };
-
-  console.log(settings.text)
-  console.log(settings.languageId)
 
   return (
     <AceEditor
