@@ -52,6 +52,7 @@ export default function App({ Component, pageProps }: AppProps) {
             languageId: parseInt(setItem("languageId", "-1")),
         }));
 
+
         if (!user.isLoggedIn) {
 
             axios
@@ -81,10 +82,10 @@ export default function App({ Component, pageProps }: AppProps) {
                             })));
 
                     }
-                    setPage(prevState => ({...prevState, isLoaded: true}));
                 });
         }
 
+        setPage(prevState => ({...prevState, isLoaded: true}));
 
     }, []);
 

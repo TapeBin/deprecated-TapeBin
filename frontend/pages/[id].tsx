@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import Navbar from "../components/bar/Navbar";
 import Formbar from "../components/bar/Formbar";
 import Topbar from "../components/bar/Topbar";
@@ -11,10 +11,9 @@ import { editorAtom } from "../states/editor";
 import { binFormAtom } from "../states/binForm";
 import { BACK_END_ROUTE } from "../utils/routes";
 import Meta from "../components/seo/Meta";
-import { NextSeo } from "next-seo";
 import { pageAtom } from "./_app";
+import { getAceModeWithId } from "../utils/fileUtil";
 // import { useMatomo } from "@datapunt/matomo-tracker-react";
-
 const DynamicEditor = dynamic(
     () => {
         return import("../components/editor/Editor");
@@ -38,25 +37,28 @@ export const getServerSideProps: GetServerSideProps<{}, Record<"id", string>> = 
 
 const ID = (props: any) => {
     const [bins, setBin] = useAtom(binsAtom);
-    const [page] = useAtom(pageAtom);
-    const [__, setEditor] = useAtom(editorAtom);
+    const [page] = useAtom(pageAtom)
+    const [editor, setEditor] = useAtom(editorAtom);
     const [___, setBinForm] = useAtom(binFormAtom);
+
     // const { trackPageView } = useMatomo();
 
 
     useEffect(() => {
+        if (!page.isLoaded) return;
         const bin = props.bin;
-        setBin({
-            title: bin.title,
-            description: bin.description,
-            bins: bin.bins
-        });
 
         setEditor(prevState => ({
             ...prevState,
             languageId: bin.bins[0].languageId,
             text: bin.bins[0].text
         }));
+
+        setBin({
+            title: bin.title,
+            description: bin.description,
+            bins: bin.bins
+        });
 
         setBinForm({
             currentBinId: bin.bins[0].id
@@ -68,7 +70,9 @@ const ID = (props: any) => {
         // axios.get(`http://localhost:8080/?module=API&method=Auctions.getPageUrl&pageUrl=${props.id}&idSite=2&format=JSON`)
         //   .then((result) => console.log(result));
 
-    }, [props.bin]);
+    }, [page.isLoaded]);
+
+
 
     return (
         <>
@@ -85,7 +89,7 @@ const ID = (props: any) => {
                     <Topbar>
                         <BinList isOnId={true}/>
                     </Topbar>
-                    {page.isLoaded && <DynamicEditor/>}
+                    <DynamicEditor/>
                 </div>
             </div>
         </>

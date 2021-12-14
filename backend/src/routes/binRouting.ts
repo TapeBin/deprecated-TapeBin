@@ -57,8 +57,6 @@ router.get("/bin/:id", (req: any, res: any) => {
         })
       });
 
-      console.log(bins);
-
       res.json({ succeed: true, title: document.title, description: document.description, bins: bins });
     }
 
