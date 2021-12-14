@@ -36,9 +36,9 @@ export const getServerSideProps: GetServerSideProps<{}, Record<"id", string>> = 
 
 
 const ID = (props: any) => {
-    const [bins, setBin] = useAtom(binsAtom);
+    const [_, setBin] = useAtom(binsAtom);
     const [page] = useAtom(pageAtom)
-    const [editor, setEditor] = useAtom(editorAtom);
+    const [__, setEditor] = useAtom(editorAtom);
     const [___, setBinForm] = useAtom(binFormAtom);
 
     // const { trackPageView } = useMatomo();
@@ -84,7 +84,7 @@ const ID = (props: any) => {
             <div className="flex flex-row" style={{ width: "100vw", height: "100vh" }}>
 
                 <Navbar/>
-                <Formbar isOnId={true} title={bins.title} description={bins.description}/>
+                <Formbar isOnId={true} title={props.bin.title} description={props.bin.description}/>
                 <div className="flex flex-col w-full h-full overflow-hidden">
                     <Topbar>
                         <BinList isOnId={true}/>

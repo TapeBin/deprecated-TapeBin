@@ -5,6 +5,8 @@ import Topbar from "../components/bar/Topbar";
 import Formbar from "../components/bar/Formbar";
 import BinList from "../components/bins/BinList";
 import Meta from "../components/seo/Meta";
+import { useAtom } from "jotai";
+import { binsAtom } from "../states/bins";
 // import { useMatomo } from "@datapunt/matomo-tracker-react";
 const DynamicEditor = dynamic(
   () => {
@@ -15,6 +17,7 @@ const DynamicEditor = dynamic(
 
 
 const Index = () => {
+    const [bin] = useAtom(binsAtom);
   // const { trackPageView } = useMatomo();
 
   // useEffect(() => {
@@ -28,7 +31,7 @@ const Index = () => {
     <div className="flex flex-row" style={{ width: "100vw", height: "100vh" }}>
       <Meta title="TapeBin" titleTemplate="%s"/>
       <Navbar />
-      <Formbar />
+      <Formbar title={bin.title} description={bin.description} />
       <div className="flex flex-col w-full h-full overflow-hidden">
         <Topbar>
           <BinList />
