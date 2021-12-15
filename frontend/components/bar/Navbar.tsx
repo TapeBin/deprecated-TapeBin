@@ -23,7 +23,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="w-[70px] fixed flex-none h-full bg-background flex flex-col space-y-12 justify-start items-center border-r-2 border-gray-700">
+    <nav className="w-[70px] sticky top-0 flex-none block overflow-y-auto  h-full bg-background flex flex-col space-y-12 justify-start items-center border-r-2 border-gray-700">
       <Logo />
       <div className="flex flex-col space-y-5 items-center">
         <ProfileIcon src={user.profileImage} alt="Profile" onClick={logIn} />
