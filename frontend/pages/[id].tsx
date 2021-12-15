@@ -12,9 +12,8 @@ import { binFormAtom } from "../states/binForm";
 import { BACK_END_ROUTE } from "../utils/routes";
 import Meta from "../components/seo/Meta";
 import { pageAtom } from "./_app";
-import { getAceModeWithId } from "../utils/fileUtil";
 import { useRouter } from "next/router";
-// import { useMatomo } from "@datapunt/matomo-tracker-react";
+import { useMatomo } from "@datapunt/matomo-tracker-react";
 const DynamicEditor = dynamic(
     () => {
         return import("../components/editor/Editor");
@@ -42,8 +41,7 @@ const ID = (props: any) => {
     const [page] = useAtom(pageAtom)
     const [__, setEditor] = useAtom(editorAtom);
     const [___, setBinForm] = useAtom(binFormAtom);
-
-    // const { trackPageView } = useMatomo();
+    const { trackPageView } = useMatomo();
 
 
     useEffect(() => {
@@ -71,9 +69,9 @@ const ID = (props: any) => {
             currentBinId: bin.bins[0].id
         });
 
-        // trackPageView({
-        //   documentTitle: `${props.id}`,
-        // });
+        trackPageView({
+          documentTitle: `${props.id}`,
+        });
         // axios.get(`http://localhost:8080/?module=API&method=Auctions.getPageUrl&pageUrl=${props.id}&idSite=2&format=JSON`)
         //   .then((result) => console.log(result));
 

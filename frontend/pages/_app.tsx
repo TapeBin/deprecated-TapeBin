@@ -14,7 +14,8 @@ import axios from "../utils/axios";
 import { AxiosResponse } from "axios";
 import { DefaultSeo } from "next-seo";
 import SEO from "../next-seo.config";
-// import { createInstance, MatomoProvider } from "@datapunt/matomo-tracker-react";
+import { createInstance, MatomoProvider } from "@datapunt/matomo-tracker-react";
+
 // import { AxiosResponse } from "axios";
 interface User {
     loginFailed: boolean;
@@ -26,17 +27,17 @@ interface User {
 }
 
 export const pageAtom = atom({
-   isLoaded: false
+    isLoaded: false
 });
 
 export default function App({ Component, pageProps }: AppProps) {
     const [_, setPage] = useAtom(pageAtom);
     const [user, setUser] = useAtom(userAtom);
     const [__, setEditor] = useAtom(editorAtom);
-    // const instance = createInstance({
-    //   urlBase: "http://localhost:8080",
-    //   siteId: 2
-    // });
+    const instance = createInstance({
+        urlBase: "https://statistics.tapeb.in",
+        siteId: 1
+    });
 
 
     useEffect(() => {
@@ -81,18 +82,16 @@ export default function App({ Component, pageProps }: AppProps) {
                             })));
 
                     }
-                    setPage(prevState => ({...prevState, isLoaded: true}));
+                    setPage(prevState => ({ ...prevState, isLoaded: true }));
                 });
         }
-
 
 
     }, []);
 
 
     return (
-        // <MatomoProvider value={instance}>
-        <>
+        <MatomoProvider value={instance}>
             <DefaultSeo {...SEO} />
             <Component {...pageProps} />
             <ToastContainer
@@ -108,7 +107,6 @@ export default function App({ Component, pageProps }: AppProps) {
                 theme="dark"
                 limit={4}
             />
-            {/*</MatomoProvider>*/}
-        </>
+        </MatomoProvider>
     );
 }

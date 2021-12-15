@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import Navbar from "../../components/bar/Navbar";
 import Profile from "../../components/profile/Profile";
 import { useRouter } from "next/router";
@@ -6,11 +6,20 @@ import { useAtom } from "jotai";
 import { userAtom } from "../../states/user";
 import Meta from "../../components/seo/Meta";
 import { pageAtom } from "../_app";
+import { useMatomo } from "@datapunt/matomo-tracker-react";
 
 const Index = () => {
     const router = useRouter();
     const [user] = useAtom(userAtom);
     const [page] = useAtom(pageAtom);
+    const { trackPageView } = useMatomo();
+
+    useEffect(() => {
+        trackPageView({
+            documentTitle: "profile",
+        });
+    }, []);
+
 
     useEffect(() => {
         if (page.isLoaded && !user.isLoggedIn)

@@ -1,9 +1,17 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Meta from "../../components/seo/Meta";
 import Navbar from "../../components/bar/Navbar";
 import Footer from "../../components/footer/Footer";
+import { useMatomo } from "@datapunt/matomo-tracker-react";
 
 const Index = () => {
+    const { trackPageView } = useMatomo();
+
+    useEffect(() => {
+        trackPageView({
+            documentTitle: "404",
+        });
+    }, []);
 
     return (
         <div className="flex flex-row bg-gray-800" style={{ width: "100vw", height: "100vh" }}>

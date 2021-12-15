@@ -7,6 +7,7 @@ import Head from "next/head";
 import Meta from "../../components/seo/Meta";
 import { useAtom } from "jotai";
 import { pageAtom } from "../_app";
+import { useMatomo } from "@datapunt/matomo-tracker-react";
 
 const DynamicEditor = dynamic(
     () => {
@@ -29,6 +30,13 @@ const TEXT = `function reverse(string) {
 
 const Index = () => {
     const [page] = useAtom(pageAtom);
+    const { trackPageView } = useMatomo();
+
+    useEffect(() => {
+        trackPageView({
+            documentTitle: "settings",
+        });
+    }, []);
 
     return (
         <div className="flex flex-row" style={{ width: "100vw", height: "100vh" }}>
