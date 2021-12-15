@@ -61,6 +61,8 @@ We may use cookies to help you personalize your online experience. A cookie is a
 
 We use a number of third-party analytics and service providers to help us evaluate our Users' use of TapeBin, compile statistical reports on activity, and improve our content and Website performance. You can read more about [Third Parties](#third-parties).
 
+
+
 ## Third Parties
 
 TapeBin works together with third parties to provide analytics, advertisements, and other services. Each party has their own Privacy Policy for its policies on user data. You can find these policies below:

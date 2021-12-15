@@ -13,7 +13,7 @@ const index = () => {
             <Navbar/>
             <div className="w-[900px] mx-auto mt-28 flex flex-col">
                 <div className="w-full">
-                    <MarkdownContainer fileName="Privacy"/>
+                    <MarkdownContainer fileName="ToS"/>
                 </div>
                 <div className="pb-4 mt-16">
                     <Footer/>

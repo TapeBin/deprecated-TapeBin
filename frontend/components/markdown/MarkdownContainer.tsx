@@ -1,6 +1,7 @@
 import React, { FunctionComponent, useEffect, useState } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
+import rehypeRaw from "rehype-raw";
 
 type MarkdownContainerProps = {
     fileName: string;
@@ -24,7 +25,7 @@ const MarkdownContainer: FunctionComponent<MarkdownContainerProps> = (props: Mar
     }, []);
 
     return (
-        <ReactMarkdown children={state} remarkPlugins={[remarkGfm]}  className="prose w-full mr-0"/>
+        <ReactMarkdown children={state} remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw]} className="prose w-full mr-0"/>
     );
 }
 
