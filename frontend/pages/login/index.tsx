@@ -20,7 +20,7 @@ const Index = () => {
             <Navbar/>
             <div className="mx-auto mt-28 flex flex-col">
                 <Login/>
-                <div className="mb-4">
+                <div className="pb-4 mt-16">
                     <Footer/>
                 </div>
             </div>
