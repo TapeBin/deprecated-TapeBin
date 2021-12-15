@@ -23,3 +23,7 @@
   opacity: 0.4;
   color: #ffffff;
 }
+
+::marker {
+  color: rgb(212, 212, 212) !important;
+}

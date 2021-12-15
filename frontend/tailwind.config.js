@@ -28,15 +28,13 @@ module.exports = {
                         p: {
                             color: theme("colors.gray.300")
                         },
-                        li: {
-                            color: theme("colors.gray.300")
-                        },
                         strong: {
                             color: theme("colors.gray.300")
                         },
                         a: {
                             color: "#3cb1ff"
-                        }
+                        },
+
                     }
                 }
             }),
