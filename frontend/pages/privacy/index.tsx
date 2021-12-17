@@ -9,7 +9,7 @@ const index = () => {
 
     return (
         <div className="flex flex-row bg-gray-800 overflow-y-auto" style={{ width: "100vw", height: "100vh" }}>
-            <Meta title="Login" url="https://tapeb.in/login"/>
+            <Meta title="Privacy" url="https://tapeb.in/privacy"/>
             <Navbar/>
             <div className="w-[900px] mx-auto mt-28 flex flex-col">
                 <div className="w-full">
