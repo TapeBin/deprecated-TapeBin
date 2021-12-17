@@ -1,5 +1,6 @@
 import React from "react";
 import SocialMediaIcon from "./SocialMediaIcon";
+import Link from "next/link"
 
 const Footer = () => {
   return (
@@ -21,6 +22,14 @@ const Footer = () => {
         />
       </div>
       <div>Copyright © 2021, TapeBin. All Rights Reserved.</div>
+        <div className="flex flex-row items-center space-x-6">
+            <Link href="terms">
+                Terms
+            </Link>
+            <Link href="privacy">
+                Privacy
+            </Link>
+        </div>
     </footer>
   );
 };
