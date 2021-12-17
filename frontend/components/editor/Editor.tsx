@@ -1,35 +1,52 @@
-import React, { FunctionComponent } from "react";
+import React, { FunctionComponent, useEffect, useState } from "react";
 import AceEditor from "react-ace";
 import ace from "ace-builds/src-noconflict/ace";
 import { useAtom } from "jotai";
 import { editorAtom } from "../../states/editor";
+import { binsAtom } from "../../states/bins";
+import { binFormAtom } from "../../states/binForm";
+import { getAceModeWithId } from "../../utils/fileUtil";
 
 ace.config.set("basePath", "ace/");
 
 type EditorProps = {
   mode?: string;
   value?: string;
-  readOnly?: boolean | false
+  readOnly?: boolean | false;
+  onChange?: (value: string) => void;
 };
 
 const Editor: FunctionComponent<EditorProps> = (props: EditorProps) => {
-  const [settings] = useAtom(editorAtom);
+  const [settings, setEditor] = useAtom(editorAtom);
+  const [bins] = useAtom(binsAtom);
+  const [binForm] = useAtom(binFormAtom);
+
+  const onChange = (value: string) => {
+    setEditor(prevState => ({...prevState, text: value}))
+    const currentBin = bins.bins.find(
+      (foundBin) => foundBin.id === binForm.currentBinId
+    );
+    if (currentBin) {
+      currentBin.text = value;
+    }
+  };
 
   return (
     <AceEditor
       height="100%"
       width="100%"
-      value={props.value}
+      value={props.value || settings.text}
       setOptions={{
         useWorker: false,
-        cursorStyle: "smooth",
         fontSize: settings.fontSize,
-        fontFamily: settings.fontSize,
+        fontFamily: settings.fontFamily,
         showPrintMargin: settings.printMargin,
+        tabSize: settings.tabWidth
       }}
       theme={settings.theme}
-      mode={props.mode || settings.mode}
+      mode={props.mode || getAceModeWithId(settings.languageId.toString())}
       readOnly={props.readOnly}
+      onChange={onChange}
     />
   );
 };

@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "NODE_PATH=./build node build/index.js",
+    "start": "set NODE_PATH=./build && node build/index.js",
     "build": "tsc -p .",
     "dev": "nodemon -L src/index.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -25,10 +25,13 @@
   },
   "dependencies": {
     "cors": "^2.8.5",
+    "cross-fetch": "^3.1.4",
+    "crypto-random-string": "^3.3.1",
     "express": "^4.17.1",
     "express-session": "^1.17.2",
     "mongoose": "^6.0.12",
     "passport": "^0.5.0",
+    "passport-discord": "^0.1.4",
     "passport-github2": "^0.1.12"
   }
 }

@@ -10,5 +10,16 @@ module.exports = {
 
   env: {
     BACK_END: process.env.BACK_END,
+    PRODUCTION: process.env.PRODUCTION
+  },
+  webpack: (config) => {
+    config.module.rules.push(
+        {
+          test: /\.md$/,
+          use: 'raw-loader'
+        }
+    )
+
+    return config
   },
 };

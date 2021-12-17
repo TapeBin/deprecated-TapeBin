@@ -37,3 +37,12 @@
 **/.idea
 
 /frontend/public/ace/
+/.env.dev
+/nginx/certs/
+/nginx/nginx/matomo.conf
+/nginx/nginx/db.env
+/nginx/nginx/
+/nginx/ssl/
+/db.env
+/nginx/production/
+/nginx/conf.d/
