@@ -61,7 +61,7 @@ export default function App({ Component, pageProps }: AppProps) {
                     withCredentials: true,
                 })
                 .then((response) => {
-                    if (!response.data.loginFailed && response.data.username) {
+                    if (response.status !== 500 && response.data.username) {
 
                         setUser((prevState) => ({
                             ...prevState,

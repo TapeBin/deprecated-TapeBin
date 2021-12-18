@@ -2,7 +2,7 @@ import Bin from "../schemas/Bin";
 import cryptoRandomString from "crypto-random-string";
 import * as mongoose from "mongoose";
 import { MAX_CHARACTERS } from "../constants";
-import { isLoggedIn } from "../utils/routeUtils";
+import { isAuthenticated } from "../utils/routeUtils";
 
 const router = require("express").Router();
 
@@ -23,7 +23,7 @@ router.post("/bin/create", (req: any, res: any) => {
   }).catch(err => console.log(err));
 });
 
-router.get("/bin", isLoggedIn, (req: any, res: any) => {
+router.get("/bin", isAuthenticated, (req: any, res: any) => {
   Bin.find({ownerId: req.user._id}, function(err: mongoose.Error, document: any) {
     if (err)
       console.log(err);

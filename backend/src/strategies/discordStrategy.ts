@@ -2,48 +2,48 @@ import { PassportStatic } from "passport";
 import User from "../schemas/User";
 import { Express } from "express";
 import * as mongoose from "mongoose";
-import { FAILURE_REDIRECT, FRONT_END, isLoggedIn } from "../utils/routeUtils";
+import { FAILURE_REDIRECT, FRONT_END, isAuthenticated } from "../utils/routeUtils";
 
 const DiscordStrategy = require("passport-discord").Strategy;
 const scopes = ["identify", "email"];
 
 module.exports = function (passport: PassportStatic, app: Express) {
 
-    passport.use(
-        new DiscordStrategy({
-                clientID: `${process.env.DISCORD_CLIENT_ID}`,
-                clientSecret: `${process.env.DISCORD_CLIENT_SECRET}`,
-                callbackURL: `/api/auth/discord/callback`,
-                scope: scopes,
-                passReqToCallback: true
-            },
+    const newDiscordStrategy = new DiscordStrategy({
+            clientID: `${process.env.DISCORD_CLIENT_ID}`,
+            clientSecret: `${process.env.DISCORD_CLIENT_SECRET}`,
+            callbackURL: `/api/auth/discord/callback`,
+            scope: scopes,
+            passReqToCallback: true
+        },
 
-            function (req: any, accessToken: string, refreshToken: string, profile: any, done: any) {
-                User.findOne({ discordId: profile.id },
-                    async function (err: mongoose.Error, document: any) {
-                        if (err) return done(err, null);
+        function (req: any, _: string, __: string, profile: any, done: any) {
+            User.findOne({ discordId: profile.id },
+                async function (err: mongoose.Error, document: any) {
+                    if (err) return done(err, null);
 
-                        req.session.avatar = profile.avatar;
-                        req.session.discriminator = profile.discriminator;
-                        req.session.username = profile.username;
+                    req.session.avatar = profile.avatar;
+                    req.session.discriminator = profile.discriminator;
+                    req.session.username = profile.username;
 
-                        if (!document) {
-                            const newUser = new User({
-                                discordId: profile.id,
-                                creationDate: Date.now(),
-                            });
-                            await newUser.save();
-                            done(null, newUser)
-                        } else {
-                            done(null, document);
-                        }
+                    if (!document) {
+                        const newUser = new User({
+                            discordId: profile.id,
+                            creationDate: Date.now(),
+                        });
+                        await newUser.save();
+                        done(null, newUser)
+                    } else {
+                        done(null, document);
                     }
-                );
-            }
-        )
+                }
+            );
+        }
     );
 
-    app.get("/discordImage", isLoggedIn, (req: any, res: any) => {
+    passport.use(newDiscordStrategy);
+
+    app.get("/discordImage", isAuthenticated, (req: any, res: any) => {
         res.json(getAvatarURL(req.session.avatar, req.session.discriminator, req.user.discordId));
     });
 
