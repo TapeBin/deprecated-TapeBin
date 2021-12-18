@@ -17,8 +17,7 @@ services:
       - GITHUB_CLIENT_SECRET_PRODUCTION=${GITHUB_CLIENT_SECRET_PRODUCTION}
       - DISCORD_CLIENT_ID=${DISCORD_CLIENT_ID}
       - DISCORD_CLIENT_SECRET=${DISCORD_CLIENT_SECRET}
-      - FRONT_END=http://localhost
-      - BACK_END="http://frontend"
+      - MAX_AGE_COOKIE=${MAX_AGE_COOKIE}
       - PRODUCTION=true
     command: node build/index.js
     networks:

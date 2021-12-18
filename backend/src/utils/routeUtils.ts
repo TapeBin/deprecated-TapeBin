@@ -1,9 +1,9 @@
 import { PRODUCTION } from "./secrets";
 
-export function isLoggedIn(req: any, res: any, next: any) {
-  if (req.isAuthenticated())
-    next();
-  else res.redirect("http://localhost");
+export function isAuthenticated(req: any, res: any, next: any) {
+    if (req.isAuthenticated())
+        next();
+     else res.redirect(FRONT_END);
 }
 
 export const PRODUCTION_LINK = "https://tapeb.in";
