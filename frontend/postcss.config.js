@@ -2,6 +2,6 @@ module.exports = {
   plugins: {
     tailwindcss: {},
     autoprefixer: {},
-    ...(false === true ? { cssnano: {} } : {})
+    ...(true === true ? { cssnano: {} } : {})
   },
 }
