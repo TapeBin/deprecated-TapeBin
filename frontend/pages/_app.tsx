@@ -5,7 +5,7 @@ import "@fontsource/lobster";
 import "@fontsource/fira-code";
 import "@fontsource/source-code-pro";
 import 'react-toastify/dist/ReactToastify.css';
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect } from "react";
 import { atom, useAtom } from "jotai";
 import { userAtom } from "../states/user";
 import { editorAtom, setItem } from "../states/editor";
