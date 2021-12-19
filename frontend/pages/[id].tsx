@@ -84,20 +84,27 @@ const ID = (props: any) => {
                   description={props.bin.description}
                   url={"https://tapeb.in/" + props.id}
             />
-            {/*<NextSeo {...{ title: "yes" }}/>*/}
-            <div className="flex flex-row" style={{ width: "100vw", height: "100vh" }}>
 
-                <Navbar/>
-                <Formbar isOnId={true} title={props.bin.title} description={props.bin.description}/>
-                <div className="flex flex-col w-full h-full overflow-hidden">
-                    <Topbar>
-                        <BinList isOnId={true}/>
-                    </Topbar>
-                    <DynamicEditor/>
-                </div>
-            </div>
+            {page.isLoaded && <Page bin={props.bin}/>}
+
         </>
     )
+};
+
+export const Page = (props: any) => {
+  return (
+      <div className="flex flex-row" style={{ width: "100vw", height: "100vh" }}>
+
+          <Navbar/>
+          <Formbar isOnId={true} title={props.bin.title} description={props.bin.description}/>
+          <div className="flex flex-col w-full h-full overflow-hidden">
+              <Topbar>
+                  <BinList isOnId={true}/>
+              </Topbar>
+              <DynamicEditor/>
+          </div>
+      </div>
+  )
 };
 
 export default ID;

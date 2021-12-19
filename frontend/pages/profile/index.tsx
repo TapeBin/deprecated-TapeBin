@@ -27,12 +27,22 @@ const Index = () => {
     }, [page.isLoaded]);
 
     return (
+        <>
+            <Meta title="Profile" url="https://tapeb.in/profile"/>
+            {page.isLoaded && user.isLoggedIn && <Page/>}
+        </>
+
+    );
+};
+
+export const Page = () => {
+    return (
         <div className="flex flex-row" style={{ width: "100vw", height: "100vh" }}>
             <Meta title="Profile" url="https://tapeb.in/profile"/>
             <Navbar/>
-            {page.isLoaded && user.isLoggedIn && <Profile/>}
+            <Profile/>
         </div>
-    );
-};
+    )
+}
 
 export default Index;

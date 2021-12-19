@@ -27,7 +27,7 @@ interface User {
 }
 
 export const pageAtom = atom({
-    isLoaded: false
+    isLoaded: false,
 });
 
 export default function App({ Component, pageProps }: AppProps) {
@@ -76,10 +76,12 @@ export default function App({ Component, pageProps }: AppProps) {
                         }));
 
                         if (response.data.discordId)
-                            axios.get("discordImage").then((res: AxiosResponse<any>) => setUser(prevState => ({
-                                ...prevState,
-                                profileImage: res.data.toString()
-                            })));
+                            axios.get("discordImage").then((res: AxiosResponse<any>) => {
+                                setUser(prevState => ({
+                                    ...prevState,
+                                    profileImage: res.data.toString()
+                                }));
+                            });
 
                     }
                     setPage(prevState => ({ ...prevState, isLoaded: true }));
