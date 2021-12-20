@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import Navbar from "../../components/bar/Navbar";
 import Topbar from "../../components/bar/Topbar";
 import dynamic from "next/dynamic";
 import Settingsbar from "../../components/bar/Settingsbar";
-import Head from "next/head";
 import Meta from "../../components/seo/Meta";
 import { useAtom } from "jotai";
 import { pageAtom } from "../_app";

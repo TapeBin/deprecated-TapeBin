@@ -15,8 +15,9 @@ import { AxiosResponse } from "axios";
 import { DefaultSeo } from "next-seo";
 import SEO from "../next-seo.config";
 import { createInstance, MatomoProvider } from "@datapunt/matomo-tracker-react";
+import { Router } from "next/router";
+import { CSSTransition, TransitionGroup } from "react-transition-group";
 
-// import { AxiosResponse } from "axios";
 interface User {
     loginFailed: boolean;
     username: string;
@@ -39,8 +40,15 @@ export default function App({ Component, pageProps }: AppProps) {
         siteId: 1
     });
 
-
     useEffect(() => {
+
+        Router.events.on("routeChangeStart", (url) => {
+            setPage(prevState => ({ ...prevState, isLoaded: false }));
+        });
+
+        Router.events.on("routeChangeComplete", (url) => {
+            setPage(prevState => ({ ...prevState, isLoaded: true }));
+        });
 
         //@ts-ignore
         setEditor(prevState => ({
@@ -55,11 +63,7 @@ export default function App({ Component, pageProps }: AppProps) {
 
 
         if (!user.isLoggedIn) {
-
-            axios
-                .get<User>("user", {
-                    withCredentials: true,
-                })
+            axios.get<User>("user", { withCredentials: true })
                 .then((response) => {
                     if (response.status !== 500 && response.data.username) {
 
@@ -95,7 +99,9 @@ export default function App({ Component, pageProps }: AppProps) {
     return (
         <MatomoProvider value={instance}>
             <DefaultSeo {...SEO} />
+            {/*<TransitionGroup in={page.isLoaded} timeout={150} classNames="fade">*/}
             <Component {...pageProps} />
+            {/*</TransitionGroup>*/}
             <ToastContainer
                 position="top-right"
                 autoClose={4000}

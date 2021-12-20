@@ -5,12 +5,10 @@ import { userAtom } from "../../states/user";
 import Icon from "./Icon";
 import Logo from "./Logo";
 import ProfileIcon from "./ProfileIcon";
-import { pageAtom } from "../../pages/_app";
 
 const Navbar = () => {
   const router = useRouter();
   const [user] = useAtom(userAtom);
-  const [page] = useAtom(pageAtom);
 
   const logIn = () => {
     if (user.isLoggedIn) {

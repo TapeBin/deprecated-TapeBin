@@ -30,7 +30,6 @@ const Index = () => {
     }, []);
 
 
-
     return (
         <>
             <Meta title="TapeBin" titleTemplate="%s"/>
@@ -40,7 +39,6 @@ const Index = () => {
 };
 
 const Page = (props: any) => {
-
     return (
         <div className="flex flex-row" style={{ width: "100vw", height: "100vh" }}>
             <Navbar/>

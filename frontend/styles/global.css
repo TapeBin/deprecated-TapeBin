@@ -27,3 +27,39 @@
 ::marker {
   color: rgb(212, 212, 212) !important;
 }
+
+html {
+  background-color: #262626;
+}
+
+.fade-enter {
+  opacity: 0;
+  transform: translateY(50px);
+}
+
+.fade-enter-active {
+  opacity: 1;
+  transition: opacity 0.15s, transform 0.15s;
+  transform: translateY(0);
+}
+.fade-exit {
+  opacity: 1;
+}
+.fade-exit-active {
+  opacity: 0;
+  /*transform: translateY(-500px);*/
+  transition: opacity 0.15s, transform 0.15s;
+}
+
+/*@keyframes slideInFromDown {*/
+/*  0% {*/
+/*    transform: translateY(100%);*/
+/*  }*/
+/*  100% {*/
+/*    transform: translateY(0);*/
+/*  }*/
+/*}*/
+
+/*.fade-in {*/
+/*  animation: 0.4s ease-out 0s 1 slideInFromDown;*/
+/*}*/
