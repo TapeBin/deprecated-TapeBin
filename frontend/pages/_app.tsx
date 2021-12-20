@@ -31,7 +31,9 @@ export const pageAtom = atom({
     isLoaded: false,
     maintenance: false,
     termsUpdated: false,
-    privacyUpdated: false
+    privacyUpdated: false,
+    notify: false,
+    notification: ""
 });
 
 export default function App({ Component, pageProps }: AppProps) {
@@ -70,9 +72,10 @@ export default function App({ Component, pageProps }: AppProps) {
                    ...prevState,
                    maintenance: response.data.maintenance,
                    termsUpdated: response.data.termsUpdated,
-                   privacyUpdated: response.data.privacyUpdated
+                   privacyUpdated: response.data.privacyUpdated,
+                   notify: response.data.notify,
+                   notification: response.data.notification
                }));
-               console.log(response.data);
             });
 
 

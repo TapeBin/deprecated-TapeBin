@@ -4,6 +4,8 @@ export type ConfigurationType = {
     maintenance: boolean;
     termsUpdated: boolean;
     privacyUpdated: boolean;
+    notify: boolean;
+    notification: string;
 }
 
 const configuration = new mongoose.Schema({
@@ -26,6 +28,16 @@ const configuration = new mongoose.Schema({
         type: Boolean,
         required: true,
         default: false
+    },
+    notify: {
+        type: Boolean,
+        required: true,
+        default: false
+    },
+    notification: {
+        type: String,
+        required: true,
+        default: "Notification"
     }
 });
 

@@ -8,7 +8,9 @@ router.get("/configuration", (req: any, res: any) => {
         const configuration = {
             maintenance: document.maintenance,
             termsUpdated: document.termsUpdated,
-            privacyUpdated: document.privacyUpdated
+            privacyUpdated: document.privacyUpdated,
+            notify: document.notify,
+            notification: document.notification
         } as ConfigurationType;
 
         res.json(configuration);
