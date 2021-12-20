@@ -5,7 +5,6 @@ import { userAtom } from "../../states/user";
 import { getFormattedDate } from "../../utils/dateUtil";
 import Button from "../form/Button";
 import { useRouter } from "next/router";
-import Image from "next/image";
 
 type TopProfileProps = {
   amountOfBins: number;
@@ -29,13 +28,10 @@ const TopProfile: FunctionComponent<TopProfileProps> = (props: TopProfileProps) 
     <div
       className="flex flex-row items-center align-middle justify-between bg-gray-600 text-gray-100 rounded-md px-[40px] py-[20px]">
       <div className="flex flex-row items-center space-x-8">
-        <Image
+        <img
           src={user.profileImage}
           alt="Profile Image"
           className="h-[90px] rounded-full"
-          height={90}
-          width={90}
-          priority
         />
         <div className="flex flex-col space-y-1 align-middle">
           <div className="flex flex-row space-x-3 text-3xl">

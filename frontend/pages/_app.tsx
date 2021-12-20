@@ -29,6 +29,9 @@ interface User {
 
 export const pageAtom = atom({
     isLoaded: false,
+    maintenance: false,
+    termsUpdated: false,
+    privacyUpdated: false
 });
 
 export default function App({ Component, pageProps }: AppProps) {
@@ -61,26 +64,35 @@ export default function App({ Component, pageProps }: AppProps) {
             languageId: parseInt(setItem("languageId", "-1")),
         }));
 
+        axios.get("configuration")
+            .then((response: any) => {
+               setPage(prevState => ({
+                   ...prevState,
+                   maintenance: response.data.maintenance,
+                   termsUpdated: response.data.termsUpdated,
+                   privacyUpdated: response.data.privacyUpdated
+               }));
+               console.log(response.data);
+            });
+
 
         if (!user.isLoggedIn) {
             axios.get<User>("user", { withCredentials: true })
-                .then((response: any) => {
-                    console.log(response.data);
-                    if (response.status !== 500 && response.data.user) {
-                        const user = response.data.user;
+                .then((response) => {
+                    if (response.status !== 500 && response.data.username) {
                         setUser((prevState) => ({
                             ...prevState,
                             isLoggedIn: true,
-                            username: user.username,
-                            discordId: user.discordId,
-                            githubId: user.githubId,
-                            profileImage: user.githubId
-                                ? `https://avatars.githubusercontent.com/u/${user.githubId}?v=3`
+                            username: response.data.username,
+                            discordId: response.data.discordId,
+                            githubId: response.data.githubId,
+                            profileImage: response.data.githubId
+                                ? `https://avatars.githubusercontent.com/u/${response.data.githubId}?v=3`
                                 : "",
-                            creationDate: new Date(user.creationDate),
+                            creationDate: new Date(response.data.creationDate),
                         }));
 
-                        if (user.discordId)
+                        if (response.data.discordId)
                             axios.get("discordImage").then((res: AxiosResponse<any>) => {
                                 setUser(prevState => ({
                                     ...prevState,

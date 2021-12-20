@@ -16,12 +16,6 @@ interface GithubUser {
 }
 
 router.get("/user", isAuthenticated, (req: any, res: any) => {
-    Configuration.findOne({ id: 0 }, (err: any, document: any) => {
-        const configuration = {
-            maintenance: document.maintenance,
-            termsUpdated: document.termsUpdated,
-            privacyUpdated: document.privacyUpdated
-        } as ConfigurationType;
         if (req.user) {
 
             const username = req.session.username;
@@ -36,20 +30,19 @@ router.get("/user", isAuthenticated, (req: any, res: any) => {
                     creationDate: creationDate
                 } as DiscordUser;
 
-                res.json({ user, configuration });
+                res.json(user);
             } else {
 
                 const user = {
                     githubId: req.user.githubId, username, creationDate
                 } as GithubUser;
 
-                res.json({ user, configuration });
+                res.json(user);
             }
 
         } else { // Login failed
-            res.json({ loginFailed: true, configuration });
+            res.json({ loginFailed: true });
         }
-    });
 });
 
 router.get("/user/logout", isAuthenticated, (req: any, res: any) => {

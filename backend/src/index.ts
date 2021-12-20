@@ -6,6 +6,7 @@ import passport from "passport";
 import User from "./schemas/User";
 import userRouting from "./routes/userRouting";
 import binRouting from "./routes/binRouting";
+import configurationRouting from "./routes/configurationRoute";
 import { PRODUCTION } from "./utils/secrets";
 import Configuration, { ConfigurationType } from "./schemas/Configuration";
 
@@ -57,6 +58,7 @@ discordStrategy(passport, app);
 
 app.use(userRouting);
 app.use(binRouting);
+app.use(configurationRouting);
 
 mongoose
     .connect(
