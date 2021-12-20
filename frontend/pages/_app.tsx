@@ -64,22 +64,23 @@ export default function App({ Component, pageProps }: AppProps) {
 
         if (!user.isLoggedIn) {
             axios.get<User>("user", { withCredentials: true })
-                .then((response) => {
-                    if (response.status !== 500 && response.data.username) {
-
+                .then((response: any) => {
+                    console.log(response.data);
+                    if (response.status !== 500 && response.data.user) {
+                        const user = response.data.user;
                         setUser((prevState) => ({
                             ...prevState,
                             isLoggedIn: true,
-                            username: response.data.username,
-                            discordId: response.data.discordId,
-                            githubId: response.data.githubId,
-                            profileImage: response.data.githubId
-                                ? `https://avatars.githubusercontent.com/u/${response.data.githubId}?v=3`
+                            username: user.username,
+                            discordId: user.discordId,
+                            githubId: user.githubId,
+                            profileImage: user.githubId
+                                ? `https://avatars.githubusercontent.com/u/${user.githubId}?v=3`
                                 : "",
-                            creationDate: new Date(response.data.creationDate),
+                            creationDate: new Date(user.creationDate),
                         }));
 
-                        if (response.data.discordId)
+                        if (user.discordId)
                             axios.get("discordImage").then((res: AxiosResponse<any>) => {
                                 setUser(prevState => ({
                                     ...prevState,
