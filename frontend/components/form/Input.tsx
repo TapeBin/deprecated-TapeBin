@@ -12,7 +12,7 @@ type InputProps = {
 
 const Input: FunctionComponent<InputProps> = (props: InputProps) => {
   return (
-    <div className="flex flex-col text-gray-100 ">
+    <div className="w-[215px] flex flex-col text-gray-100 ">
       <label htmlFor={props.label}>{props.label}</label>
       <input
         type={props.type}

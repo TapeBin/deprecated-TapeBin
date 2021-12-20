@@ -4,7 +4,7 @@ import Link from "next/link"
 
 const Footer = () => {
   return (
-    <footer className="flex flex-col items-center justify-end space-y-2 text-center opacity-60 hover:opacity-100 transition duration-300 text-gray-200">
+    <footer className="flex flex-col items-center justify-end space-y-2 mt-5 text-center opacity-60 hover:opacity-100 transition duration-300 text-gray-200">
       <div className="flex flex-row items-center space-x-6">
         <SocialMediaIcon
           src="../images/social_media/discord.svg"
