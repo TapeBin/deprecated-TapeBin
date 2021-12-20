@@ -12,7 +12,6 @@ import { binFormAtom } from "../states/binForm";
 import { BACK_END_ROUTE } from "../utils/routes";
 import Meta from "../components/seo/Meta";
 import { pageAtom } from "./_app";
-import { useRouter } from "next/router";
 import { useMatomo } from "@datapunt/matomo-tracker-react";
 const DynamicEditor = dynamic(
     () => {
@@ -25,6 +24,12 @@ export const getServerSideProps: GetServerSideProps<{}, Record<"id", string>> = 
     const response = await fetch(`${BACK_END_ROUTE}/api/bin/${params!!.id}`);
     const json = await response.json();
 
+    if (!json.succeed) {
+        return {
+            notFound: true
+        }
+    }
+
     return {
         props: {
             bin: json,
@@ -36,20 +41,13 @@ export const getServerSideProps: GetServerSideProps<{}, Record<"id", string>> = 
 
 
 const ID = (props: any) => {
-    const router = useRouter();
     const [_, setBin] = useAtom(binsAtom);
     const [page] = useAtom(pageAtom)
     const [__, setEditor] = useAtom(editorAtom);
     const [___, setBinForm] = useAtom(binFormAtom);
     const { trackPageView } = useMatomo();
 
-
     useEffect(() => {
-        if (!props.bin.succeed) {
-            router.push("404");
-            return;
-        }
-
         if (!page.isLoaded) return;
         const bin = props.bin;
 
