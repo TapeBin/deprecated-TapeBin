@@ -71,7 +71,13 @@ TapeBin works together with third parties to provide analytics, advertisements, 
 
 ## How we secure your information
 
-TapeBin secures your personal information from unauthorized access, alteration, or destruction; maintain data accuracy; and help ensure the appropriate use of User Personal Information. Transmission of data on TapeBin is encrypted using HTTPS (TLS).
+TapeBin secures your personal information from unauthorized access, alteration, or destruction; maintain data accuracy; and help ensure the appropriate use of User Personal Information. 
+Transmission of data on TapeBin is encrypted using HTTPS (TLS). 
+However, no data transmissions over the Internet can be guaranteed to be 100% secure. 
+Consequently, we cannot guarantee or warrant the security of any information you transmit to us and you do so at your own risk. 
+Once we receive your information, we make efforts to ensure security on our servers. 
+We use electronic and procedural safeguards to protect personal information about you. 
+If we learn of a security breach we may attempt to notify you electronically so that you can take appropriate protective steps.
 
 ## Access and control your information
 
