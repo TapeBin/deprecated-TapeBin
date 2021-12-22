@@ -52,17 +52,15 @@ export default function App({ Component, pageProps }: AppProps) {
 
         Router.events.on("routeChangeStart", (url) => {
             setPage(prevState => ({ ...prevState, isLoaded: false }));
-            if (ref && ref.current) {
+            if (ref && ref.current)
                 ref.current.staticStart(0);
-            }
 
         });
 
         Router.events.on("routeChangeComplete", (url) => {
             setPage(prevState => ({ ...prevState, isLoaded: true }));
-            if (ref && ref.current) {
+            if (ref && ref.current)
                 ref.current.complete();
-            }
         });
 
         //@ts-ignore
