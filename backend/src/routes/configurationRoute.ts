@@ -7,6 +7,7 @@ router.get("/configuration", (req: any, res: any) => {
 
         const configuration = {
             maintenance: document.maintenance,
+            maintenanceNotification: document.maintenanceNotification,
             termsUpdated: document.termsUpdated,
             privacyUpdated: document.privacyUpdated,
             notify: document.notify,

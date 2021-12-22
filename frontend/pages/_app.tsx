@@ -30,6 +30,7 @@ interface User {
 export const pageAtom = atom({
     isLoaded: false,
     maintenance: false,
+    maintenanceNotification: "",
     termsUpdated: false,
     privacyUpdated: false,
     notify: false,
@@ -68,14 +69,15 @@ export default function App({ Component, pageProps }: AppProps) {
 
         axios.get("configuration")
             .then((response: any) => {
-               setPage(prevState => ({
-                   ...prevState,
-                   maintenance: response.data.maintenance,
-                   termsUpdated: response.data.termsUpdated,
-                   privacyUpdated: response.data.privacyUpdated,
-                   notify: response.data.notify,
-                   notification: response.data.notification
-               }));
+                setPage(prevState => ({
+                    ...prevState,
+                    maintenance: response.data.maintenance,
+                    maintenanceNotification: response.data.maintenanceNotification,
+                    termsUpdated: response.data.termsUpdated,
+                    privacyUpdated: response.data.privacyUpdated,
+                    notify: response.data.notify,
+                    notification: response.data.notification
+                }));
             });
 
 
