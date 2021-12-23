@@ -17,7 +17,6 @@ import { DefaultSeo } from "next-seo";
 import SEO from "../next-seo.config";
 import { createInstance, MatomoProvider } from "@datapunt/matomo-tracker-react";
 import { Router } from "next/router";
-import { CSSTransition, TransitionGroup } from "react-transition-group";
 import LoadingBar, { LoadingBarRef } from "react-top-loading-bar";
 
 interface User {
@@ -124,9 +123,7 @@ export default function App({ Component, pageProps }: AppProps) {
         <MatomoProvider value={instance}>
             <DefaultSeo {...SEO} />
             <LoadingBar color="#00C2FF" ref={ref}/>
-            {/*<TransitionGroup in={page.isLoaded} timeout={150} classNames="fade">*/}
             <Component {...pageProps} />
-            {/*</TransitionGroup>*/}
             <ToastContainer
                 position="top-right"
                 autoClose={4000}

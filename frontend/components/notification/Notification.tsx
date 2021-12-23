@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useState } from "react";
+import React, { FunctionComponent } from "react";
 import { useRouter } from "next/router";
 
 type NotificationType = {
@@ -22,7 +22,7 @@ const Notification: FunctionComponent<NotificationType> = (props: NotificationTy
                 rounded-md border-2 p-2 px-3 text-gray-100
                 text-xs
                 transition duration-300 ${props.maintenance ? "maintenance" : "notification"}
-                 transform-gpu cursor-pointer`}>
+                transform-gpu cursor-pointer`}>
             {props.message}
         </div>
     );
