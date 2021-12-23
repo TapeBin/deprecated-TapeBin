@@ -20,6 +20,7 @@ import {
 } from "../../utils/notify";
 import { exceedsMaxCharacters, getModeWithLanguageId, isEmptyBins } from "../../utils/binUtil";
 import { beautify, canBeautify } from "../../utils/beautify/beautifier";
+import Notification from "../notification/Notification";
 
 type FormbarProps = {
   isOnId?: boolean;
@@ -113,6 +114,7 @@ const Formbar: FunctionComponent<FormbarProps> = (props: FormbarProps) => {
 
   return (
     <FormContainer title="Bin">
+      <Notification maintenance={true} message={"Yeasd asd asd asd asd asd asd asd asd s"} url={"privacy"}/>
       <Input label="Title" isOnId={props.isOnId} onChange={onTitleChange} defaultValue={props.title || ""}/>
       <Selector options={languagesArray} onChange={onChange} isOnId={props.isOnId}/>
       <Input label="Description" isOnId={props.isOnId} maxLength={256} onChange={onDescriptionChange} defaultValue={props.description || ""}/>

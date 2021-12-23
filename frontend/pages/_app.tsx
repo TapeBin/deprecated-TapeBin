@@ -5,6 +5,7 @@ import "@fontsource/lobster";
 import "@fontsource/fira-code";
 import "@fontsource/source-code-pro";
 import 'react-toastify/dist/ReactToastify.css';
+import "../styles/notification.css";
 import React, { useEffect, useRef } from "react";
 import { atom, useAtom } from "jotai";
 import { userAtom } from "../states/user";

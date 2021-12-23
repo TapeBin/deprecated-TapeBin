@@ -1,0 +1,15 @@
+.notification {
+    border-color: #00C2FF;
+}
+
+.notification:hover {
+    border-color: #00a7db;
+}
+
+.maintenance {
+    border-color: #fde047;
+}
+
+.maintenance:hover {
+    border-color: #facc15;
+}

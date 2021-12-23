@@ -7,6 +7,7 @@ export type ConfigurationType = {
     privacyUpdated: boolean;
     notify: boolean;
     notification: string;
+    url: string;
 }
 
 const configuration = new mongoose.Schema({
@@ -44,6 +45,11 @@ const configuration = new mongoose.Schema({
         type: String,
         required: true,
         default: "Notification"
+    },
+    url: {
+        type: String,
+        required: true,
+        default: "https://tapeb.in"
     }
 });
 

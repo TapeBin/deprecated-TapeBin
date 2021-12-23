@@ -11,7 +11,8 @@ router.get("/configuration", (req: any, res: any) => {
             termsUpdated: document.termsUpdated,
             privacyUpdated: document.privacyUpdated,
             notify: document.notify,
-            notification: document.notification
+            notification: document.notification,
+            url: document.url
         } as ConfigurationType;
 
         res.json(configuration);
