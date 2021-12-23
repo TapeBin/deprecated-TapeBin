@@ -33,8 +33,6 @@ export const pageAtom = atom({
     isLoaded: false,
     maintenance: false,
     maintenanceNotification: "",
-    termsUpdated: false,
-    privacyUpdated: false,
     notify: false,
     notification: "",
     url: ""
@@ -82,8 +80,6 @@ export default function App({ Component, pageProps }: AppProps) {
                     ...prevState,
                     maintenance: response.data.maintenance,
                     maintenanceNotification: response.data.maintenanceNotification,
-                    termsUpdated: response.data.termsUpdated,
-                    privacyUpdated: response.data.privacyUpdated,
                     notify: response.data.notify,
                     notification: response.data.notification,
                     url: response.data.url

@@ -3,8 +3,6 @@ import mongoose from "mongoose";
 export type ConfigurationType = {
     maintenance: boolean;
     maintenanceNotification: string;
-    termsUpdated: boolean;
-    privacyUpdated: boolean;
     notify: boolean;
     notification: string;
     url: string;
@@ -25,16 +23,6 @@ const configuration = new mongoose.Schema({
         type: String,
         required: true,
         default: "There will be a maintenance soon!"
-    },
-    termsUpdated: {
-        type: Boolean,
-        required: true,
-        default: false
-    },
-    privacyUpdated: {
-        type: Boolean,
-        required: true,
-        default: false
     },
     notify: {
         type: Boolean,
