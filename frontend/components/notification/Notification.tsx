@@ -20,6 +20,7 @@ const Notification: FunctionComponent<NotificationType> = (props: NotificationTy
             onClick={onClick}
             className={`w-full flex flex-row justify-between
                 rounded-md border-2 p-2 px-3 text-gray-100
+                text-xs
                 transition duration-300 ${props.maintenance ? "maintenance" : "notification"}
                  transform-gpu cursor-pointer`}>
             {props.message}

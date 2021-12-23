@@ -36,7 +36,8 @@ export const pageAtom = atom({
     termsUpdated: false,
     privacyUpdated: false,
     notify: false,
-    notification: ""
+    notification: "",
+    url: ""
 });
 
 export default function App({ Component, pageProps }: AppProps) {
@@ -84,7 +85,8 @@ export default function App({ Component, pageProps }: AppProps) {
                     termsUpdated: response.data.termsUpdated,
                     privacyUpdated: response.data.privacyUpdated,
                     notify: response.data.notify,
-                    notification: response.data.notification
+                    notification: response.data.notification,
+                    url: response.data.url
                 }));
             });
 
