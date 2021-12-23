@@ -1,5 +1,5 @@
 import { useAtom } from "jotai";
-import Router, { useRouter } from "next/router";
+import { useRouter } from "next/router";
 import React from "react";
 import { userAtom } from "../../states/user";
 import Icon from "./Icon";
@@ -12,9 +12,9 @@ const Navbar = () => {
 
   const logIn = () => {
     if (user.isLoggedIn) {
-      Router.push("/profile");
+      router.push("/profile");
     } else {
-      Router.push("/login");
+      router.push("/login");
     }
   };
 

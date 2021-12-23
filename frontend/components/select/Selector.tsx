@@ -105,6 +105,7 @@ const Selector: FunctionComponent<SelectorProps> = (props: SelectorProps) => {
   return (
     <>
       {isLoaded && <Select
+          className="w-[215px]"
       options={props.options}
       onChange={(
         option: SelectOption | null,

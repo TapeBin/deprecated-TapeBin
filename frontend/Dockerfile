@@ -49,7 +49,7 @@ WORKDIR /usr/src
 
 COPY package*.json ./
 
-RUN npm ci
+RUN npm ci --production
 
 COPY . .
 
@@ -69,6 +69,7 @@ RUN npm ci --production
 
 COPY --from=builder /usr/src/next.config.js ./
 COPY --from=builder /usr/src/tailwind.config.js ./
+COPY --from=builder /usr/src/postcss.config.js ./
 COPY --from=builder /usr/src/public ./public
 COPY --from=builder /usr/src/.next ./.next
 COPY --from=builder /usr/src/node_modules ./node_modules

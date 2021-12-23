@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import FormContainer from "./FormContainer";
 import DefaultSelector from "../select/DefaultSelector";
 import {
-  getAceModeWithId,
   getFirstOrSelectedFontFamily,
   getFirstOrSelectedLanguage, getFirstOrSelectedTheme,
   getFonts,

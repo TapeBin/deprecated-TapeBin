@@ -5,7 +5,8 @@ import "@fontsource/lobster";
 import "@fontsource/fira-code";
 import "@fontsource/source-code-pro";
 import 'react-toastify/dist/ReactToastify.css';
-import React, { useEffect, useRef, useState } from "react";
+import "../styles/notification.css";
+import React, { useEffect, useRef } from "react";
 import { atom, useAtom } from "jotai";
 import { userAtom } from "../states/user";
 import { editorAtom, setItem } from "../states/editor";
@@ -15,8 +16,9 @@ import { AxiosResponse } from "axios";
 import { DefaultSeo } from "next-seo";
 import SEO from "../next-seo.config";
 import { createInstance, MatomoProvider } from "@datapunt/matomo-tracker-react";
+import { Router } from "next/router";
+import LoadingBar, { LoadingBarRef } from "react-top-loading-bar";
 
-// import { AxiosResponse } from "axios";
 interface User {
     loginFailed: boolean;
     username: string;
@@ -27,20 +29,38 @@ interface User {
 }
 
 export const pageAtom = atom({
-    isLoaded: false
+    isLoaded: false,
+    maintenance: false,
+    maintenanceNotification: "",
+    notify: false,
+    notification: "",
+    url: ""
 });
 
 export default function App({ Component, pageProps }: AppProps) {
     const [_, setPage] = useAtom(pageAtom);
     const [user, setUser] = useAtom(userAtom);
     const [__, setEditor] = useAtom(editorAtom);
+    const ref = useRef<LoadingBarRef>(null)
     const instance = createInstance({
         urlBase: "https://statistics.tapeb.in",
         siteId: 1
     });
 
-
     useEffect(() => {
+
+        Router.events.on("routeChangeStart", (url) => {
+            setPage(prevState => ({ ...prevState, isLoaded: false }));
+            if (ref && ref.current)
+                ref.current.staticStart(0);
+
+        });
+
+        Router.events.on("routeChangeComplete", (url) => {
+            setPage(prevState => ({ ...prevState, isLoaded: true }));
+            if (ref && ref.current)
+                ref.current.complete();
+        });
 
         //@ts-ignore
         setEditor(prevState => ({
@@ -53,16 +73,23 @@ export default function App({ Component, pageProps }: AppProps) {
             languageId: parseInt(setItem("languageId", "-1")),
         }));
 
+        axios.get("configuration")
+            .then((response: any) => {
+                setPage(prevState => ({
+                    ...prevState,
+                    maintenance: response.data.maintenance,
+                    maintenanceNotification: response.data.maintenanceNotification,
+                    notify: response.data.notify,
+                    notification: response.data.notification,
+                    url: response.data.url
+                }));
+            });
+
 
         if (!user.isLoggedIn) {
-
-            axios
-                .get<User>("user", {
-                    withCredentials: true,
-                })
+            axios.get<User>("user", { withCredentials: true })
                 .then((response) => {
                     if (response.status !== 500 && response.data.username) {
-
                         setUser((prevState) => ({
                             ...prevState,
                             isLoggedIn: true,
@@ -76,10 +103,12 @@ export default function App({ Component, pageProps }: AppProps) {
                         }));
 
                         if (response.data.discordId)
-                            axios.get("discordImage").then((res: AxiosResponse<any>) => setUser(prevState => ({
-                                ...prevState,
-                                profileImage: res.data.toString()
-                            })));
+                            axios.get("discordImage").then((res: AxiosResponse<any>) => {
+                                setUser(prevState => ({
+                                    ...prevState,
+                                    profileImage: res.data.toString()
+                                }));
+                            });
 
                     }
                     setPage(prevState => ({ ...prevState, isLoaded: true }));
@@ -93,6 +122,7 @@ export default function App({ Component, pageProps }: AppProps) {
     return (
         <MatomoProvider value={instance}>
             <DefaultSeo {...SEO} />
+            <LoadingBar color="#00C2FF" ref={ref}/>
             <Component {...pageProps} />
             <ToastContainer
                 position="top-right"

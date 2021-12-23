@@ -22,4 +22,7 @@ module.exports = {
 
     return config
   },
+  images: {
+    domains: ["cdn.discordapp.com", "avatars.githubusercontent.com"]
+  }
 };

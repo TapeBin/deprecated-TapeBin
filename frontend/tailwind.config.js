@@ -2,8 +2,7 @@ const colors = require("tailwindcss/colors");
 const defaultTheme = require("tailwindcss/defaultTheme");
 
 module.exports = {
-    mode: "jit",
-    purge: ["./pages/**/*.{js,ts,jsx,tsx}", "./components/**/*.{js,ts,jsx,tsx}"],
+    content: ["./pages/**/*.{js,ts,jsx,tsx}", "./components/**/*.{js,ts,jsx,tsx}"],
     theme: {
         extend: {
             typography: (theme) => ({
@@ -50,7 +49,9 @@ module.exports = {
                 proHoverColor: "#00a7db",
                 proFocusColor: "#009ccc",
                 background: "#262626",
-                binColor: "#309CFF"
+                binColor: "#309CFF",
+                maintenance: "#fde047",
+                maintenanceHover: "#facc15"
             },
             outline: {
                 gray: "1px solid #F5F5F5",

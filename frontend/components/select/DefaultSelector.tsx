@@ -16,7 +16,7 @@ type DefaultSelectorProps = {
 const DefaultSelector: FunctionComponent<DefaultSelectorProps> = (props: DefaultSelectorProps) => {
 
   return (
-    <div>
+    <div className="w-[215px]">
       <label htmlFor={props.label}>
         {props.label}
       </label>

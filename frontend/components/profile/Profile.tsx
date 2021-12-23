@@ -1,25 +1,22 @@
-import React, { useEffect, useState } from "react";
+import React, { FunctionComponent } from "react";
 import TopProfile from "./TopProfile";
-import axios from "../../utils/axios";
-import { AxiosResponse } from "axios";
 import ProfileBinList from "./ProfileBinList";
+import Footer from "../footer/Footer";
 
-const Profile = () => {
-  const [state, setState] = useState([]);
+type ProfileProps = {
+    bins: any[];
+};
 
-  useEffect(() => {
-    axios.get("/bin")
-      .then((response: AxiosResponse<any>) => {
-        setState(response.data);
-      });
-  }, []);
-
-  return (
-    <div className="flex flex-col px-[25px] py-[35px] bg-gray-800 w-full h-full space-y-5">
-      <TopProfile amountOfBins={state.length}/>
-      <ProfileBinList bins={state}/>
-    </div>
-  );
+const Profile: FunctionComponent<ProfileProps> = (props: ProfileProps) => {
+    return (
+        <div className="flex flex-col overflow-y-auto px-[25px] pt-[35px] pb-4 bg-gray-800 w-full h-full space-y-5">
+            <TopProfile amountOfBins={props.bins.length}/>
+            <ProfileBinList bins={props.bins}/>
+            <div className="mt-16">
+                <Footer/>
+            </div>
+        </div>
+    );
 };
 
 export default Profile;

@@ -6,7 +6,9 @@ import passport from "passport";
 import User from "./schemas/User";
 import userRouting from "./routes/userRouting";
 import binRouting from "./routes/binRouting";
+import configurationRouting from "./routes/configurationRoute";
 import { PRODUCTION } from "./utils/secrets";
+import Configuration, { ConfigurationType } from "./schemas/Configuration";
 
 const githubStrategy = require("./strategies/githubStrategy");
 const discordStrategy = require("./strategies/discordStrategy");
@@ -56,12 +58,28 @@ discordStrategy(passport, app);
 
 app.use(userRouting);
 app.use(binRouting);
+app.use(configurationRouting);
 
 mongoose
     .connect(
         `${process.env.START_MONGODB}${process.env.MONGODB_USERNAME}:${process.env.MONGODB_PASSWORD}${process.env.END_MONGODB}`
     )
-    .then(() => console.log("Connected to database!"))
+    .then(() => {
+        console.log("Connected to database!");
+        console.log("Checking if a configuration exists...");
+        Configuration.findOne({id: 0}, async (err: mongoose.Error, document: any) => {
+            if (document)
+                console.log("Configuration exists!");
+            else {
+                console.log("Configuration does not exist!");
+                console.log("Creating a configuration!");
+                const configuration = new Configuration();
+                await configuration.save();
+                console.log("Successfully saved a new configuration!");
+            }
+        });
+
+    })
     .catch((err) => console.log(`Database error: ${err}`));
 
 

@@ -1,6 +1,6 @@
 import axios from "../../utils/axios";
 import { useAtom } from "jotai";
-import React, { FunctionComponent, useEffect, useState } from "react";
+import React, { FunctionComponent } from "react";
 import { userAtom } from "../../states/user";
 import { getFormattedDate } from "../../utils/dateUtil";
 import Button from "../form/Button";
