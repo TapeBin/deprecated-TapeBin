@@ -22,15 +22,13 @@ const index = () => {
 
     }, []);
 
-    useEffect(() => {
+    useLayoutEffect(() => {
         setTimeout(() => {
             const anchor = router.asPath.split("#")[1];
             if (anchor) {
                 const el = document.getElementById(anchor);
-                console.log(el)
                 if (el) {
                     el.scrollIntoView();
-                    console.log("sdfsdf");
                 }
             }
         }, 1000);

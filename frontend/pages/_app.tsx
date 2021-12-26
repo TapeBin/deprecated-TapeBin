@@ -133,8 +133,8 @@ export default function App({ Component, pageProps }: AppProps) {
                     width: "150px"
                 }}
             >
-                This website uses cookies to enhance the user experience. To learn more, go to the <Link href="privacy#cookies">Cookies
-                Policy</Link>
+                This website uses cookies to enhance the user experience. To learn more, go to the <a href="privacy#cookies" className="text-proColor">Cookies
+                Policy</a>
             </CookieConsent>
             <DefaultSeo {...SEO} />
             <LoadingBar color="#00C2FF" ref={ref}/>
