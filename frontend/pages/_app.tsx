@@ -132,6 +132,8 @@ export default function App({ Component, pageProps }: AppProps) {
                 declineButtonStyle={{
                     width: "150px"
                 }}
+
+                expires={120}
             >
                 This website uses cookies to enhance the user experience. To learn more, go to the <a href="privacy#cookies" className="text-proColor">Cookies
                 Policy</a>
