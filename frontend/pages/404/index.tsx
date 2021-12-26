@@ -3,14 +3,16 @@ import Meta from "../../components/seo/Meta";
 import Navbar from "../../components/bar/Navbar";
 import Footer from "../../components/footer/Footer";
 import { useMatomo } from "@datapunt/matomo-tracker-react";
+import { isCookieConsent } from "../../utils/routes";
 
 const Index = () => {
     const { trackPageView } = useMatomo();
 
     useEffect(() => {
-        trackPageView({
-            documentTitle: "404",
-        });
+        if (isCookieConsent())
+            trackPageView({
+                documentTitle: "404",
+            });
     }, []);
 
     return (

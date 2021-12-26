@@ -7,6 +7,7 @@ import Meta from "../../components/seo/Meta";
 import { useAtom } from "jotai";
 import { pageAtom } from "../_app";
 import { useMatomo } from "@datapunt/matomo-tracker-react";
+import { isCookieConsent } from "../../utils/routes";
 
 const DynamicEditor = dynamic(
     () => {
@@ -32,9 +33,10 @@ const Index = () => {
     const { trackPageView } = useMatomo();
 
     useEffect(() => {
-        trackPageView({
-            documentTitle: "settings",
-        });
+        if (isCookieConsent())
+            trackPageView({
+                documentTitle: "settings",
+            });
     }, []);
 
     return (

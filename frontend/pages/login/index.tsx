@@ -4,14 +4,16 @@ import Login from "../../components/login/Login";
 import Footer from "../../components/footer/Footer";
 import Meta from "../../components/seo/Meta";
 import { useMatomo } from "@datapunt/matomo-tracker-react";
+import { isCookieConsent } from "../../utils/routes";
 
 const Index = () => {
     const { trackPageView } = useMatomo();
 
     useEffect(() => {
-        trackPageView({
-            documentTitle: "login",
-        });
+        if (isCookieConsent())
+            trackPageView({
+                documentTitle: "login",
+            });
     }, []);
 
     return (

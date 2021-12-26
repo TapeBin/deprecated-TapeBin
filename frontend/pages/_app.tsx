@@ -18,6 +18,7 @@ import SEO from "../next-seo.config";
 import { createInstance, MatomoProvider } from "@datapunt/matomo-tracker-react";
 import { Router } from "next/router";
 import LoadingBar, { LoadingBarRef } from "react-top-loading-bar";
+import CookieConsent, { getCookieConsentValue } from "react-cookie-consent";
 
 interface User {
     loginFailed: boolean;
@@ -42,7 +43,7 @@ export default function App({ Component, pageProps }: AppProps) {
     const [user, setUser] = useAtom(userAtom);
     const [__, setEditor] = useAtom(editorAtom);
     const ref = useRef<LoadingBarRef>(null)
-    const instance = createInstance({
+    let instance = createInstance({
         urlBase: "https://statistics.tapeb.in",
         siteId: 1
     });
@@ -119,8 +120,12 @@ export default function App({ Component, pageProps }: AppProps) {
     }, []);
 
 
+    // @ts-ignore
     return (
         <MatomoProvider value={instance}>
+            <CookieConsent
+            >
+            </CookieConsent>
             <DefaultSeo {...SEO} />
             <LoadingBar color="#00C2FF" ref={ref}/>
             <Component {...pageProps} />

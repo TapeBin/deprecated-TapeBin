@@ -9,6 +9,8 @@ import { useAtom } from "jotai";
 import { binsAtom } from "../states/bins";
 import { useMatomo } from "@datapunt/matomo-tracker-react";
 import { pageAtom } from "./_app";
+import { getCookieConsentValue } from "react-cookie-consent";
+import { isCookieConsent } from "../utils/routes";
 
 const DynamicEditor = dynamic(
     () => {
@@ -24,9 +26,10 @@ const Index = () => {
     const [page] = useAtom(pageAtom);
 
     useEffect(() => {
-        trackPageView({
-            documentTitle: "index",
-        });
+        if (isCookieConsent())
+            trackPageView({
+                documentTitle: "index",
+            });
     }, []);
 
 

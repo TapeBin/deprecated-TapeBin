@@ -1,14 +1,23 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Meta from "../../components/seo/Meta";
 import Navbar from "../../components/bar/Navbar";
 import Footer from "../../components/footer/Footer";
 import dynamic from "next/dynamic";
+import { useMatomo } from "@datapunt/matomo-tracker-react";
+import { isCookieConsent } from "../../utils/routes";
 
 const MarkdownContainer = dynamic(() => {
     return import("../../components/markdown/MarkdownContainer")
 }, { ssr: false })
 
 const index = () => {
+    const { trackPageView } = useMatomo();
+    useEffect(() => {
+        if (isCookieConsent())
+            trackPageView({
+                documentTitle: "privacy",
+            });
+    });
 
     return (
         <>
