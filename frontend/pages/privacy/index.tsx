@@ -1,10 +1,11 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useLayoutEffect, useState } from "react";
 import Meta from "../../components/seo/Meta";
 import Navbar from "../../components/bar/Navbar";
 import Footer from "../../components/footer/Footer";
 import dynamic from "next/dynamic";
 import { useMatomo } from "@datapunt/matomo-tracker-react";
 import { isCookieConsent } from "../../utils/routes";
+import { useRouter } from "next/router";
 
 const MarkdownContainer = dynamic(() => {
     return import("../../components/markdown/MarkdownContainer")
@@ -12,12 +13,29 @@ const MarkdownContainer = dynamic(() => {
 
 const index = () => {
     const { trackPageView } = useMatomo();
+    const router = useRouter();
     useEffect(() => {
         if (isCookieConsent())
             trackPageView({
                 documentTitle: "privacy",
             });
-    });
+
+    }, []);
+
+    useEffect(() => {
+        setTimeout(() => {
+            const anchor = router.asPath.split("#")[1];
+            if (anchor) {
+                const el = document.getElementById(anchor);
+                console.log(el)
+                if (el) {
+                    el.scrollIntoView();
+                    console.log("sdfsdf");
+                }
+            }
+        }, 1000);
+
+    }, []);
 
     return (
         <>
@@ -34,7 +52,9 @@ const index = () => {
                 </div>
             </div>
         </>
-    );
+    )
+        ;
 }
+
 
 export default index;

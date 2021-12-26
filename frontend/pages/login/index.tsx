@@ -5,15 +5,18 @@ import Footer from "../../components/footer/Footer";
 import Meta from "../../components/seo/Meta";
 import { useMatomo } from "@datapunt/matomo-tracker-react";
 import { isCookieConsent } from "../../utils/routes";
+import { useRouter } from "next/router";
 
 const Index = () => {
     const { trackPageView } = useMatomo();
+    const router = useRouter();
 
     useEffect(() => {
         if (isCookieConsent())
             trackPageView({
                 documentTitle: "login",
             });
+        else router.push("/");
     }, []);
 
     return (

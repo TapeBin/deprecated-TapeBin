@@ -40,7 +40,7 @@ const Index = (props: any) => {
 
 
     useEffect(() => {
-        if (page.isLoaded && !user.isLoggedIn)
+        if ((page.isLoaded && !user.isLoggedIn) || !isCookieConsent())
             router.push("/");
     }, [page.isLoaded]);
 

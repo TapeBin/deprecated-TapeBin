@@ -19,6 +19,7 @@ import { createInstance, MatomoProvider } from "@datapunt/matomo-tracker-react";
 import { Router } from "next/router";
 import LoadingBar, { LoadingBarRef } from "react-top-loading-bar";
 import CookieConsent, { getCookieConsentValue } from "react-cookie-consent";
+import Link from "next/link";
 
 interface User {
     loginFailed: boolean;
@@ -124,7 +125,16 @@ export default function App({ Component, pageProps }: AppProps) {
     return (
         <MatomoProvider value={instance}>
             <CookieConsent
+                enableDeclineButton
+                buttonStyle={{
+                    width: "150px"
+                }}
+                declineButtonStyle={{
+                    width: "150px"
+                }}
             >
+                This website uses cookies to enhance the user experience. To learn more, go to the <Link href="privacy#cookies">Cookies
+                Policy</Link>
             </CookieConsent>
             <DefaultSeo {...SEO} />
             <LoadingBar color="#00C2FF" ref={ref}/>
