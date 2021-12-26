@@ -5,7 +5,6 @@ import Footer from "../../components/footer/Footer";
 import dynamic from "next/dynamic";
 import { isCookieConsent } from "../../utils/routes";
 import { useMatomo } from "@datapunt/matomo-tracker-react";
-import { useRouter } from "next/router";
 
 const MarkdownContainer = dynamic(() => {
     return import("../../components/markdown/MarkdownContainer")

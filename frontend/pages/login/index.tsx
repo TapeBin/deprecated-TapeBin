@@ -5,7 +5,7 @@ import Footer from "../../components/footer/Footer";
 import Meta from "../../components/seo/Meta";
 import { useMatomo } from "@datapunt/matomo-tracker-react";
 import { isCookieConsent } from "../../utils/routes";
-import { Router, useRouter } from "next/router";
+import { useRouter } from "next/router";
 import { resetCookieConsentValue } from "react-cookie-consent";
 
 const Index = () => {

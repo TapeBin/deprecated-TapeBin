@@ -1,5 +1,6 @@
 import { AppProps } from "next/dist/shared/lib/router/router";
 import "../styles/global.css";
+import "../styles/cookieButton.css";
 import "@fontsource/roboto";
 import "@fontsource/lobster";
 import "@fontsource/fira-code";
@@ -18,8 +19,7 @@ import SEO from "../next-seo.config";
 import { createInstance, MatomoProvider } from "@datapunt/matomo-tracker-react";
 import { Router } from "next/router";
 import LoadingBar, { LoadingBarRef } from "react-top-loading-bar";
-import CookieConsent, { getCookieConsentValue } from "react-cookie-consent";
-import Link from "next/link";
+import CookieConsent  from "react-cookie-consent";
 
 interface User {
     loginFailed: boolean;
@@ -121,18 +121,13 @@ export default function App({ Component, pageProps }: AppProps) {
     }, []);
 
 
-    // @ts-ignore
     return (
         <MatomoProvider value={instance}>
             <CookieConsent
                 enableDeclineButton
-                buttonStyle={{
-                    width: "150px"
-                }}
-                declineButtonStyle={{
-                    width: "150px"
-                }}
-
+                buttonClasses="cookie-button"
+                declineButtonClasses="cookie-button"
+                disableButtonStyles={true}
                 expires={120}
             >
                 This website uses cookies to enhance the user experience. To learn more, go to the <a href="privacy#cookies" className="text-proColor">Cookies
