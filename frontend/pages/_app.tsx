@@ -27,7 +27,7 @@ interface User {
     githubId: string;
     discordId: string;
     creationDate: Date;
-    profilePicture: string;
+    profileImage: string;
 }
 
 export const pageAtom = atom({
@@ -100,17 +100,9 @@ export default function App({ Component, pageProps }: AppProps) {
                             githubId: response.data.githubId,
                             profileImage: response.data.githubId
                                 ? `https://avatars.githubusercontent.com/u/${response.data.githubId}?v=3`
-                                : "",
+                                : response.data.profileImage,
                             creationDate: new Date(response.data.creationDate),
                         }));
-
-                        if (response.data.discordId)
-                            axios.get("discordImage").then((res: AxiosResponse<any>) => {
-                                setUser(prevState => ({
-                                    ...prevState,
-                                    profileImage: res.data.toString()
-                                }));
-                            });
 
                     }
                     setPage(prevState => ({ ...prevState, isLoaded: true }));

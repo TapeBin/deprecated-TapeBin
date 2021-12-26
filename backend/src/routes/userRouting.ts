@@ -7,6 +7,7 @@ interface DiscordUser {
     avatar: string;
     discriminator: string;
     username: string;
+    profileImage: string;
     creationDate: Date;
 }
 
@@ -26,6 +27,7 @@ router.get("/user", isAuthenticated, (req: any, res: any) => {
                     discordId: req.user.discordId,
                     avatar: req.session.avatar,
                     discriminator: req.session.discriminator,
+                    profileImage: req.session.profileImage,
                     username: username,
                     creationDate: creationDate
                 } as DiscordUser;
