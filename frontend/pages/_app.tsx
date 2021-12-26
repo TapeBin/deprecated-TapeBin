@@ -131,7 +131,7 @@ export default function App({ Component, pageProps }: AppProps) {
                 expires={120}
             >
                 This website uses cookies to enhance the user experience. To learn more, go to the <a href="privacy#cookies" className="text-proColor">Cookies
-                Policy</a>
+                Policy</a>.
             </CookieConsent>
             <DefaultSeo {...SEO} />
             <LoadingBar color="#00C2FF" ref={ref}/>
