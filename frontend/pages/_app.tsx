@@ -36,7 +36,8 @@ export const pageAtom = atom({
     maintenanceNotification: "",
     notify: false,
     notification: "",
-    url: ""
+    url: "",
+    isBarHidden: false
 });
 
 export default function App({ Component, pageProps }: AppProps) {
@@ -63,6 +64,8 @@ export default function App({ Component, pageProps }: AppProps) {
             if (ref && ref.current)
                 ref.current.complete();
         });
+
+        setPage(prevState => ({ ...prevState, isBarHidden: setItem("isBarHidden", "false") === "true" }));
 
         //@ts-ignore
         setEditor(prevState => ({

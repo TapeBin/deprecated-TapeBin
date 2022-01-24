@@ -118,3 +118,11 @@ export const getPrintMargin = (): boolean => {
 };
 
 // END MARGIN ------------------------------------------------------------
+
+// BAR HIDDEN
+
+export const getBarHidden = (): boolean => {
+  return localStorage.getItem("isBarHidden") === "true";
+};
+
+// END BAR HIDDEN ------------------------------------------------------------
