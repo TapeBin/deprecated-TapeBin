@@ -9,10 +9,11 @@ import { useAtom } from "jotai";
 import { binsAtom } from "../states/bins";
 import { editorAtom } from "../states/editor";
 import { binFormAtom } from "../states/binForm";
-import { BACK_END_ROUTE } from "../utils/routes";
+import { BACK_END_ROUTE, isCookieConsent } from "../utils/routes";
 import Meta from "../components/seo/Meta";
 import { pageAtom } from "./_app";
 import { useMatomo } from "@datapunt/matomo-tracker-react";
+
 const DynamicEditor = dynamic(
     () => {
         return import("../components/editor/Editor");
@@ -67,9 +68,10 @@ const ID = (props: any) => {
             currentBinId: bin.bins[0].id
         });
 
-        trackPageView({
-          documentTitle: `${props.id}`,
-        });
+        if (isCookieConsent())
+            trackPageView({
+                documentTitle: `${props.id}`,
+            });
         // axios.get(`http://localhost:8080/?module=API&method=Auctions.getPageUrl&pageUrl=${props.id}&idSite=2&format=JSON`)
         //   .then((result) => console.log(result));
 
@@ -90,19 +92,19 @@ const ID = (props: any) => {
 };
 
 export const Page = (props: any) => {
-  return (
-      <div className="flex flex-row" style={{ width: "100vw", height: "100vh" }}>
+    return (
+        <div className="flex flex-row" style={{ width: "100vw", height: "100vh" }}>
 
-          <Navbar/>
-          <Formbar isOnId={true} title={props.bin.title} description={props.bin.description}/>
-          <div className="flex flex-col w-full h-full overflow-hidden">
-              <Topbar>
-                  <BinList isOnId={true}/>
-              </Topbar>
-              <DynamicEditor/>
-          </div>
-      </div>
-  )
+            <Navbar/>
+            <Formbar isOnId={true} title={props.bin.title} description={props.bin.description}/>
+            <div className="flex flex-col w-full h-full overflow-hidden">
+                <Topbar>
+                    <BinList isOnId={true}/>
+                </Topbar>
+                <DynamicEditor/>
+            </div>
+        </div>
+    )
 };
 
 export default ID;

@@ -1,5 +1,6 @@
 import { AppProps } from "next/dist/shared/lib/router/router";
 import "../styles/global.css";
+import "../styles/cookieButton.css";
 import "@fontsource/roboto";
 import "@fontsource/lobster";
 import "@fontsource/fira-code";
@@ -18,6 +19,7 @@ import SEO from "../next-seo.config";
 import { createInstance, MatomoProvider } from "@datapunt/matomo-tracker-react";
 import { Router } from "next/router";
 import LoadingBar, { LoadingBarRef } from "react-top-loading-bar";
+import CookieConsent  from "react-cookie-consent";
 
 interface User {
     loginFailed: boolean;
@@ -25,7 +27,7 @@ interface User {
     githubId: string;
     discordId: string;
     creationDate: Date;
-    profilePicture: string;
+    profileImage: string;
 }
 
 export const pageAtom = atom({
@@ -42,7 +44,7 @@ export default function App({ Component, pageProps }: AppProps) {
     const [user, setUser] = useAtom(userAtom);
     const [__, setEditor] = useAtom(editorAtom);
     const ref = useRef<LoadingBarRef>(null)
-    const instance = createInstance({
+    let instance = createInstance({
         urlBase: "https://statistics.tapeb.in",
         siteId: 1
     });
@@ -98,17 +100,9 @@ export default function App({ Component, pageProps }: AppProps) {
                             githubId: response.data.githubId,
                             profileImage: response.data.githubId
                                 ? `https://avatars.githubusercontent.com/u/${response.data.githubId}?v=3`
-                                : "",
+                                : response.data.profileImage,
                             creationDate: new Date(response.data.creationDate),
                         }));
-
-                        if (response.data.discordId)
-                            axios.get("discordImage").then((res: AxiosResponse<any>) => {
-                                setUser(prevState => ({
-                                    ...prevState,
-                                    profileImage: res.data.toString()
-                                }));
-                            });
 
                     }
                     setPage(prevState => ({ ...prevState, isLoaded: true }));
@@ -121,6 +115,16 @@ export default function App({ Component, pageProps }: AppProps) {
 
     return (
         <MatomoProvider value={instance}>
+            <CookieConsent
+                enableDeclineButton
+                buttonClasses="cookie-button"
+                declineButtonClasses="cookie-button"
+                disableButtonStyles={true}
+                expires={120}
+            >
+                This website uses cookies to enhance the user experience. To learn more, go to the <a href="privacy#cookies" className="text-proColor">Cookies
+                Policy</a>.
+            </CookieConsent>
             <DefaultSeo {...SEO} />
             <LoadingBar color="#00C2FF" ref={ref}/>
             <Component {...pageProps} />

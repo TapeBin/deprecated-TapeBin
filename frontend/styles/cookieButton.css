@@ -1,0 +1,14 @@
+.cookie-button {
+    width: 150px;
+    background-color: #00C2FF;
+    color: #4A4A4A;
+    border-radius: 0.375em;
+    padding: 5px 10px;
+    margin: 15px;
+}
+
+.cookie-button:hover {
+    background-color: #00a7db;
+    transform: scale(1.05);
+    transition: 0.5s;
+}

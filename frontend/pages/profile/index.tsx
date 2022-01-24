@@ -8,10 +8,13 @@ import Meta from "../../components/seo/Meta";
 import { pageAtom } from "../_app";
 import { useMatomo } from "@datapunt/matomo-tracker-react";
 import { GetServerSideProps } from "next";
-import { BACK_END_ROUTE } from "../../utils/routes";
+import { BACK_END_ROUTE, isCookieConsent } from "../../utils/routes";
 
-export const getServerSideProps: GetServerSideProps= async (context) => {
-    const response = await fetch(`${BACK_END_ROUTE}/api/bin`, {headers: {Cookie: `${context.req.headers.cookie}` }, credentials: "include"});
+export const getServerSideProps: GetServerSideProps = async (context) => {
+    const response = await fetch(`${BACK_END_ROUTE}/api/bin`, {
+        headers: { Cookie: `${context.req.headers.cookie}` },
+        credentials: "include"
+    });
     const json = await response.json();
 
     return {
@@ -29,14 +32,15 @@ const Index = (props: any) => {
     const { trackPageView } = useMatomo();
 
     useEffect(() => {
-        trackPageView({
-            documentTitle: "profile",
-        });
+        if (isCookieConsent())
+            trackPageView({
+                documentTitle: "profile",
+            });
     }, []);
 
 
     useEffect(() => {
-        if (page.isLoaded && !user.isLoggedIn)
+        if ((page.isLoaded && !user.isLoggedIn) || !isCookieConsent())
             router.push("/");
     }, [page.isLoaded]);
 

@@ -25,6 +25,7 @@ module.exports = function (passport: PassportStatic, app: Express) {
                     req.session.avatar = profile.avatar;
                     req.session.discriminator = profile.discriminator;
                     req.session.username = profile.username;
+                    req.session.profileImage = getAvatarURL(profile.avatar, profile.discriminator, profile.id);
 
                     if (!document) {
                         const newUser = new User({
@@ -42,10 +43,6 @@ module.exports = function (passport: PassportStatic, app: Express) {
     );
 
     passport.use(newDiscordStrategy);
-
-    app.get("/discordImage", isAuthenticated, (req: any, res: any) => {
-        res.json(getAvatarURL(req.session.avatar, req.session.discriminator, req.user.discordId));
-    });
 
     function getAvatarURL(avatar: any, discriminator: any, discordId: any): string {
         if (avatar) {
