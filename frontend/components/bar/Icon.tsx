@@ -13,6 +13,7 @@ const Icon: FunctionComponent<IconProps> = (props: IconProps) => {
       alt={props.alt}
       className="h-[35px] cursor-pointer"
       onClick={props.onClick}
+      title={props.alt}
     />
   );
 };
