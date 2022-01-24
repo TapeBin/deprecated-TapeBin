@@ -70,7 +70,7 @@ const Settingsbar = () => {
   };
 
   return (
-    <FormContainer title="Settings">
+    <FormContainer title="Settings" ignoreHidden={true}>
       <DefaultSelector options={getFonts()} onChange={onFontFamilyChange} defaultValue={getFirstOrSelectedFontFamily()}
                        label={"Font Family"}/>
       <DefaultSelector options={getLanguages()} onChange={onLanguageChange} defaultValue={getFirstOrSelectedLanguage()}
