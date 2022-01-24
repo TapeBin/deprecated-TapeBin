@@ -43,7 +43,7 @@ export const getServerSideProps: GetServerSideProps<{}, Record<"id", string>> = 
 
 const ID = (props: any) => {
     const [_, setBin] = useAtom(binsAtom);
-    const [page] = useAtom(pageAtom)
+    const [page, setPage] = useAtom(pageAtom)
     const [__, setEditor] = useAtom(editorAtom);
     const [___, setBinForm] = useAtom(binFormAtom);
     const { trackPageView } = useMatomo();
@@ -67,6 +67,10 @@ const ID = (props: any) => {
         setBinForm({
             currentBinId: bin.bins[0].id
         });
+
+        if (window && window.innerWidth < 770) {
+            setPage(prevState => ({ ...prevState, isBarHidden: true}));
+        }
 
         if (isCookieConsent())
             trackPageView({
